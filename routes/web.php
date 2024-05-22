@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/daftar', [PendaftaranController::class, 'daftar'])->name('daftar');

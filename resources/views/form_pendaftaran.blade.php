@@ -7,7 +7,7 @@
         <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
-        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free-6.5.2-web/css/all.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
     </head>
@@ -16,7 +16,7 @@
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
                     <a href="#" class="navbar-brand">
-                        <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="dosq" class="brand-image">
+                        <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="dosq" class="brand-image img-circle elevation-1" style="opacity: .8">
                         <span class="brand-text font-weight-bold"> BKK SMK Muhammadiyah Kandanghaur</span>
                     </a>
                     <ul class="navbar-nav ms-auto">
@@ -52,55 +52,59 @@
                     </ul>
                 </div>
             </nav>
-        <div class="content-wrapper">
-            <div class="content-header">
-                <h4 class="m-0 text-center"><b>Rekrutmen yang ada di BKK SMK Muhammadiyah Kandanghaur</b></h4>
-            </div>
-            <div class="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                        <div class="card card-solid">
-                                <div class="card-body pb-0">
-                                <div class="row">
-                                    <div class="col-md-6 d-flex align-items-stretch flex-column">
-                                        <div class="card bg-light d-flex flex-fill">
-                                            <div class="card-header text-muted border-bottom-0">
-                                            Nama Loker
-                                            </div>
-                                            <div class="card-body pt-0">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                    <h2 class="lead"><b>PT Astra Honda Motor</b></h2>
-                                                    <p class="text-muted text-sm"><b>Deskripsi: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Id reiciendis illo vitae magnam veniam, nam ut in tenetur porro! Libero eius voluptatibus iusto placeat incidunt. Accusantium, qui. Aliquam, dolorem molestias? </p>
-                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                        <li class="small"><span class="fa-li"><i class="fa-solid fa-users"></i></span> Jumlah Pendaftar :</li>
-                                                    </ul>
-                                                    </div>
-                                                    <div class="col-4 text-center">
-                                                    <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="user-avatar" class="img-circle img-fluid">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="text-right">
-                                                    <a href="#" class="btn btn-sm bg-teal">
-                                                    <i class="fa-solid fa-magnifying-glass"></i> Cari
-                                                    </a>
-                                                    <a href="#" class="btn btn-sm btn-primary">
-                                                    <i class="fas fa-user"></i> Daftar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <!-- /.card-body -->
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container">
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <h1 class="m-0 text-center">Nama Loker : <b>PT. Astra Honda Motor Tbk</b></h1>
                             </div>
                         </div>
                     </div>
                 </div>
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header bg-info">
+                                    <h5 class="card-title m-0 text-bold">Info Loker</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h5>test123</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header bg-primary">
+                                    <h5 class="card-title m-0 text-bold">Form Pendaftaran</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/daftar" method="post">
+                                        @csrf
+                                        <div class="card-body pt-0">
+                                            <div class="form-group">
+                                                <label for="nama">Nama Lengkap</label>
+                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nomor_wa">Nomor Whatsapp</label>
+                                                <input type="number" class="form-control" id="nomor_wa" name="nomor_wa" placeholder="081222222222" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Email Aktif</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="merudipantara02@gmail.com" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary float-right">Daftar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
         <footer class="main-footer">

@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('role', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('nama_role');
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('role');
+            $table->foreignId('id_role')->index()->references('id')->on('role');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

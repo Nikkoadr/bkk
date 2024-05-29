@@ -46,37 +46,39 @@
                         <div class="card card-solid">
                                 <div class="card-body pb-0">
                                 <div class="row">
+                                    @foreach ( $loker as $data)
                                     <div class="col-md-6 d-flex align-items-stretch flex-column">
                                         <div class="card bg-light d-flex flex-fill">
                                             <div class="card-header text-muted border-bottom-0">
                                             Nama Loker
                                             </div>
-                                            <div class="card-body pt-0">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                    <h2 class="lead"><b>PT Astra Honda Motor</b></h2>
-                                                    <p class="text-muted text-sm"><b>Deskripsi: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Id reiciendis illo vitae magnam veniam, nam ut in tenetur porro! Libero eius voluptatibus iusto placeat incidunt. Accusantium, qui. Aliquam, dolorem molestias? </p>
-                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                        <li class="small"><span class="fa-li"><i class="fa-solid fa-users"></i></span> Jumlah Pendaftar :</li>
-                                                    </ul>
-                                                    </div>
-                                                    <div class="col-4 text-center">
-                                                    <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="user-avatar" class="img-circle img-fluid">
+                                                <div class="card-body pt-0">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                        <h2 class="lead"><b>{{ $data -> nama_loker }}</b></h2>
+                                                        <p class="text-muted text-sm"><b>Deskripsi: </b> {{ $data -> deskripsi }}</p>
+                                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                            <li class="small"><span class="fa-li"><i class="fa-solid fa-users"></i></span> Jumlah Pendaftar : {{ $data -> jumlah_pendaftar }}</li>
+                                                        </ul>
+                                                        </div>
+                                                        <div class="col-4 text-center">
+                                                        <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="user-avatar" class="img-circle img-fluid">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="text-right">
-                                                    <a href="#" class="btn btn-sm bg-teal">
-                                                    <i class="fa-solid fa-magnifying-glass"></i> Cari
-                                                    </a>
-                                                    <a href="#" class="btn btn-sm btn-primary">
-                                                    <i class="fas fa-user"></i> Daftar
-                                                    </a>
+                                                <div class="card-footer">
+                                                    <div class="text-right">
+                                                        <form action="form_daftar" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
+                                                            <button class="btn btn-primary" type="submit"><i class="fas fa-user"></i> Daftar</button>
+                                                        </form>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                                 </div>
                                 <!-- /.card-body -->

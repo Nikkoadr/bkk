@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Loker;
+use App\Models\Role;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,10 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        Role::create([
+            'nama_role' => 'admin',
+        ]);
 
-        User::factory()->create([
-            'role' => 'admin',
+        User::create([
+            'id_role' => '1',
             'name' => 'Administrator',
             'email' => 'bkk@smkmuhkandanghaur.sch.id',
             'password' => Hash::make('P4ssw0rd'),
@@ -27,7 +29,8 @@ class DatabaseSeeder extends Seeder
         Loker::create([
             'nama_loker' => 'PT.Astra Honda Motor Jakarta',
             'deskripsi' => 'lorem ipsum',
-            'jumlah_pendaftar' => '600',
+            'grup_wa' => 'lorem ipsum',
         ]);
+
     }
 }

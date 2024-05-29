@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('loker', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_loker');
             $table->string('nama_loker');
-            $table->string('deskripsi');
-            $table->integer('jumlah_pendaftar');
+            $table->text('deskripsi');
+            $table->string('grup_wa');
             $table->timestamps();
         });
     }

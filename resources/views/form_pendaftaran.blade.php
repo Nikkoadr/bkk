@@ -57,7 +57,7 @@
                     <div class="container">
                         <div class="row mb-2">
                             <div class="col-sm-12">
-                                <h1 class="m-0 text-center">Nama Loker : <b>PT. Astra Honda Motor Tbk</b></h1>
+                                <h1 class="m-0 text-center">Nama Loker : <b>{{ $data-> nama_loker }}</b></h1>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                                     <h5 class="card-title m-0 text-bold">Info Loker</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h5>test123</h5>
+                                    <h5>{{ $data-> deskripsi }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -85,6 +85,10 @@
                                         @csrf
                                         <div class="card-body pt-0">
                                             <div class="form-group">
+                                                <label for="code">Code Pendaftar</label>
+                                                <input type="text" class="form-control" id="code" name="code" value="" readonly required>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="nama">Nama Lengkap</label>
                                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" required>
                                             </div>
@@ -96,6 +100,7 @@
                                                 <label for="email">Email Aktif</label>
                                                 <input type="email" class="form-control" id="email" name="email" placeholder="merudipantara02@gmail.com" required>
                                             </div>
+                                            <a class="btn btn-secondary" href="/">Kembali</a>
                                             <button type="submit" class="btn btn-primary float-right">Daftar</button>
                                         </div>
                                     </form>
@@ -116,5 +121,24 @@
             All rights reserved.
         </footer>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            function generateUniqueCode() {
+                let date = new Date();
+                let loker = {{ $data->id_loker }};
+                let year = date.getFullYear().toString().slice(-2);
+                let month = ('0' + (date.getMonth() + 1)).slice(-2);
+                let day = ('0' + date.getDate()).slice(-2);
+                let hours = ('0' + date.getHours()).slice(-2);
+                let minutes = ('0' + date.getMinutes()).slice(-2);
+                let seconds = ('0' + date.getSeconds()).slice(-2);
+                let randomNumber = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+                return `${loker}/${day}/${month}/${year}/${hours}${minutes}${seconds}/${randomNumber}`;
+            }
+
+            let codeInput = document.getElementById('code');
+            codeInput.value = generateUniqueCode();
+        });
+    </script>
     </body>
     </html>

@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Loker extends Model
+class Role extends Model
 {
-    protected $table = 'loker';
-    protected $primaryKey = 'id_loker';
     protected $guarded = [];
+    protected $table = 'role';
 }

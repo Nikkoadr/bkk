@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loker;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 
 class PendaftaranController extends Controller
 {
+    public function form_daftar(Request $request){
+        $data = Loker::find( $request->id_loker);
+        return view('form_pendaftaran', compact('data'));
+    }
+
     public function daftar(Request $request){
         $request->request->add(['bayar'=> '50000', 'status_bayar'=> 'belum']);
         $pendaftaran = Pendaftaran::create($request->all());

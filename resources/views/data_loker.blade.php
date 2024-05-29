@@ -32,9 +32,7 @@
         <div class="col-12">
         <div class="card">
             <div class="card-header">
-            <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#modal_import"><i class="fa-solid fa-file-import"></i> Import</button>
-            <a href="exportuser" class="btn btn-info m-1" target="_blank"><i class="fa-solid fa-file-export"></i> Export</a>
-            <button type="button" class="btn btn-success m-1" data-toggle="modal" data-target="#modal_tambah_user"><i class="fa-solid fa-user-plus"></i> Tambah</button>
+            <button type="button" class="btn btn-success m-1" data-toggle="modal" data-target="#modal_tambah_user"><i class="fa-solid fa-address-card"></i> Tambah Loker</button>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,7 +42,8 @@
                         <th>No</th>
                         <th>Nama loker</th>
                         <th>Deskripsi</th>
-                        <th>Jumlah Pendaftar</th>
+                        <th>Status Loker</th>
+                        <th>grup WA</th>
                         <th data-orderable="false">Menu</th>
                     </tr>
                 </thead>
@@ -54,7 +53,13 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->nama_loker }}</td>
                         <td>{{ $data->deskripsi }}</td>
-                        <td>{{ $data->jumlah_pendaftar }}</td>
+                        
+                        <td>@if($data -> status_loker == 'aktif')
+                            <span class="badge bg-green">Aktif</span>
+                        @else
+                            <span class="badge bg-red">Tidak Aktif</span>
+                        @endif</td>
+                        <td>{{ $data->grup_wa }}</td>
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
                                 <button type="button" class="btn btn-info m-1" data-toggle="modal" data-target="#modalEditUserId{{ $data->id }}"><i class="fa-regular fa-pen-to-square"></i></button>

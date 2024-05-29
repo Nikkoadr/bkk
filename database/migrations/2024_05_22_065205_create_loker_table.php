@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_loker');
             $table->string('nama_loker');
             $table->text('deskripsi');
+            $table->enum('status_loker',['aktif','tidak aktif'])->default('tidak aktif');
             $table->string('grup_wa');
             $table->timestamps();
         });

@@ -13,10 +13,10 @@ class PendaftaranController extends Controller
         return view('form_pendaftaran', compact('data'));
     }
 
-    public function daftar(Request $request){
-        $request->request->add(['status_bayar'=> 'belum']);
-        $pendaftaran = Pendaftaran::create($request->all());
-
+    public function daftar(Request $request)
+{
+    $request->merge(['status_bayar' => 'belum']);
+    $pendaftaran = Pendaftaran::create($request->all());
         // \Midtrans\Config::$serverKey = config('midtrans.server_key');
         // \Midtrans\Config::$isProduction = config('midtrans.production_status');
         // \Midtrans\Config::$isSanitized = true;
@@ -37,8 +37,17 @@ class PendaftaranController extends Controller
         //     ),
         // );
         // $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('pembayaran', compact('pendaftaran'));
+    return redirect()->route('pembayaran.show', $pendaftaran);
+}
+
+public function show(Pendaftaran $pendaftaran)
+{
+    if($pendaftaran->status_bayar == 'sudah'){
+        return redirect('/');
+    }else{
+    return view('pembayaran', compact('pendaftaran'));
     }
+}
 
     // public function callback(Request $request){
     //     $serverKey = config('midtrans.server_key');
@@ -50,9 +59,11 @@ class PendaftaranController extends Controller
     //         }
     //     }
     // }
-    public function bukti_pembayaran($id){
-        $pendaftaran = Pendaftaran::find($id);
-        return view('bukti_pembayaran', compact('pendaftaran'));
+    public function bukti_pembayaran(Request $request){
+        $id_pendaftaran = $request-> id;
+        $pendaftaran = Pendaftaran::find($id_pendaftaran);
+        $pendaftaran->update(['bukti_transfer' => $request->bukti_transfer]);
+        return view('bukti_pembayaran');
     }
 
 }

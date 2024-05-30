@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code_pendaftaran');
             $table->enum('status_bayar',['belum','sudah']);
-            // $table->integer('bayar');
+            $table->string('bukti_transfer')->nullable();
             $table->string('email');
             $table->string('nomor_wa');
             $table->string('nama');
@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('npwp')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
-            $table->enum('jenis_kelamin', ['L','P']);
-            $table->enum('status_perkawinan',['MENIKAH','BELUM MENIKAH']);
-            $table->enum('jenis_pendidikan_terakhir', ['MA','MAK','SMA','SMK']);
+            $table->enum('jenis_kelamin', ['L','P'])->nullable();
+            $table->enum('status_perkawinan',['MENIKAH','BELUM MENIKAH'])->nullable();
+            $table->enum('jenis_pendidikan_terakhir', ['MA','MAK','SMA','SMK'])->nullable();
             $table->string('npsn')->nullable();
             $table->string('nama_sekolah')->nullable();
             $table->string('jurusan_pendidikan')->nullable();

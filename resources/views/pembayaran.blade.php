@@ -97,10 +97,9 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <p class="lead">Metode Pembayaran :</p>
-                                                <img src="../../dist/img/credit/visa.png" alt="Dana">
-                                                <img src="../../dist/img/credit/mastercard.png" alt="Gopay">
-                                                <img src="../../dist/img/credit/american-express.png" alt="Bank">
-                                                <img src="../../dist/img/credit/paypal2.png" alt="OVO">
+                                                <img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
+                                                <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span>
+                                                <img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span>
                                                 <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                                                     Segera lakukan Pembayaran Sebelum loker di tutup atau sampai kuota terpenuhi
                                                 </p>
@@ -116,8 +115,11 @@
                                                             </tr>
                                                             <tr>
                                                                 <th style="width:50%">Upload Bukti Pembayaran</th>
-                                                                <td><form action="upload_bukti" method="post">
-                                                                    <input type="file" name="" id="" required>
+                                                                <td><form action="bukti_pembayaran" method="post">
+                                                                    @csrf
+                                                                    @method('patch')
+                                                                    <input type="hidden" name="id" value="{{ $pendaftaran->id }}">
+                                                                    <input type="file" name="bukti_transfer" id="">
                                                                 </td>
                                                             </tr>
                                                         </tbody>

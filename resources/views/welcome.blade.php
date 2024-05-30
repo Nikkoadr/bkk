@@ -71,7 +71,7 @@
                                                                 </ul>
                                                             </div>
                                                             <div class="col-4 text-center">
-                                                                <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="user-avatar" class="img-circle img-fluid">
+                                                                <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="user-avatar" class="img-box img-fluid">
                                                             </div>
                                                         </div>
                                                     </div>

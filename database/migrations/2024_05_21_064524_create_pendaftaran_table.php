@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code_pendaftaran');
             $table->enum('status_bayar',['belum','sudah']);
             $table->string('bukti_transfer')->nullable();
+            $table->foreignId('id_loker')->index()->references('id_loker')->on('loker');
             $table->string('email');
             $table->string('nomor_wa');
             $table->string('nama');

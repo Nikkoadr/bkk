@@ -83,6 +83,7 @@
                                 <div class="card-body">
                                     <form action="/daftar" method="post">
                                         @csrf
+                                        <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
                                         <div class="card-body pt-0">
                                             <div class="form-group">
                                                 <label for="code_pendaftaran">Code Pendaftaran</label>

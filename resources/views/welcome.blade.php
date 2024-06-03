@@ -43,52 +43,57 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                        <div class="card card-solid">
+                            @if (session('notif'))
+                                <div class="alert alert-info">
+                                    {{ session('notif') }}
+                                </div>
+                            @endif
+                            <div class="card card-solid">
                                 <div class="card-body pb-0">
-                                <div class="row">
-                                    @php
-                                        $loker_aktif = $loker->filter(function ($data) {
-                                            return $data->status_loker == 'aktif';
-                                        });
-                                    @endphp
+                                    <div class="row">
+                                        @php
+                                            $loker_aktif = $loker->filter(function ($data) {
+                                                return $data->status_loker == 'aktif';
+                                            });
+                                        @endphp
 
-                                    @if($loker_aktif->isEmpty())
-                                        <h1 class="text-center">Tidak Ada Loker yang aktif</h1>
-                                    @else
-                                        @foreach ($loker_aktif as $data)
-                                            <div class="col-md-6 d-flex align-items-stretch flex-column">
-                                                <div class="card bg-light d-flex flex-fill">
-                                                    <div class="card-header text-muted border-bottom-0">
-                                                        Nama Loker
-                                                    </div>
-                                                    <div class="card-body pt-0">
-                                                        <div class="row">
-                                                            <div class="col-7">
-                                                                <h2 class="lead"><b>{{ $data->nama_loker }}</b></h2>
-                                                                <p class="text-muted text-sm"><b>Deskripsi: </b> {{ $data->deskripsi }}</p>
-                                                                <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                                    <li class="small"><span class="fa-li"><i class="fa-solid fa-users"></i></span> Jumlah Pendaftar : {{ $data->jumlah_pendaftar }}</li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="user-avatar" class="img-box img-fluid">
+                                        @if($loker_aktif->isEmpty())
+                                            <h1 class="text-center">Tidak Ada Loker yang aktif</h1>
+                                        @else
+                                            @foreach ($loker_aktif as $data)
+                                                <div class="col-md-6 d-flex align-items-stretch flex-column">
+                                                    <div class="card bg-light d-flex flex-fill">
+                                                        <div class="card-header text-muted border-bottom-0">
+                                                            Nama Loker
+                                                        </div>
+                                                        <div class="card-body pt-0">
+                                                            <div class="row">
+                                                                <div class="col-7">
+                                                                    <h2 class="lead"><b>{{ $data->nama_loker }}</b></h2>
+                                                                    <p class="text-muted text-sm"><b>Deskripsi: </b> {{ $data->deskripsi }}</p>
+                                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                                        <li class="small"><span class="fa-li"><i class="fa-solid fa-users"></i></span> Jumlah Pendaftar : {{ $data->jumlah_pendaftar }}</li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-4 text-center">
+                                                                    <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="user-avatar" class="img-box img-fluid">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        <div class="text-right">
-                                                            <form action="form_daftar" method="POST">
-                                                                @csrf
-                                                                <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
-                                                                <button class="btn btn-primary" type="submit"><i class="fas fa-user"></i> Daftar</button>
-                                                            </form>
+                                                        <div class="card-footer">
+                                                            <div class="text-right">
+                                                                <form action="form_daftar" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
+                                                                    <button class="btn btn-primary" type="submit"><i class="fas fa-user"></i> Daftar</button>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

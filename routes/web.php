@@ -16,11 +16,10 @@ Auth::routes(['register' => false]);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/form_daftar', [PendaftaranController::class, 'form_daftar'])->name('form_daftar');
 Route::get('/form_daftar', function () {
-    return redirect('/');});
+    return redirect('/')->with('notif','maaf Formulir Pendaftaran hanya bisa di Akses Lewat Metode POST. Ulang Lagi ya Pilih PTnya !!!');});
 Route::post('/daftar', [PendaftaranController::class, 'daftar'])->name('daftar');
 Route::get('/daftar', function () {
-    return redirect('/');});
-Route::get('/pembayaran/{pendaftaran}', [PendaftaranController::class, 'show'])->name('pembayaran.show');
-Route::patch('/bukti_pembayaran', [PendaftaranController::class, 'bukti_pembayaran'])->name('bukti_pembayaran');
+    return redirect('/')->with('notif','maaf Pembayaran hanya bisa di Akses Lewat Metode POST. Jika anda belum membayar atau belum upload bukti pembayaran hubungi admin !!!');});
+Route::put('/bukti_pembayaran', [PendaftaranController::class, 'bukti_pembayaran'])->name('bukti_pembayaran');
 Route::get('/data_loker', [HomeController::class, 'data_loker'])->name('data_loker');
 Route::get('/data_pelamar', [HomeController::class, 'data_pelamar'])->name('data_pelamar');

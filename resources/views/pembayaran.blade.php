@@ -111,13 +111,13 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th style="width:50%">Biaya Administrasi</th>
-                                                                <td>Rp. 35.000,-</td>
+                                                                <td>Rp. 37.000,-</td>
                                                             </tr>
                                                             <tr>
                                                                 <th style="width:50%">Upload Bukti Pembayaran</th>
                                                                 <td><form action="bukti_pembayaran" method="post">
                                                                     @csrf
-                                                                    @method('patch')
+                                                                    @method('put')
                                                                     <input type="hidden" name="id" value="{{ $pendaftaran->id }}">
                                                                     <input type="file" name="bukti_transfer" id="">
                                                                 </td>
@@ -130,9 +130,6 @@
                                         <!-- Print row -->
                                         <div class="row no-print">
                                             <div class="col-12">
-                                                {{-- <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default">
-                                                    <i class="fas fa-print"></i> Print
-                                                </a> --}}
                                                 <button type="submit" class="btn btn-success float-right">
                                                     <i class="far fa-credit-card"></i> Bayar
                                                 </button>
@@ -157,27 +154,5 @@
             All rights reserved.
         </footer>
     </div>
-    {{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key={{ config('midtrans.clinet_key') }}></script>
-    <script type="text/javascript">
-    document.getElementById('pay-button').onclick = function(){
-    window.snap.pay('{{ $snapToken }}', {
-        onSuccess: function(result){
-            window.location.href = '/bukti_pembayaran/{{$pendaftaran->id}}'
-            console.log(result);
-        },
-        onPending: function(result){
-            alert("wating your payment!");
-            console.log(result);
-        },
-        onError: function(result){
-            alert("payment failed!");
-                console.log(result);
-        },
-        onClose: function () {
-                    alert('you closed the popup without finishing the payment');
-                }
-    });
-    };
-    </script> --}}
     </body>
     </html>

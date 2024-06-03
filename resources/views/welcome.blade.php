@@ -49,17 +49,16 @@
                                 </div>
                             @endif
                             <div class="card card-solid">
+                            @php
+                                $loker_aktif = $loker->filter(function ($data) {
+                                    return $data->status_loker == 'aktif';
+                                });
+                            @endphp
+                            @if($loker_aktif->isEmpty())
+                            <H1 class="text-center">Tidak Ada Loker Yang Dibuka</H1>
+                            @else
                                 <div class="card-body pb-0">
                                     <div class="row">
-                                        @php
-                                            $loker_aktif = $loker->filter(function ($data) {
-                                                return $data->status_loker == 'aktif';
-                                            });
-                                        @endphp
-
-                                        @if($loker_aktif->isEmpty())
-                                            <h1 class="text-center">Tidak Ada Loker yang aktif</h1>
-                                        @else
                                             @foreach ($loker_aktif as $data)
                                                 <div class="col-md-6 d-flex align-items-stretch flex-column">
                                                     <div class="card bg-light d-flex flex-fill">

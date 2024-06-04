@@ -69,6 +69,11 @@
                                             <td><b>:</b></td>
                                             <td><b>{{ $pendaftaran -> created_at }}</b></td>
                                         </tr>
+                                        <tr>
+                                            <td><b>Status Pembayaran</b></td>
+                                            <td><b>:</b></td>
+                                            <td><span class="badge bg-red">{{ $pendaftaran -> status_bayar }}</span></td>
+                                        </tr>
                                     </table>
                                     <p class="mt-4 mb-3">Telah mendaftar sebagai calon pelamar pada :</p>
                                     <span><b>Perusahaan: {{ $pendaftaran->nama_loker }}</b></span>

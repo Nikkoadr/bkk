@@ -579,7 +579,7 @@
                 let minutes = ('0' + date.getMinutes()).slice(-2);
                 let seconds = ('0' + date.getSeconds()).slice(-2);
                 let randomNumber = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-                return `${loker}/${day}/${month}/${year}/${hours}${minutes}${seconds}/${randomNumber}`;
+                return `${loker}-${day}-${month}-${year}-${hours}${minutes}${seconds}-${randomNumber}`;
             }
 
             let codeInput = document.getElementById('code_pendaftaran');

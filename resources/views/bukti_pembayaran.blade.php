@@ -78,7 +78,7 @@
                                     <p class="mt-4 mb-3">Telah mendaftar sebagai calon pelamar pada :</p>
                                     <span><b>Perusahaan: {{ $pendaftaran->nama_loker }}</b></span>
                                     <p>Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
-                                    <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.test/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
+                                    <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

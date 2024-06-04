@@ -16,8 +16,8 @@
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
                     <a href="#" class="navbar-brand">
-                        <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="dosq" class="brand-image">
-                        <span class="brand-text font-weight-bold"> BKK SMK Muhammadiyah Kandanghaur</span>
+                        <img src="{{ asset('assets/dist/img/bkk.png') }}" alt="dosq" class="brand-image">
+                        <span class="brand-text font-weight-bold"> Smkmuhkandanghaur</span>
                     </a>
                     <ul class="navbar-nav ms-auto">
                         @if (Route::has('login'))

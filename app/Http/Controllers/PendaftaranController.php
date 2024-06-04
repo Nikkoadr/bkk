@@ -28,12 +28,10 @@ class PendaftaranController extends Controller
     public function bukti_pembayaran(Request $request) {
         $id_pendaftaran = $request->id;
 
-        // Update bukti_transfer in Pendaftaran table
         DB::table('pendaftaran')
             ->where('id', $id_pendaftaran)
             ->update(['bukti_transfer' => $request->bukti_transfer]);
 
-        // Join Pendaftaran with Loker using id_loker
         $pendaftaran = DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select('pendaftaran.*', 'loker.*')

@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
     </head>
-        <body class="hold-transition layout-top-nav layout-navbar-fixed">
+        <body class="hold-transition layout-top-nav layout-navbar-fixed" style="font-family:'Times New Roman', Times, serif">
         <div class="wrapper">
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
@@ -73,7 +73,7 @@
                                     <p class="mt-4 mb-3">Telah mendaftar sebagai calon pelamar pada :</p>
                                     <span><b>Perusahaan: {{ $pendaftaran->nama_loker }}</b></span>
                                     <p>Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
-                                    <p class="text-center m-3">{!! QrCode::size(200)->backgroundColor(255,255,255)->generate('https://bkk.test/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
+                                    <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.test/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

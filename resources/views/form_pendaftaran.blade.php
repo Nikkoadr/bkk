@@ -562,7 +562,7 @@
             <div class="float-right d-none d-sm-inline">Anything you want</div>
             <strong
             >Copyright &copy; 2024-2025
-            <a href="https://bkk.smkmuhkandanghaur.sch.id">BKK SMK Muhammadiyah Kandanghaur</a>.</strong
+            <a href="https://bkk.smkmuhkandanghaur.sch.id">Nikko Adrian</a>.</strong
             >
             All rights reserved.
         </footer>

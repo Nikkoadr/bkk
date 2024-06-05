@@ -6,6 +6,8 @@ use App\Models\Loker;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PendaftaranController extends Controller
 {
@@ -58,5 +60,28 @@ class PendaftaranController extends Controller
             ->first();
             return view('bukti_pembayaran', compact('pendaftaran'));
     }
+
+public function download_pdf($code_pendaftaran) {
+    $pendaftaran = DB::table('pendaftaran')
+        ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+        ->select('pendaftaran.*', 'loker.*')
+        ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
+        ->first();
+
+    // Mengonversi objek stdClass ke array
+    $pendaftaranArray = (array) $pendaftaran;
+
+    // Generate QR Code and save it as an image
+    $qrCodePath = storage_path('app/public/qrcode_'.$code_pendaftaran.'.png');
+    QrCode::size(100)
+        ->backgroundColor(255, 255, 255)
+        ->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$code_pendaftaran, $qrCodePath);
+
+    // Add QR Code path to the array
+    $pendaftaranArray['qr_code_path'] = $qrCodePath;
+
+    $pdf = Pdf::loadView('download_pdf', $pendaftaranArray);
+    return $pdf->download('bukti_pendaftaran.pdf');
+}
 
 }

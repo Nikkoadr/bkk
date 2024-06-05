@@ -92,12 +92,23 @@
                                         </tr>
                                     </table>
                                     <hr>
+                                    <div class="col-12 m-3">
+                                        <p class="lead">Metode Pembayaran :</p>
+                                        <table>
+                                            <tr>
+                                                <td><img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
+                                                <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span>
+                                                </td>
+                                                <td><img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                     @if($pendaftaran -> status_bayar  == 'sudah')
                                         <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
                                     @elseif($pendaftaran -> status_bayar  == 'menunggu')
                                         <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
                                     @else
-                                        <div class="col-12 m-3">
+                                        <div class="col-12">
                                             <form action="/bukti_pembayaran" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('put')
@@ -117,12 +128,6 @@
                                                 Segera lakukan Pembayaran Sebelum loker di tutup atau sampai kuota terpenuhi
                                             </p>
                                         </div>
-                                        <div class="col-12">
-                                            <p class="lead">Metode Pembayaran :</p>
-                                            <img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
-                                            <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span><br>
-                                            <img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span>
-                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -133,10 +138,10 @@
         </div>
         </div>
         <footer class="main-footer">
-            <div class="float-right d-none d-sm-inline">Anything you want</div>
+            <div class="float-right d-none d-sm-inline">version 2.0</div>
             <strong
             >Copyright &copy; 2024-2025
-            <a href="https://bkk.smkmuhkandanghaur.sch.id">BKK SMK Muhammadiyah Kandanghaur</a>.</strong
+            <a href="https://bkk.smkmuhkandanghaur.sch.id">Nikko Adrian</a>.</strong
             >
             All rights reserved.
         </footer>

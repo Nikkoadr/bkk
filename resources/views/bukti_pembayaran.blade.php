@@ -50,10 +50,10 @@
                                     </h3>
                                     <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
                                     <hr>
-                                    <span><b>Code Regsitrasi: {{ $pendaftaran -> code_pendaftaran }}</b></span>
+                                    <p class="text-center"><b>Code Registrasi: {{ $pendaftaran -> code_pendaftaran }}</b></p>
 
-                                    <p class="mt-3 mb-5">dokument ini menyatakan bahwa</p>
-                                    <table>
+                                    <p class="mt-3 mb-5 text-center">dokument ini menyatakan bahwa :</p>
+                                    <table class="table">
                                         <tr>
                                             <td><b>Nama</b></td>
                                             <td><b>:</b></td>
@@ -65,9 +65,9 @@
                                             <td><b>{{ $pendaftaran -> nomor_wa }}</b></td>
                                         </tr>
                                         <tr>
-                                            <td><b>Daftar Pada</b></td>
+                                            <td><b>Nama Sekolah</b></td>
                                             <td><b>:</b></td>
-                                            <td><b>{{ $pendaftaran -> created_at }}</b></td>
+                                            <td><b>{{ $pendaftaran -> nama_sekolah }}</b></td>
                                         </tr>
                                         <tr>
                                             <td><b>Status Pembayaran</b></td>
@@ -80,10 +80,12 @@
                                             @endif</td>
                                         </tr>
                                     </table>
-                                    <p class="mt-4 mb-3">Telah mendaftar sebagai calon pelamar pada :</p>
-                                    <span><b>Perusahaan: {{ $pendaftaran->nama_loker }}</b></span>
-                                    <p>Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
+                                    <p class="mt-4 mb-3 text-center">Telah mendaftar sebagai calon pelamar pada :</p>
+                                    <p class="text-center"><b>Perusahaan: {{ $pendaftaran->nama_loker }}</b></p>
+                                    <p class="text-center"><b>Pada tanggal : {{ $pendaftaran->created_at }}</b></p>
+                                    <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
                                     <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
+                                    <p class="text-center"><a class="btn btn-primary" href="download_pdf/{{ $pendaftaran -> code_pendaftaran }}" target="_blank" rel="noopener noreferrer">Download PDF</a></p>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -94,10 +96,10 @@
         </div>
         </div>
         <footer class="main-footer">
-            <div class="float-right d-none d-sm-inline">Anything you want</div>
+            <div class="float-right d-none d-sm-inline">version 2.0</div>
             <strong
             >Copyright &copy; 2024-2025
-            <a href="https://bkk.smkmuhkandanghaur.sch.id">BKK SMK Muhammadiyah Kandanghaur</a>.</strong
+            <a href="https://bkk.smkmuhkandanghaur.sch.id">Nikko Adrian</a>.</strong
             >
             All rights reserved.
         </footer>

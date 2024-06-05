@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pendaftaran', function (Blueprint $table) {
             $table->id();
             $table->string('code_pendaftaran');
-            $table->enum('status_bayar',['belum','sudah']);
+            $table->enum('status_bayar',['belum','menunggu','sudah']);
             $table->string('bukti_transfer')->nullable();
             $table->foreignId('id_loker')->index()->references('id_loker')->on('loker');
             $table->string('email');

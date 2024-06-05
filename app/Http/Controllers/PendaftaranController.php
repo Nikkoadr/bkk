@@ -17,32 +17,43 @@ class PendaftaranController extends Controller
     public function daftar(Request $request)
     {
         $pendaftaran = Pendaftaran::where('code_pendaftaran', $request->code_pendaftaran)->first();
-        if ($pendaftaran) {
-            return view('pembayaran', compact('pendaftaran'));
-        } else {
+        if (!$pendaftaran) {
             $request->merge(['status_bayar' => 'belum']);
             $pendaftaran = Pendaftaran::create($request->all());
-            return view('pembayaran', compact('pendaftaran'));
         }
+        $pendaftaran = DB::table('pendaftaran')
+            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+            ->select('pendaftaran.*', 'loker.*', 'loker.nama_loker as nama_loker')
+            ->where('pendaftaran.id', $pendaftaran->id)
+            ->first();
+        return view('pembayaran', compact('pendaftaran'));
     }
+
     public function bukti_pembayaran(Request $request) {
-        $id_pendaftaran = $request->id;
 
-        DB::table('pendaftaran')
-            ->where('id', $id_pendaftaran)
-            ->update(['bukti_transfer' => $request->bukti_transfer]);
 
+
+    $currentStatus = DB::table('pendaftaran')
+        ->where('id', $request->id)
+        ->value('status_bayar');
+
+    $updateData = ['bukti_transfer' => $request->bukti_transfer];
+    if ($currentStatus === 'belum') {
+        $updateData['status_bayar'] = 'menunggu';
+    }
+
+    DB::table('pendaftaran')
+        ->where('id', $request->id)
+        ->update($updateData);
         $pendaftaran = DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select('pendaftaran.*', 'loker.*')
-            ->where('pendaftaran.id', $id_pendaftaran)
+            ->where('pendaftaran.id', $request->id)
             ->first();
-
         return view('bukti_pembayaran', compact('pendaftaran'));
     }
     
     public function cari($code_pendaftaran) {
-
         $pendaftaran = DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select('pendaftaran.*', 'loker.*')

@@ -17,7 +17,7 @@
                 <div class="container">
                     <a href="#" class="navbar-brand">
                         <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="dosq" class="brand-image img-circle elevation-1" style="opacity: .8">
-                        <span class="brand-text font-weight-bold"> BKK SMK Muhammadiyah Kandanghaur</span>
+                        <span class="brand-text font-weight-bold">Smkmuhkandanghaur</span>
                     </a>
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -56,9 +56,6 @@
                 <div class="content-header">
                     <div class="container">
                         <div class="row mb-2">
-                            <div class="col-sm-12">
-                                <h1 class="m-0 text-center">Nama Loker : <b>{{ $data-> nama_loker }}</b></h1>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,7 +68,10 @@
                                     <h5 class="card-title m-0 text-bold">Info Loker</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h5>{{ $data-> deskripsi }}</h5>
+                                    <h5>Nama Perusahaan : </h5>
+                                    <h6><b>{{ $data->nama_loker }}</b></h6>
+                                    <h5>Deskripsi :</h5>
+                                    <h6><b>{{ $data->deskripsi }}</b></h6>
                                 </div>
                             </div>
                         </div>

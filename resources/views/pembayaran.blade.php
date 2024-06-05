@@ -12,13 +12,13 @@
         <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
     </head>
-        <body class="hold-transition layout-top-nav layout-navbar-fixed">
+        <body class="hold-transition layout-top-nav layout-navbar-fixed" style="font-family:'Times New Roman', Times, serif">
         <div class="wrapper">
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
                     <a href="#" class="navbar-brand">
                         <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="dosq" class="brand-image">
-                        <span class="brand-text font-weight-bold"> BKK SMK Muhammadiyah Kandanghaur</span>
+                        <span class="brand-text font-weight-bold">Smkmuhkandanghaur</span>
                     </a>
                     <ul class="navbar-nav ms-auto">
                         @if (Route::has('login'))
@@ -38,7 +38,6 @@
             </nav>
         <div class="content-wrapper">
             <div class="content-header">
-                <h4 class="m-0 text-center"><b>Pembayaran BKK</b></h4>
             </div>
             <div class="content">
                 <div class="container">
@@ -46,98 +45,63 @@
                         <div class="col-12">
                             <div class="card card-solid">
                                 <div class="card-body pb-0">
-                                    <div class="invoice p-3 mb-3">
-                                        <!-- Title row -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <h4>
-                                                    <img style="width: 50px; height: 50px;" src="{{ asset('assets/dist/img/BKK.png') }}" alt="bkk"> BKK SMK Muhammadiyah Kandanghaur
-                                                    <small class="float-right">Date: {{ date('d/m/Y') }}</small>
-                                                </h4>
-                                            </div>
+                                    <h3 class="text-center">
+                                        <b>Proses Pembayaran</b>
+                                    </h3>
+                                    <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
+                                    <hr>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td><b>Code Registrasi</b></td>
+                                            <td><b>:</b></td>
+                                            <td><b>{{ $pendaftaran -> code_pendaftaran }}</b</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Nama</b></td>
+                                            <td><b>:</b></td>
+                                            <td><b>{{ $pendaftaran -> nama }}</b</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>No Whatsapp</b></td>
+                                            <td><b>:</b></td>
+                                            <td><b>{{ $pendaftaran -> nomor_wa }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Asal Sekolah</b></td>
+                                            <td><b>:</b></td>
+                                            <td><b>{{ $pendaftaran -> nama_sekolah }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Perusahaan</b></td>
+                                            <td><b>:</b></td>
+                                            <td><b>{{ $pendaftaran -> nama_loker }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Status Pembayaran</b></td>
+                                            <td><b>:</b></td>
+                                            <td><span class="badge bg-red">{{ $pendaftaran -> status_bayar }}</span></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                        <div class="col-12">
+                                            <p class="lead">Metode Pembayaran :</p>
+                                            <img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
+                                            <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span><br>
+                                            <img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span>
+                                            <p class="text-center text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                                Segera lakukan Pembayaran Sebelum loker di tutup atau sampai kuota terpenuhi
+                                            </p>
                                         </div>
-                                        <!-- Info row -->
-
-                                        <!-- Table row -->
-                                        <div class="row">
-                                            <div class="col-12 table-responsive">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Data Pendaftar</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Code registrasi</td>
-                                                            <td><b>{{ $pendaftaran->code_pendaftaran }}</b></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Nama</td>
-                                                            <td>{{ $pendaftaran->nama }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Nomor Whatsapp</td>
-                                                            <td>{{ $pendaftaran->nomor_wa }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Asal Sekolah</td>
-                                                            <td>{{ $pendaftaran->nama_sekolah }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Status Bayar</td>
-                                                            <td><span class="badge bg-red">{{ $pendaftaran->status_bayar }}</span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                        <div class="col-12 m-3">
+                                            <form action="/bukti_pembayaran" method="post">
+                                                @csrf
+                                                @method('put')
+                                            <input type="hidden" name="id" value="{{ $pendaftaran -> id }}">
+                                            <input type="file" name="bukti_pembayaran" id="bukti_pembayaran">
+                                            <input class="btn btn-primary" type="submit" value="Upload">
+                                            </form>
                                         </div>
-                                        <!-- Payment row -->
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p class="lead">Metode Pembayaran :</p>
-                                                <img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
-                                                <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span>
-                                                <img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span>
-                                                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                                    Segera lakukan Pembayaran Sebelum loker di tutup atau sampai kuota terpenuhi
-                                                </p>
-                                            </div>
-                                            <div class="col-6">
-                                                <p class="lead">Jumlah yang harus dibayarkan :</p>
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <th style="width:50%">Biaya Administrasi</th>
-                                                                <td>Rp. 37.000,-</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th style="width:50%">Upload Bukti Pembayaran</th>
-                                                                <td><form action="bukti_pembayaran" method="post">
-                                                                    @csrf
-                                                                    @method('put')
-                                                                    <input type="hidden" name="id" value="{{ $pendaftaran->id }}">
-                                                                    <input type="file" name="bukti_transfer" id="">
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Print row -->
-                                        <div class="row no-print">
-                                            <div class="col-12">
-                                                <button type="submit" class="btn btn-success float-right">
-                                                    <i class="far fa-credit-card"></i> Bayar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
                         </div>
                     </div>

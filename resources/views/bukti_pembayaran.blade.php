@@ -18,7 +18,7 @@
                 <div class="container">
                     <a href="#" class="navbar-brand">
                         <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="dosq" class="brand-image">
-                        <span class="brand-text font-weight-bold"> BKK SMK Muhammadiyah Kandanghaur</span>
+                        <span class="brand-text font-weight-bold">Smkmuhkandanghaur</span>
                     </a>
                     <ul class="navbar-nav ms-auto">
                         @if (Route::has('login'))
@@ -72,7 +72,12 @@
                                         <tr>
                                             <td><b>Status Pembayaran</b></td>
                                             <td><b>:</b></td>
-                                            <td><span class="badge bg-red">{{ $pendaftaran -> status_bayar }}</span></td>
+                                            <td>
+                                            @if( $pendaftaran -> status_bayar  == 'sudah')
+                                                <span class="badge bg-green">{{ $pendaftaran -> status_bayar }}</span>
+                                            @else
+                                                <span class="badge bg-yellow">{{ $pendaftaran -> status_bayar }}</span>
+                                            @endif</td>
                                         </tr>
                                     </table>
                                     <p class="mt-4 mb-3">Telah mendaftar sebagai calon pelamar pada :</p>

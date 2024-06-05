@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>BKK SMK Muhammadiyah Kandanghaur</title>
+        <title>BKK Smkmuhkandanghaur</title>
         <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
@@ -17,7 +17,6 @@
                 <div class="container">
                     <a href="#" class="navbar-brand">
                         <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="dosq" class="brand-image">
-                        <span class="brand-text font-weight-bold"> BKK</span>
                         <span class="brand-text font-weight-bold"> Smkmuhkandanghaur</span>
                     </a>
                     <ul class="navbar-nav ms-auto">

@@ -67,19 +67,12 @@ public function download_pdf($code_pendaftaran) {
         ->select('pendaftaran.*', 'loker.*')
         ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
         ->first();
-
-    // Mengonversi objek stdClass ke array
     $pendaftaranArray = (array) $pendaftaran;
-
-    // Generate QR Code and save it as an image
     $qrCodePath = storage_path('app/public/qrcode_'.$code_pendaftaran.'.png');
     QrCode::size(100)
         ->backgroundColor(255, 255, 255)
         ->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$code_pendaftaran, $qrCodePath);
-
-    // Add QR Code path to the array
     $pendaftaranArray['qr_code_path'] = $qrCodePath;
-
     $pdf = Pdf::loadView('download_pdf', $pendaftaranArray);
     return $pdf->download('bukti_pendaftaran.pdf');
 }

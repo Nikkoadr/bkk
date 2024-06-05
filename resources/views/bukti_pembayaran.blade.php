@@ -85,7 +85,10 @@
                                     <p class="text-center"><b>Pada tanggal : {{ $pendaftaran->created_at }}</b></p>
                                     <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
                                     <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
-                                    <p class="text-center"><a class="btn btn-primary" href="download_pdf/{{ $pendaftaran -> code_pendaftaran }}" target="_blank" rel="noopener noreferrer">Download PDF</a></p>
+                                    <form action="download_pdf/{{ $pendaftaran -> code_pendaftaran }}" method="post">
+                                    @csrf
+                                        <p class="text-center"><button class="btn btn-primary" type="submit" >Download PDF</button></p>
+                                    </form>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

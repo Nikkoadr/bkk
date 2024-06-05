@@ -55,7 +55,7 @@
                                 });
                             @endphp
                             @if($loker_aktif->isEmpty())
-                            <H1 class="text-center">Tidak Ada Loker Yang Dibuka</H1>
+                            <H2 class="text-center">Tidak Ada Loker Yang Dibuka</H2>
                             @else
                                 <div class="card-body pb-0">
                                     <div class="row">
@@ -63,7 +63,7 @@
                                                 <div class="col-md-6 d-flex align-items-stretch flex-column">
                                                     <div class="card bg-light d-flex flex-fill">
                                                         <div class="card-header text-muted border-bottom-0">
-                                                            Nama Loker
+                                                            Nama Perusahaan
                                                         </div>
                                                         <div class="card-body pt-0">
                                                             <div class="row">

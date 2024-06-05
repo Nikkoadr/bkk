@@ -37,7 +37,7 @@
             </nav>
         <div class="content-wrapper">
             <div class="content-header">
-                <h4 class="m-0 text-center"><b>LOWONGAN PEKERJAAN</b></h4>
+                <h5 class="m-0 text-center"><b>LOWONGAN PEKERJAAN</b></h5>
             </div>
             <div class="content">
                 <div class="container">
@@ -55,7 +55,7 @@
                                 });
                             @endphp
                             @if($loker_aktif->isEmpty())
-                            <H2 class="text-center">Tidak Ada Loker Yang Dibuka</H2>
+                            <H3 class="text-center">Tidak Ada Loker Yang Dibuka</H3>
                             @else
                                 <div class="card-body pb-0">
                                     <div class="row">

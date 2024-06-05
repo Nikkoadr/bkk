@@ -42,9 +42,11 @@
 </head>
 <body>
     <div class="content">
-        <h3 class="text-center">
-            <b>Bukti Pendaftaran</b>
-        </h3>
+    <h3 class="text-center">
+        <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="Left Logo" style="height: 70px; float: left; margin-right: 10px;">
+        <b>Bukti Pendaftaran</b>
+        <img src="{{ asset('assets/dist/img/logoKotak.png') }}" alt="Right Logo" style="height: 70px; float: right; margin-left: 10px;">
+    </h3>
         <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
         <hr>
         <p class="text-center"><b>Code Registrasi: {{ $code_pendaftaran }}</b></p>

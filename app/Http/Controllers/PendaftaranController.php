@@ -74,7 +74,7 @@ public function download_pdf($code_pendaftaran) {
         ->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$code_pendaftaran, $qrCodePath);
     $pendaftaranArray['qr_code_path'] = $qrCodePath;
     $pdf = Pdf::loadView('download_pdf', $pendaftaranArray);
-    return $pdf->download('bukti_pendaftaran.pdf');
+    return $pdf->download('bukti_pendaftaran_bkk_ID_'.$code_pendaftaran.'.pdf');
 }
 
 }

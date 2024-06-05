@@ -93,6 +93,7 @@
                                     </table>
                                     <hr>
                                     <div class="col-12 m-3">
+                                        <h5 class="float-right"><b>Harga : Rp. 37.000</b></h5>
                                         <p class="lead">Metode Pembayaran :</p>
                                         <table>
                                             <tr>

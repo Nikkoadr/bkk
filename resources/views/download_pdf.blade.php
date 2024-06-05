@@ -74,7 +74,7 @@
         </table>
         <p class="mt-4 mb-3 text-center">Telah mendaftar sebagai calon pelamar pada :</p>
         <p class="text-center"><b>Perusahaan: {{ $nama_loker }}</b></p>
-        <p class="text-center"><b>Pada tanggal : {{ $created_at }}</b></p>
+        <p class="text-center"><b>Pada tanggal : {{ $pendaftaran_created_at }}</b></p>
         <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
         <div class="text-center">
             <img src="{{ $qr_code_path }}" alt="QR Code">

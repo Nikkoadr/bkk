@@ -10,6 +10,8 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
         <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free-6.5.2-web/css/all.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
     </head>
         <body class="hold-transition layout-top-nav layout-navbar-fixed" style="font-family:'Times New Roman', Times, serif">
@@ -79,28 +81,49 @@
                                         <tr>
                                             <td><b>Status Pembayaran</b></td>
                                             <td><b>:</b></td>
-                                            <td><span class="badge bg-red">{{ $pendaftaran -> status_bayar }}</span></td>
+                                            <td>
+                                            @if( $pendaftaran -> status_bayar  == 'sudah')
+                                                <span class="badge bg-green">{{ $pendaftaran -> status_bayar }}</span>
+                                            @elseif($pendaftaran -> status_bayar  == 'menunggu')
+                                                <span class="badge bg-yellow">{{ $pendaftaran -> status_bayar }}</span>
+                                            @else
+                                                <span class="badge bg-red">{{ $pendaftaran -> status_bayar }}</span>
+                                            @endif</td>
                                         </tr>
                                     </table>
                                     <hr>
+                                    @if($pendaftaran -> status_bayar  == 'sudah')
+                                        <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
+                                    @elseif($pendaftaran -> status_bayar  == 'menunggu')
+                                        <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
+                                    @else
+                                        <div class="col-12 m-3">
+                                            <form action="/bukti_pembayaran" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('put')
+                                                <input type="hidden" name="id" value="{{ $pendaftaran->id }}">
+                                                <label for="">Upload Bukti pembayaran :</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="bukti_pembayaran" name="bukti_pembayaran">
+                                                        <label class="custom-file-label" for="bukti_pembayaran">Upload File</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="submit">Upload</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <p class="text-center text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                                Segera lakukan Pembayaran Sebelum loker di tutup atau sampai kuota terpenuhi
+                                            </p>
+                                        </div>
                                         <div class="col-12">
                                             <p class="lead">Metode Pembayaran :</p>
                                             <img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
                                             <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span><br>
                                             <img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span>
-                                            <p class="text-center text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                                Segera lakukan Pembayaran Sebelum loker di tutup atau sampai kuota terpenuhi
-                                            </p>
                                         </div>
-                                        <div class="col-12 m-3">
-                                            <form action="/bukti_pembayaran" method="post">
-                                                @csrf
-                                                @method('put')
-                                            <input type="hidden" name="id" value="{{ $pendaftaran -> id }}">
-                                            <input type="file" name="bukti_pembayaran" id="bukti_pembayaran">
-                                            <input class="btn btn-primary" type="submit" value="Upload">
-                                            </form>
-                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -118,5 +141,12 @@
             All rights reserved.
         </footer>
     </div>
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <script>
+    $(function () {
+        bsCustomFileInput.init();
+    });
+    </script>
     </body>
     </html>

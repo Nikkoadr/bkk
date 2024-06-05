@@ -30,27 +30,24 @@ class PendaftaranController extends Controller
     }
 
     public function bukti_pembayaran(Request $request) {
+        $currentStatus = DB::table('pendaftaran')
+            ->where('id', $request->id)
+            ->value('status_bayar');
 
+        $updateData = ['bukti_transfer' => $request->bukti_transfer];
+        if ($currentStatus === 'belum') {
+            $updateData['status_bayar'] = 'menunggu';
+        }
 
-
-    $currentStatus = DB::table('pendaftaran')
-        ->where('id', $request->id)
-        ->value('status_bayar');
-
-    $updateData = ['bukti_transfer' => $request->bukti_transfer];
-    if ($currentStatus === 'belum') {
-        $updateData['status_bayar'] = 'menunggu';
-    }
-
-    DB::table('pendaftaran')
-        ->where('id', $request->id)
-        ->update($updateData);
-        $pendaftaran = DB::table('pendaftaran')
-            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
-            ->select('pendaftaran.*', 'loker.*')
-            ->where('pendaftaran.id', $request->id)
-            ->first();
-        return view('bukti_pembayaran', compact('pendaftaran'));
+        DB::table('pendaftaran')
+            ->where('id', $request->id)
+            ->update($updateData);
+            $pendaftaran = DB::table('pendaftaran')
+                ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+                ->select('pendaftaran.*', 'loker.*')
+                ->where('pendaftaran.id', $request->id)
+                ->first();
+            return view('bukti_pembayaran', compact('pendaftaran'));
     }
     
     public function cari($code_pendaftaran) {

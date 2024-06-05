@@ -383,7 +383,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="source">Sumber Informasi</label>
-                                                <input type="text" class="form-control @error('source') is-invalid @enderror" id="source" name="source" placeholder="Sumber Informasi" oninput="this.value = this.value.toUpperCase()">
+                                                <input type="text" class="form-control @error('source') is-invalid @enderror" id="source" name="source" value="BKK SMK MUHAMMADIYAH KANDANGHAUR" placeholder="Sumber Informasi" oninput="this.value = this.value.toUpperCase()">
                                                 @error('source')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -392,7 +392,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nama_kordinator">Nama Kordinator</label>
-                                                <input type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" name="nama_kordinator" placeholder="Nama Kordinator" oninput="this.value = this.value.toUpperCase()">
+                                                <input type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" value="ADI SAFRUDIN" name="nama_kordinator" placeholder="Nama Kordinator" oninput="this.value = this.value.toUpperCase()">
                                                 @error('nama_kordinator')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

@@ -17,6 +17,7 @@
                 <div class="container">
                     <a href="#" class="navbar-brand">
                         <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="dosq" class="brand-image">
+                        <span class="brand-text font-weight-bold"> BKK</span>
                         <span class="brand-text font-weight-bold"> Smkmuhkandanghaur</span>
                     </a>
                     <ul class="navbar-nav ms-auto">
@@ -37,7 +38,7 @@
             </nav>
         <div class="content-wrapper">
             <div class="content-header">
-                <h4 class="m-0 text-center"><b>Rekrutmen yang ada di BKK SMK Muhammadiyah Kandanghaur</b></h4>
+                <h4 class="m-0 text-center"><b>LOWONGAN PEKERJAAN</b></h4>
             </div>
             <div class="content">
                 <div class="container">

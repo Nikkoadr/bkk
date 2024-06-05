@@ -82,7 +82,7 @@
                                     </table>
                                     <p class="mt-4 mb-3 text-center">Telah mendaftar sebagai calon pelamar pada :</p>
                                     <p class="text-center"><b>Perusahaan: {{ $pendaftaran-> nama_loker }}</b></p>
-                                    <p class="text-center"><b>Pada tanggal : {{ $pendaftaran-> created_at }}</b></p>
+                                    <p class="text-center"><b>Pada tanggal : {{ Carbon::parse($pendaftaran->created_at)->format('d F Y, H:i') }}</b></p>
                                     <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
                                     <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
                                     <form action="download_pdf/{{ $pendaftaran -> code_pendaftaran }}" method="post">

@@ -75,8 +75,10 @@ class PendaftaranController extends Controller
     $pendaftaran = DB::table('pendaftaran')
         ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
         ->select(
+            'pendaftaran.code_pendaftaran', 
             'pendaftaran.nama', 
             'pendaftaran.nomor_wa', 
+            'pendaftaran.nama_sekolah',
             'pendaftaran.status_bayar',
             'loker.nama_loker', 
             'pendaftaran.created_at as pendaftaran_created_at'

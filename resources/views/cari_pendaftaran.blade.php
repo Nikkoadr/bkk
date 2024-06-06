@@ -85,16 +85,6 @@
                                     <p class="text-center"><b>Pada tanggal : {{ Carbon\Carbon::parse($pendaftaran->pendaftaran_created_at)->setTimezone('Asia/Jakarta')->translatedFormat('d F Y, H:i') }}</b></p>
                                     <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
                                     <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
-                                    <form action="print_bukti_transfer/{{ $pendaftaran -> code_pendaftaran }}" method="get">
-                                        <p class="text-center"><button class="btn btn-primary" formtarget="_blank" type="submit" >Print</button></p>
-                                    </form>
-                                            @php
-                                                $grupWaLink = $pendaftaran->grup_wa;
-                                                if (!preg_match("~^(?:f|ht)tps?://~i", $grupWaLink)) {
-                                                    $grupWaLink = $grupWaLink;
-                                                }
-                                            @endphp
-                                    <p class="text-center"><a class="btn btn-success" href="{{ $grupWaLink }}" target="_blank">Join Grup Whatsapp</a></p>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

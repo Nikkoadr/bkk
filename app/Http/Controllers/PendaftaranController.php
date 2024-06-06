@@ -40,7 +40,7 @@ class PendaftaranController extends Controller
             ->value('status_bayar');
 
         $nama_file = 'bukti_transfer_'.$request->id .'_'.$request->bukti_transfer->getClientOriginalExtension();
-        Storage::disk(env('STORAGE_DISK'))->put('bukti_transfer/' . $nama_file, file_get_contents($request->bukti_transfer));
+        Storage::disk(env('STORAGE_DISK'))->put($nama_file, file_get_contents($request->bukti_transfer));
 
         $updateData = ['bukti_transfer' => $nama_file];
         if ($currentStatus === 'belum') {
@@ -75,7 +75,7 @@ class PendaftaranController extends Controller
             )
             ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
             ->first();
-        return view('bukti_pembayaran', compact('pendaftaran'));
+        return view('cari_pendaftaran', compact('pendaftaran'));
     }
 
     public function print_bukti_transfer($code_pendaftaran) {

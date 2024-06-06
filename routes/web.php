@@ -28,3 +28,6 @@ Route::get('/data_pelamar', [HomeController::class, 'data_pelamar'])->name('data
 Route::post('/cari', [PendaftaranController::class, 'cari'])->name('cari');
 Route::get('/scan/{code_pendaftaran}', [PendaftaranController::class, 'scan'])->name('scan');
 Route::post('print_bukti_transfer', [PendaftaranController::class, 'print_bukti_transfer'])->name('print_bukti_transfer');
+
+Route::get('edit/loker/{id}',[HomeController::class, 'edit_loker']);
+Route::put('update/loker/{id}',[HomeController::class, 'update_loker'])->name('update_loker');

@@ -62,7 +62,7 @@
                         <td>{{ $data->grup_wa }}</td>
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
-                                <button type="button" class="btn btn-info m-1" data-toggle="modal" data-target="#modalEditUserId{{ $data->id }}"><i class="fa-regular fa-pen-to-square"></i></button>
+                                <a class="btn btn-info" href="/edit/loker/{{ $data->id_loker }}">Edit</a>
                             </div>
                         </td>
                     </tr>

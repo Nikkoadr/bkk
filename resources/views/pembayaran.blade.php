@@ -90,10 +90,14 @@
                                                 <span class="badge bg-red">{{ $pendaftaran -> status_bayar }}</span>
                                             @endif</td>
                                         </tr>
+                                        <tr>
+                                            <td><b>Administrasi</b></td>
+                                            <td><b>:</b></td>
+                                            <td><b>Rp.37.000,-</b></td>
+                                        </tr>
                                     </table>
                                     <hr>
                                     <div class="col-12 m-3">
-                                        <h5 class="float-right"><b>Harga : Rp. 37.000</b></h5>
                                         <p class="lead">Metode Pembayaran :</p>
                                         <table>
                                             <tr>
@@ -117,8 +121,8 @@
                                                 <label for="">Upload Bukti pembayaran :</label>
                                                 <div class="input-group mb-3">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="bukti_pembayaran" name="bukti_pembayaran">
-                                                        <label class="custom-file-label" for="bukti_pembayaran">Upload File</label>
+                                                        <input type="file" class="custom-file-input" id="bukti_transfer" required name="bukti_transfer">
+                                                        <label class="custom-file-label" for="bukti_transfer" >Upload File</label>
                                                     </div>
                                                     <div class="input-group-append">
                                                         <button class="btn btn-primary" type="submit">Upload</button>

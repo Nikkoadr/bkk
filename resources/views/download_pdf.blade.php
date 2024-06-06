@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bukti Pendaftaran {{ $code_pendaftaran }}</title>
+    <title>Bukti Pendaftaran {{ $pendaftaran->code_pendaftaran }}</title>
     <style>
         body {
             font-family: 'DejaVu Sans', sans-serif;
@@ -49,36 +49,36 @@
     </h3>
         <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
         <hr>
-        <p class="text-center"><b>Code Registrasi: {{ $code_pendaftaran }}</b></p>
+        <p class="text-center"><b>Code Registrasi: {{ $pendaftaran->code_pendaftaran }}</b></p>
 
         <p class="mt-3 mb-5 text-center">Dokumen ini menyatakan bahwa :</p>
         <table class="table">
             <tr>
                 <th>Nama</th>
-                <td>{{ $nama }}</td>
+                <td>{{ $pendaftaran->nama }}</td>
             </tr>
             <tr>
                 <th>No Whatsapp</th>
-                <td>{{ $nomor_wa }}</td>
+                <td>{{ $pendaftaran->nomor_wa }}</td>
             </tr>
             <tr>
                 <th>Nama Sekolah</th>
-                <td>{{ $nama_sekolah }}</td>
+                <td>{{ $pendaftaran->nama_sekolah }}</td>
             </tr>
             <tr>
                 <th>Status Pembayaran</th>
                 <td>
-                {{ $status_bayar }}
+                {{ $pendaftaran->status_bayar }}
                 </td>
             </tr>
         </table>
         <p class="mt-4 mb-3 text-center">Telah mendaftar sebagai calon pelamar pada :</p>
-        <p class="text-center"><b>Perusahaan: {{ $nama_loker }}</b></p>
-        <p class="text-center"><b>Pada tanggal : {{ $pendaftaran_created_at }}</b></p>
+        <p class="text-center"><b>Perusahaan: {{ $pendaftaran->nama_loker }}</b></p>
+        <p class="text-center"><b>Pada tanggal : {{ $pendaftaran->pendaftaran_created_at }}</b></p>
         <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
-        <div class="text-center">
-            <img src="{{ $qr_code_path }}" alt="QR Code">
-        </div>
+        <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
+        <p class="text-center">Bergerak Maju Menjadi Yang Terdepan</p>
     </div>
+    <script> window.print(); </script>
 </body>
 </html>

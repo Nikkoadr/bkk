@@ -6,8 +6,7 @@ use App\Models\Loker;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Storage;
 
 class PendaftaranController extends Controller
 {
@@ -32,11 +31,18 @@ class PendaftaranController extends Controller
     }
 
     public function bukti_pembayaran(Request $request) {
+        $request->validate([
+            'bukti_transfer' => 'required|file|mimes:jpg,jpeg,png,pdf|max:1024',
+        ]);
+
         $currentStatus = DB::table('pendaftaran')
             ->where('id', $request->id)
             ->value('status_bayar');
 
-        $updateData = ['bukti_transfer' => $request->bukti_transfer];
+        $nama_file = 'bukti_transfer_'.$request->id .'_'.$request->bukti_transfer->getClientOriginalExtension();
+        Storage::disk(env('STORAGE_DISK'))->put('bukti_transfer/' . $nama_file, file_get_contents($request->bukti_transfer));
+
+        $updateData = ['bukti_transfer' => $nama_file];
         if ($currentStatus === 'belum') {
             $updateData['status_bayar'] = 'menunggu';
         }
@@ -44,6 +50,7 @@ class PendaftaranController extends Controller
         DB::table('pendaftaran')
             ->where('id', $request->id)
             ->update($updateData);
+
         $pendaftaran = DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select(
@@ -85,25 +92,8 @@ class PendaftaranController extends Controller
         )
         ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
         ->first();
-    
-    // Convert the result to an array
-    $pendaftaranArray = (array) $pendaftaran;
-
-    // Generate QR Code
-    $qrCodePath = storage_path('app/public/qrcode_'.$code_pendaftaran.'.png');
-    QrCode::size(100)
-        ->backgroundColor(255, 255, 255)
-        ->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$code_pendaftaran, $qrCodePath);
-    
-    // Add QR Code path to the array
-    $pendaftaranArray['qr_code_path'] = $qrCodePath;
-
-    // Generate PDF
-    $pdf = Pdf::loadView('download_pdf', $pendaftaranArray);
-    
-    // Download the PDF
-    //return $pdf->download('bukti_pendaftaran_bkk_ID_'.$code_pendaftaran.'.pdf');
-    return $pdf->stream();
+        
+    return view('download_pdf', compact('pendaftaran'));
 }
 
 }

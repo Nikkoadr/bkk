@@ -26,4 +26,4 @@ Route::get('/bukti_pembayaran', function () {
 Route::get('/data_loker', [HomeController::class, 'data_loker'])->name('data_loker');
 Route::get('/data_pelamar', [HomeController::class, 'data_pelamar'])->name('data_pelamar');
 Route::get('/cari/{code_pendaftaran}', [PendaftaranController::class, 'cari'])->name('cari');
-Route::get('download_pdf/{code_pendaftaran}', [PendaftaranController::class, 'download_pdf'])->name('download_pdf');
+Route::post('download_pdf/{code_pendaftaran}', [PendaftaranController::class, 'download_pdf'])->name('download_pdf');

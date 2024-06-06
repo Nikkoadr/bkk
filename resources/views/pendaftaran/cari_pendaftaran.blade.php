@@ -16,24 +16,11 @@
         <div class="wrapper">
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
-                    <a href="#" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
                         <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="dosq" class="brand-image">
                         <span class="brand-text font-weight-bold">Smkmuhkandanghaur</span>
                     </a>
-                    <ul class="navbar-nav ms-auto">
-                        @if (Route::has('login'))
-                            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                                @auth
-                                    <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
-                                @else
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                                    @endif
-                                @endauth
-                            </div>
-                        @endif
-                    </ul>
+
                 </div>
             </nav>
         <div class="content-wrapper">

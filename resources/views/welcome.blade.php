@@ -2,20 +2,20 @@
     <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>BKK Smkmuhkandanghaur</title>
         <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
-        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free-6.5.2-web/css/all.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free-6.5.2-web/css/all.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}"/>
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
     </head>
         <body class="hold-transition layout-top-nav layout-navbar-fixed">
         <div class="wrapper">
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
-                    <a href="#" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
                         <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="dosq" class="brand-image">
                         <span class="brand-text font-weight-bold"> Smkmuhkandanghaur</span>
                     </a>

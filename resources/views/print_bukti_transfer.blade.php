@@ -43,9 +43,9 @@
 <body>
     <div class="content">
     <h3 class="text-center">
-        <img src="{{ asset('assets/dist/img/BKK_kecil.png') }}" alt="Left Logo" style="height: 70px; float: left; margin-right: 10px;">
-        <b>Bukti Pendaftaran</b>
         <img src="{{ asset('assets/dist/img/logoKotak_kecil.png') }}" alt="Right Logo" style="height: 70px; float: right; margin-left: 10px;">
+        <b>Bukti Pendaftaran</b>
+        <img src="{{ asset('assets/dist/img/BKK_kecil.png') }}" alt="Left Logo" style="height: 70px; float: left; margin-right: 10px;">
     </h3>
         <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
         <hr>
@@ -77,7 +77,7 @@
         <p class="text-center"><b>Pada tanggal : {{ $pendaftaran->pendaftaran_created_at }}</b></p>
         <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
         <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/cari/'.$pendaftaran->code_pendaftaran) !!}</p>
-        <p class="text-center">Bergerak Maju Menjadi Yang Terdepan</p>
+        <p class="text-center"><b>Bergerak Maju Menjadi Yang Terdepan</b></p>
     </div>
     <script> window.print(); </script>
 </body>

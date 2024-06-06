@@ -24,14 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('admin.home');
     }
 
     public function data_loker() {
         $data_loker = Loker::all();
-        return view('data_loker', compact('data_loker'));
+        return view('admin.data_loker', compact('data_loker'));
     }
     public function data_pelamar() {
-        return view('data_pelamar');
+        return view('admin.data_pelamar');
     }
 }

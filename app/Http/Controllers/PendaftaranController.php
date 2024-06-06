@@ -12,7 +12,7 @@ class PendaftaranController extends Controller
 {
     public function form_daftar(Request $request){
         $data = Loker::find( $request->id_loker);
-        return view('form_pendaftaran', compact('data'));
+        return view('pendaftaran.form_pendaftaran', compact('data'));
     }
 
     public function daftar(Request $request)
@@ -27,7 +27,7 @@ class PendaftaranController extends Controller
             ->select('pendaftaran.*', 'loker.*', 'loker.nama_loker as nama_loker')
             ->where('pendaftaran.id', $pendaftaran->id)
             ->first();
-        return view('pembayaran', compact('pendaftaran'));
+        return view('pendaftaran.pembayaran', compact('pendaftaran'));
     }
 
     public function bukti_pembayaran(Request $request) {
@@ -61,7 +61,7 @@ class PendaftaranController extends Controller
             )
             ->where('pendaftaran.id', $request->id)
             ->first();
-            return view('bukti_pembayaran', compact('pendaftaran'));
+            return view('pendaftaran.bukti_pembayaran', compact('pendaftaran'));
     }
     
     public function cari(Request $request) {
@@ -78,7 +78,7 @@ class PendaftaranController extends Controller
         if (!$pendaftaran) {
         return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
         }
-        return view('cari_pendaftaran', compact('pendaftaran'));
+        return view('pendaftaran.cari_pendaftaran', compact('pendaftaran'));
     }
 
     public function scan($code_pendaftaran) {
@@ -95,7 +95,7 @@ class PendaftaranController extends Controller
     if (!$pendaftaran) {
     return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
     }
-    return view('cari_pendaftaran', compact('pendaftaran'));
+    return view('pendaftaran.cari_pendaftaran', compact('pendaftaran'));
     }
 
     public function print_bukti_transfer(Request $request) {
@@ -114,7 +114,7 @@ class PendaftaranController extends Controller
         ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
         ->first();
         
-    return view('print_bukti_transfer', compact('pendaftaran'));
+    return view('pendaftaran.print_bukti_transfer', compact('pendaftaran'));
     }
 
 }

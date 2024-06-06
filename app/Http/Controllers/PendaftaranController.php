@@ -64,7 +64,7 @@ class PendaftaranController extends Controller
             return view('bukti_pembayaran', compact('pendaftaran'));
     }
     
-    public function cari(Request $request) {
+    public function cari(Request $request, $code_pendaftaran) {
         $pendaftaran = DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select(
@@ -81,7 +81,8 @@ class PendaftaranController extends Controller
         return view('cari_pendaftaran', compact('pendaftaran'));
     }
 
-    public function print_bukti_transfer($code_pendaftaran) {
+    public function print_bukti_transfer(Request $request) {
+        
     $pendaftaran = DB::table('pendaftaran')
         ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
         ->select(
@@ -93,7 +94,7 @@ class PendaftaranController extends Controller
             'loker.nama_loker', 
             'pendaftaran.created_at as pendaftaran_created_at'
         )
-        ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
+        ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
         ->first();
         
     return view('print_bukti_transfer', compact('pendaftaran'));

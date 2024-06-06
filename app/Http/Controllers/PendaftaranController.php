@@ -102,7 +102,8 @@ class PendaftaranController extends Controller
     $pdf = Pdf::loadView('download_pdf', $pendaftaranArray);
     
     // Download the PDF
-    return $pdf->download('bukti_pendaftaran_bkk_ID_'.$code_pendaftaran.'.pdf');
+    //return $pdf->download('bukti_pendaftaran_bkk_ID_'.$code_pendaftaran.'.pdf');
+    return $pdf->stream();
 }
 
 }

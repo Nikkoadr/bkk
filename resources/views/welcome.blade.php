@@ -69,10 +69,10 @@
                                                             <div class="row">
                                                                 <div class="col-7">
                                                                     <h2 class="lead"><b>{{ $data->nama_loker }}</b></h2>
-                                                                    <p class="text-muted text-sm"><b>Deskripsi: </b> {{ $data->deskripsi }}</p>
-                                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                                    <p class="text-muted text-sm"><b>Deskripsi: </b> {!! $data->deskripsi !!}</p>
+                                                                    {{-- <ul class="ml-4 mb-0 fa-ul text-muted">
                                                                         <li class="small"><span class="fa-li"><i class="fa-solid fa-users"></i></span> Jumlah Pendaftar : {{ $data->jumlah_pendaftar }}</li>
-                                                                    </ul>
+                                                                    </ul> --}}
                                                                 </div>
                                                                 <div class="col-4 text-center">
                                                                     <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="user-avatar" class="img-box img-fluid">

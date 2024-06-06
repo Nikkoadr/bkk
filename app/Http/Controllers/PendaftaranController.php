@@ -76,7 +76,7 @@ class PendaftaranController extends Controller
             ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
             ->first();
         if (!$pendaftaran) {
-        return redirect('/')->with('error', 'Data yang Anda cari tidak ditemukan.');
+        return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
         }
         return view('cari_pendaftaran', compact('pendaftaran'));
     }

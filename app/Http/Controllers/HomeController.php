@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Loker;
 use Illuminate\Http\Request;
+use App\Models\Pendaftaran;
 
 class HomeController extends Controller
 {
@@ -32,25 +33,47 @@ class HomeController extends Controller
         return view('admin.data_loker', compact('data_loker'));
     }
 
-public function edit_loker($id){
-    $data = Loker::find($id);
-    return view('admin.edit_loker', compact('data'));
-}
+    public function tambah_loker(Request $request)
+    {
+        $request->validate([
+            'nama_loker' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'status_loker' => 'required|string|max:255',
+            'grup_wa' => 'required|string',
+        ]);
 
-public function update_loker(Request $request, $id)
-{
-    $request->validate([
-        'nama_loker' => 'required|string|max:255',
-        'deskripsi' => 'required|string|max:255',
-        'status_loker' => 'required|string|max:255',
-        'grup_wa' => 'required|string',
-    ]);
+        Loker::create($request->all());
 
-    $loker = Loker::findOrFail($id);
-    $loker->update($request->only(['nama_loker', 'deskripsi', 'status_loker', 'grup_wa']));
+        return redirect()->back()->with('success', 'Loker has been added successfully');
+    }
 
-    return redirect()->route('data_loker')->with('success', 'Loker updated successfully');
-}
+    public function edit_loker($id){
+        $data = Loker::find($id);
+        return view('admin.edit_loker', compact('data'));
+    }
+
+    public function update_loker(Request $request, $id)
+    {
+        $request->validate([
+            'nama_loker' => 'required|string|max:255',
+            'deskripsi' => 'required|string|',
+            'status_loker' => 'required|string|max:255',
+            'grup_wa' => 'required|string',
+        ]);
+
+        $loker = Loker::findOrFail($id);
+        $loker->update($request->only(['nama_loker', 'deskripsi', 'status_loker', 'grup_wa']));
+
+        return redirect()->route('data_loker')->with('success', 'Loker updated successfully');
+    }
+
+    public function hapus_loker($id)
+    {
+        $loker = Loker::findOrFail($id);
+        Pendaftaran::where('id_loker', $id)->delete();
+        $loker->delete();
+        return redirect()->back()->with('success', 'Loker has been deleted successfully');
+    }
 
     public function data_pelamar() {
         return view('admin.data_pelamar');

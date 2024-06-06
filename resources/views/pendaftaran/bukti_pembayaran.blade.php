@@ -76,7 +76,7 @@
                                             @csrf
                                             <input type="hidden" name="code_pendaftaran" value="{{ $pendaftaran -> code_pendaftaran }}">
                                             <div class="text-center m-2">
-                                                <button class="btn btn-primary" type="submit">Print</button>
+                                                <button class="btn btn-primary" formtarget="_blank" type="submit">Print</button>
                                             </div>
                                         </form>
                                             @php

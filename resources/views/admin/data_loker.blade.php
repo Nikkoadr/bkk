@@ -32,7 +32,8 @@
         <div class="col-12">
         <div class="card">
             <div class="card-header">
-            <button type="button" class="btn btn-success m-1" data-toggle="modal" data-target="#modal_tambah_user"><i class="fa-solid fa-address-card"></i> Tambah Loker</button>
+            <button type="button" class="btn btn-success m-1" data-toggle="modal" data-target="#modal_tambah_loker"><i class="fa-solid fa-address-card"></i> Tambah Loker</button>
+            @include('layouts.partials.modal_tambah_loker')
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -62,7 +63,9 @@
                         <td>{{ $data->grup_wa }}</td>
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
-                                <a class="btn btn-info" href="/edit/loker/{{ $data->id_loker }}">Edit</a>
+                                <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}">Edit</a>
+                                <a class="btn btn-danger konfirmasi" href="/hapus_loker/{{ $data->id_loker }}">Hapus</a>
+                                
                             </div>
                         </td>
                     </tr>
@@ -98,6 +101,10 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('deskripsi');
+</script>
 <script>
 $(function () {
     bsCustomFileInput.init();

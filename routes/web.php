@@ -29,5 +29,8 @@ Route::post('/cari', [PendaftaranController::class, 'cari'])->name('cari');
 Route::get('/scan/{code_pendaftaran}', [PendaftaranController::class, 'scan'])->name('scan');
 Route::post('print_bukti_transfer', [PendaftaranController::class, 'print_bukti_transfer'])->name('print_bukti_transfer');
 
-Route::get('edit/loker/{id}',[HomeController::class, 'edit_loker']);
-Route::put('update/loker/{id}',[HomeController::class, 'update_loker'])->name('update_loker');
+
+Route::post('tambah_loker',[HomeController::class, 'tambah_loker'])->name('tambah_loker');
+Route::get('edit_loker/{id}',[HomeController::class, 'edit_loker']);
+Route::put('update_loker/{id}',[HomeController::class, 'update_loker'])->name('update_loker');
+Route::get('hapus_loker/{id}',[HomeController::class, 'hapus_loker']);

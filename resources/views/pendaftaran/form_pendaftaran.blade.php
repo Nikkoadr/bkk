@@ -41,7 +41,7 @@
                                     <h5>Nama Perusahaan : </h5>
                                     <h6><b>{{ $data->nama_loker }}</b></h6>
                                     <h5>Deskripsi :</h5>
-                                    <h6><b>{{ $data->deskripsi }}</b></h6>
+                                    <h6><b>{!! $data->deskripsi !!}</b></h6>
                                 </div>
                             </div>
                         </div>

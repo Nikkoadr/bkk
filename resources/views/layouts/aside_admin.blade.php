@@ -2,12 +2,12 @@
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
             <img
-                src="{{ asset('assets/dist/img/logoKotak.png') }}"
+                src="{{ asset('assets/dist/img/BKK.png') }}"
                 alt="BKK"
-                class="brand-image img-circle elevation-3"
+                class="brand-image elevation-3"
                 style="opacity: 0.8"
             />
-            <span class="brand-text font-weight-light">Admin BKK</span>
+            <span class="brand-text font-weight-light">BKK SMK MUH KDH</span>
             </a>
 
             <!-- Sidebar -->

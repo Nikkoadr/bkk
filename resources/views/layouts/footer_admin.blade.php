@@ -4,7 +4,7 @@
             <!-- Default to the left -->
             <strong
             >Copyright &copy; 2024-2025
-            <a href="https://adminlte.io">BKK SMK Muhammadiyah Kandanghaur</a>.</strong
+            <a href="https://github.com/Nikkoadr">Nikko Adrian</a>.</strong
             >
             All rights reserved.
         </footer>

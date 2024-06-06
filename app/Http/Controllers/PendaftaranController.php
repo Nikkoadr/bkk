@@ -64,7 +64,7 @@ class PendaftaranController extends Controller
             return view('bukti_pembayaran', compact('pendaftaran'));
     }
     
-    public function cari(Request $request, $code_pendaftaran) {
+    public function cari(Request $request) {
         $pendaftaran = DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select(

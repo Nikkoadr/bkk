@@ -46,9 +46,7 @@
                             <div class="card card-solid">
                                 <div class="card-body pb-0">
                                     <h3 class="text-center">
-                                        <img src="{{ asset('assets/dist/img/logoKotak_kecil.png') }}" alt="Left Logo" style="height: 70px; float: left; margin-right: 10px;">
                                         <b>Bukti Pendaftaran</b>
-                                        <img src="{{ asset('assets/dist/img/BKK_kecil.png') }}" alt="Right Logo" style="height: 70px; float: right; margin-left: 10px;">
                                     </h3>
                                     <h3 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h3>
                                     <hr>

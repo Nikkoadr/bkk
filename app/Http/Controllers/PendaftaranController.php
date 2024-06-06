@@ -64,7 +64,7 @@ class PendaftaranController extends Controller
             return view('bukti_pembayaran', compact('pendaftaran'));
     }
     
-    public function cari($code_pendaftaran) {
+    public function cari(Request $request) {
         $pendaftaran = DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select(
@@ -73,7 +73,7 @@ class PendaftaranController extends Controller
                 'loker.*', 
                 'loker.created_at as loker_created_at'
             )
-            ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
+            ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
             ->first();
         if (!$pendaftaran) {
         return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');

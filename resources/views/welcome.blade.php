@@ -97,6 +97,17 @@
                                 <!-- /.card-body -->
                             </div>
                         </div>
+                            <div class="col-12">
+                                <form action="/cari" method="POST">
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="code_pendaftaran" class="form-control" placeholder="Masukan Code pendaftaran Disini">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="sumbit">Cari</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                     </div>
                 </div>
             </div>

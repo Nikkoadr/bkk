@@ -47,7 +47,7 @@
             <b>Bukti Pendaftaran</b>
             <img src="{{ asset('assets/dist/img/BKK_kecil.png') }}" alt="Right Logo" style="height: 70px; float: right; margin-left: 10px;">
         </h3>
-        <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
+        <h3 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h3>
         <hr>
         <p class="text-center"><b>Code Registrasi: {{ $pendaftaran->code_pendaftaran }}</b></p>
 

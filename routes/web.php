@@ -25,5 +25,5 @@ Route::get('/bukti_pembayaran', function () {
     return redirect('/')->with('notif','maaf bukti pembayaran tidak bisa di akses lewat url langsung jika ingin melihat bukti pembayaran lakukan pencarian');});
 Route::get('/data_loker', [HomeController::class, 'data_loker'])->name('data_loker');
 Route::get('/data_pelamar', [HomeController::class, 'data_pelamar'])->name('data_pelamar');
-Route::get('/cari/{code_pendaftaran}', [PendaftaranController::class, 'cari'])->name('cari');
+Route::post('/cari/', [PendaftaranController::class, 'cari'])->name('cari');
 Route::get('print_bukti_transfer/{code_pendaftaran}', [PendaftaranController::class, 'print_bukti_transfer'])->name('print_bukti_transfer');

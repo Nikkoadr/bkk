@@ -78,7 +78,7 @@ class PendaftaranController extends Controller
         return view('bukti_pembayaran', compact('pendaftaran'));
     }
 
-    public function download_pdf($code_pendaftaran) {
+    public function print_bukti_transfer($code_pendaftaran) {
     $pendaftaran = DB::table('pendaftaran')
         ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
         ->select(
@@ -93,7 +93,7 @@ class PendaftaranController extends Controller
         ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
         ->first();
         
-    return view('download_pdf', compact('pendaftaran'));
+    return view('print_bukti_transfer', compact('pendaftaran'));
 }
 
 }

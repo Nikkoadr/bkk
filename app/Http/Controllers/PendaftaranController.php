@@ -81,6 +81,23 @@ class PendaftaranController extends Controller
         return view('cari_pendaftaran', compact('pendaftaran'));
     }
 
+    public function scan($code_pendaftaran) {
+    $pendaftaran = DB::table('pendaftaran')
+        ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+        ->select(
+            'pendaftaran.*', 
+            'pendaftaran.created_at as pendaftaran_created_at',
+            'loker.*', 
+            'loker.created_at as loker_created_at'
+        )
+        ->where('pendaftaran.code_pendaftaran', $code_pendaftaran)
+        ->first();
+    if (!$pendaftaran) {
+    return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
+    }
+    return view('cari_pendaftaran', compact('pendaftaran'));
+    }
+
     public function print_bukti_transfer(Request $request) {
         
     $pendaftaran = DB::table('pendaftaran')
@@ -98,6 +115,6 @@ class PendaftaranController extends Controller
         ->first();
         
     return view('print_bukti_transfer', compact('pendaftaran'));
-}
+    }
 
 }

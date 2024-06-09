@@ -57,7 +57,7 @@
                         @else
                         <span class="badge bg-red">Belum Bayar</span>
                         @endif</td>
-                        <td>{{ $data->bukti_transfer }}</td>
+                        <td><img src="/storage/bukti_transfer/{{ $data->bukti_transfer }}" alt="{{ $data->bukti_transfer }}"></td>
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
                                 <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}">Edit</a>

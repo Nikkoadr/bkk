@@ -353,7 +353,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="source">Sumber Informasi</label>
-                                                <input type="text" class="form-control @error('source') is-invalid @enderror" id="source" name="source" value="BKK SMK MUHAMMADIYAH KANDANGHAUR" placeholder="Sumber Informasi" oninput="this.value = this.value.toUpperCase()">
+                                                <input readonly type="text" class="form-control @error('source') is-invalid @enderror" id="source" name="source" value="BKK SMK MUHAMMADIYAH KANDANGHAUR" placeholder="Sumber Informasi" oninput="this.value = this.value.toUpperCase()">
                                                 @error('source')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -362,160 +362,162 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nama_kordinator">Nama Kordinator</label>
-                                                <input type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" value="ADI SAFRUDIN" name="nama_kordinator" placeholder="Nama Kordinator" oninput="this.value = this.value.toUpperCase()">
+                                                <input readonly type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" value="ADI SAFRUDIN" name="nama_kordinator" placeholder="Nama Kordinator" oninput="this.value = this.value.toUpperCase()">
                                                 @error('nama_kordinator')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="form-group">
-                                                <label for="vaksin_1">Vaksin 1</label>
-                                                <select class="form-control @error('vaksin_1') is-invalid @enderror" id="vaksin_1" name="vaksin_1">
-                                                    <option value="sudah">Sudah</option>
-                                                    <option value="belum">Belum</option>
-                                                </select>
-                                                @error('vaksin_1')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="jenis_vaksin_1">Jenis Vaksin 1</label>
-                                                <select class="form-control @error('jenis_vaksin_1') is-invalid @enderror" id="jenis_vaksin_1" name="jenis_vaksin_1">
-                                                    <option value="SINOVAC">SINOVAC</option>
-                                                    <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
-                                                    <option value="ASTRAZENECA">ASTRAZENECA</option>
-                                                    <option value="SINOPHARM">SINOPHARM</option>
-                                                    <option value="MODERNA">MODERNA</option>
-                                                    <option value="PFIZER">PFIZER</option>
-                                                    <option value="SPUTNIK V">SPUTNIK V</option>
-                                                    <option value="INDOVAC">INDOVAC</option>
-                                                    <option value="INAVAC">INAVAC</option>
-                                                </select>
-                                                @error('jenis_vaksin_1')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="tanggal_vaksin_1">Tanggal Vaksin 1</label>
-                                                <input type="date" class="form-control @error('tanggal_vaksin_1') is-invalid @enderror" id="tanggal_vaksin_1" name="tanggal_vaksin_1">
-                                                @error('tanggal_vaksin_1')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="lokasi_vaksin_1">Lokasi Vaksin 1</label>
-                                                <input type="text" class="form-control @error('lokasi_vaksin_1') is-invalid @enderror" id="lokasi_vaksin_1" name="lokasi_vaksin_1" placeholder="Lokasi Vaksin 1" oninput="this.value = this.value.toUpperCase()">
-                                                @error('lokasi_vaksin_1')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="vaksin_2">Vaksin 2</label>
-                                                <select class="form-control @error('vaksin_2') is-invalid @enderror" id="vaksin_2" name="vaksin_2">
-                                                    <option value="sudah">Sudah</option>
-                                                    <option value="belum">Belum</option>
-                                                </select>
-                                                @error('vaksin_2')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="jenis_vaksin_2">Jenis Vaksin 2</label>
-                                                <select class="form-control @error('jenis_vaksin_2') is-invalid @enderror" id="jenis_vaksin_2" name="jenis_vaksin_2">
-                                                    <option value="SINOVAC">SINOVAC</option>
-                                                    <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
-                                                    <option value="ASTRAZENECA">ASTRAZENECA</option>
-                                                    <option value="SINOPHARM">SINOPHARM</option>
-                                                    <option value="MODERNA">MODERNA</option>
-                                                    <option value="PFIZER">PFIZER</option>
-                                                    <option value="SPUTNIK V">SPUTNIK V</option>
-                                                    <option value="INDOVAC">INDOVAC</option>
-                                                    <option value="INAVAC">INAVAC</option>
-                                                </select>
-                                                @error('jenis_vaksin_2')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="tanggal_vaksin_2">Tanggal Vaksin 2</label>
-                                                <input type="date" class="form-control @error('tanggal_vaksin_2') is-invalid @enderror" id="tanggal_vaksin_2" name="tanggal_vaksin_2">
-                                                @error('tanggal_vaksin_2')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="lokasi_vaksin_2">Lokasi Vaksin 2</label>
-                                                <input type="text" class="form-control @error('lokasi_vaksin_2') is-invalid @enderror" id="lokasi_vaksin_2" name="lokasi_vaksin_2" placeholder="Lokasi Vaksin 2" oninput="this.value = this.value.toUpperCase()">
-                                                @error('lokasi_vaksin_2')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="vaksin_3">Vaksin 3</label>
-                                                <select class="form-control @error('vaksin_3') is-invalid @enderror" id="vaksin_3" name="vaksin_3">
-                                                    <option value="sudah">Sudah</option>
-                                                    <option value="belum">Belum</option>
-                                                </select>
-                                                @error('vaksin_3')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="jenis_vaksin_3">Jenis Vaksin 3</label>
-                                                <select class="form-control @error('jenis_vaksin_3') is-invalid @enderror" id="jenis_vaksin_3" name="jenis_vaksin_3">
-                                                    <option value="SINOVAC">SINOVAC</option>
-                                                    <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
-                                                    <option value="ASTRAZENECA">ASTRAZENECA</option>
-                                                    <option value="SINOPHARM">SINOPHARM</option>
-                                                    <option value="MODERNA">MODERNA</option>
-                                                    <option value="PFIZER">PFIZER</option>
-                                                    <option value="SPUTNIK V">SPUTNIK V</option>
-                                                    <option value="INDOVAC">INDOVAC</option>
-                                                    <option value="INAVAC">INAVAC</option>
-                                                </select>
-                                                @error('jenis_vaksin_3')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="tanggal_vaksin_3">Tanggal Vaksin 3</label>
-                                                <input type="date" class="form-control @error('tanggal_vaksin_3') is-invalid @enderror" id="tanggal_vaksin_3" name="tanggal_vaksin_3">
-                                                @error('tanggal_vaksin_3')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="lokasi_vaksin_3">Lokasi Vaksin 3</label>
-                                                <input type="text" class="form-control @error('lokasi_vaksin_3') is-invalid @enderror" id="lokasi_vaksin_3" name="lokasi_vaksin_3" placeholder="Lokasi Vaksin 3" oninput="this.value = this.value.toUpperCase()">
-                                                @error('lokasi_vaksin_3')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
+                                            @if('0'=='1')
+                                                    <div class="form-group">
+                                                    <label for="vaksin_1">Vaksin 1</label>
+                                                    <select class="form-control @error('vaksin_1') is-invalid @enderror" id="vaksin_1" name="vaksin_1">
+                                                        <option value="sudah">Sudah</option>
+                                                        <option value="belum">Belum</option>
+                                                    </select>
+                                                    @error('vaksin_1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jenis_vaksin_1">Jenis Vaksin 1</label>
+                                                    <select class="form-control @error('jenis_vaksin_1') is-invalid @enderror" id="jenis_vaksin_1" name="jenis_vaksin_1">
+                                                        <option value="SINOVAC">SINOVAC</option>
+                                                        <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
+                                                        <option value="ASTRAZENECA">ASTRAZENECA</option>
+                                                        <option value="SINOPHARM">SINOPHARM</option>
+                                                        <option value="MODERNA">MODERNA</option>
+                                                        <option value="PFIZER">PFIZER</option>
+                                                        <option value="SPUTNIK V">SPUTNIK V</option>
+                                                        <option value="INDOVAC">INDOVAC</option>
+                                                        <option value="INAVAC">INAVAC</option>
+                                                    </select>
+                                                    @error('jenis_vaksin_1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tanggal_vaksin_1">Tanggal Vaksin 1</label>
+                                                    <input type="date" class="form-control @error('tanggal_vaksin_1') is-invalid @enderror" id="tanggal_vaksin_1" name="tanggal_vaksin_1">
+                                                    @error('tanggal_vaksin_1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lokasi_vaksin_1">Lokasi Vaksin 1</label>
+                                                    <input type="text" class="form-control @error('lokasi_vaksin_1') is-invalid @enderror" id="lokasi_vaksin_1" name="lokasi_vaksin_1" placeholder="Lokasi Vaksin 1" oninput="this.value = this.value.toUpperCase()">
+                                                    @error('lokasi_vaksin_1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vaksin_2">Vaksin 2</label>
+                                                    <select class="form-control @error('vaksin_2') is-invalid @enderror" id="vaksin_2" name="vaksin_2">
+                                                        <option value="sudah">Sudah</option>
+                                                        <option value="belum">Belum</option>
+                                                    </select>
+                                                    @error('vaksin_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jenis_vaksin_2">Jenis Vaksin 2</label>
+                                                    <select class="form-control @error('jenis_vaksin_2') is-invalid @enderror" id="jenis_vaksin_2" name="jenis_vaksin_2">
+                                                        <option value="SINOVAC">SINOVAC</option>
+                                                        <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
+                                                        <option value="ASTRAZENECA">ASTRAZENECA</option>
+                                                        <option value="SINOPHARM">SINOPHARM</option>
+                                                        <option value="MODERNA">MODERNA</option>
+                                                        <option value="PFIZER">PFIZER</option>
+                                                        <option value="SPUTNIK V">SPUTNIK V</option>
+                                                        <option value="INDOVAC">INDOVAC</option>
+                                                        <option value="INAVAC">INAVAC</option>
+                                                    </select>
+                                                    @error('jenis_vaksin_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tanggal_vaksin_2">Tanggal Vaksin 2</label>
+                                                    <input type="date" class="form-control @error('tanggal_vaksin_2') is-invalid @enderror" id="tanggal_vaksin_2" name="tanggal_vaksin_2">
+                                                    @error('tanggal_vaksin_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lokasi_vaksin_2">Lokasi Vaksin 2</label>
+                                                    <input type="text" class="form-control @error('lokasi_vaksin_2') is-invalid @enderror" id="lokasi_vaksin_2" name="lokasi_vaksin_2" placeholder="Lokasi Vaksin 2" oninput="this.value = this.value.toUpperCase()">
+                                                    @error('lokasi_vaksin_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vaksin_3">Vaksin 3</label>
+                                                    <select class="form-control @error('vaksin_3') is-invalid @enderror" id="vaksin_3" name="vaksin_3">
+                                                        <option value="sudah">Sudah</option>
+                                                        <option value="belum">Belum</option>
+                                                    </select>
+                                                    @error('vaksin_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jenis_vaksin_3">Jenis Vaksin 3</label>
+                                                    <select class="form-control @error('jenis_vaksin_3') is-invalid @enderror" id="jenis_vaksin_3" name="jenis_vaksin_3">
+                                                        <option value="SINOVAC">SINOVAC</option>
+                                                        <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
+                                                        <option value="ASTRAZENECA">ASTRAZENECA</option>
+                                                        <option value="SINOPHARM">SINOPHARM</option>
+                                                        <option value="MODERNA">MODERNA</option>
+                                                        <option value="PFIZER">PFIZER</option>
+                                                        <option value="SPUTNIK V">SPUTNIK V</option>
+                                                        <option value="INDOVAC">INDOVAC</option>
+                                                        <option value="INAVAC">INAVAC</option>
+                                                    </select>
+                                                    @error('jenis_vaksin_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tanggal_vaksin_3">Tanggal Vaksin 3</label>
+                                                    <input type="date" class="form-control @error('tanggal_vaksin_3') is-invalid @enderror" id="tanggal_vaksin_3" name="tanggal_vaksin_3">
+                                                    @error('tanggal_vaksin_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lokasi_vaksin_3">Lokasi Vaksin 3</label>
+                                                    <input type="text" class="form-control @error('lokasi_vaksin_3') is-invalid @enderror" id="lokasi_vaksin_3" name="lokasi_vaksin_3" placeholder="Lokasi Vaksin 3" oninput="this.value = this.value.toUpperCase()">
+                                                    @error('lokasi_vaksin_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            @endif
                                         </div>
                                             <a class="btn btn-secondary" href="/">Kembali</a>
                                             <button type="submit" class="btn btn-primary float-right">Daftar</button>

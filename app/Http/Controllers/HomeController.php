@@ -76,6 +76,7 @@ class HomeController extends Controller
     }
 
     public function data_pelamar() {
-        return view('admin.data_pelamar');
+        $pendaftaran = Pendaftaran::all();
+        return view('admin.data_pelamar', compact('pendaftaran'));
     }
 }

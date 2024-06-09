@@ -39,7 +39,7 @@ class PendaftaranController extends Controller
             ->where('id', $request->id)
             ->value('status_bayar');
 
-        $nama_file = 'bukti_transfer_'.$request->id .'.'.$request->bukti_transfer->getClientOriginalExtension();
+        $nama_file = 'bukti_transfer_'.$request->id .$request->nama.'.'.$request->bukti_transfer->getClientOriginalExtension();
         Storage::disk(env('STORAGE_DISK'))->put($nama_file, file_get_contents($request->bukti_transfer));
 
         $updateData = ['bukti_transfer' => $nama_file];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Loker;
 use Illuminate\Http\Request;
 use App\Models\Pendaftaran;
+use Illuminate\Auth\Events\Validated;
 
 class HomeController extends Controller
 {
@@ -79,11 +80,66 @@ class HomeController extends Controller
         $pendaftaran = Pendaftaran::all();
         return view('admin.data_pelamar', compact('pendaftaran'));
     }
-    public function update_pelamar(Request $request, $id){
-    $pendaftaran = Pendaftaran::findOrFail($id);
-    $pendaftaran-> update($request);
-    return redirect()->back()->with('success', 'data pelamar berhasil di update');
+
+    public function edit_pelamar($id){
+        $data = Pendaftaran::find($id);
+        return view('admin.edit_pelamar', compact('data'));
     }
+
+public function update_pelamar(Request $request, $id) {
+    $validatedData = $request->validate([
+        'code_pendaftaran' => 'required|string|max:255',
+        'status_bayar' => 'required|in:belum,menunggu,sudah',
+        'bukti_transfer' => 'nullable|string|max:255',
+        'email' => 'required|email|max:255',
+        'nomor_wa' => 'required|string|max:15',
+        'nama' => 'required|string|max:255',
+        'nomor_nik' => 'nullable|string|max:255',
+        'npwp' => 'nullable|string|max:255',
+        'tempat_lahir' => 'nullable|string|max:255',
+        'tanggal_lahir' => 'nullable|date',
+        'jenis_kelamin' => 'nullable|in:L,P',
+        'status_perkawinan' => 'nullable|in:MENIKAH,BELUM MENIKAH',
+        'jenis_pendidikan_terakhir' => 'nullable|in:MA,MAK,SMA,SMK',
+        'npsn' => 'nullable|string|max:255',
+        'nama_sekolah' => 'nullable|string|max:255',
+        'jurusan_pendidikan' => 'nullable|string|max:255',
+        'kota_asal_sekolah' => 'nullable|string|max:255',
+        'tahun_lulus' => 'nullable|string|max:4',
+        'nilai_rata_rata_ijazah' => 'nullable|string|max:255',
+        'nilai_rata_rata_matematika' => 'nullable|string|max:255',
+        'blok' => 'nullable|string|max:255',
+        'rt' => 'nullable|string|max:5',
+        'rw' => 'nullable|string|max:5',
+        'desa' => 'nullable|string|max:255',
+        'kecamatan' => 'nullable|string|max:255',
+        'kabupaten' => 'nullable|string|max:255',
+        'kode_pos' => 'nullable|string|max:10',
+        'domisili' => 'nullable|string|max:255',
+        'tinggi_badan' => 'nullable|string|max:255',
+        'berat_badan' => 'nullable|string|max:255',
+        'pengalaman_kerja' => 'nullable|string|max:255',
+        'pernah_mengikuti_reqrutment_calon_karyawan' => 'nullable|in:BELUM PERNAH,SUDAH PERNAH',
+        'pernah_bekerja' => 'nullable|in:BELUM PERNAH,SUDAH PERNAH',
+        'source' => 'nullable|string|max:255',
+        'nama_kordinator' => 'nullable|string|max:255',
+        'vaksin_1' => 'nullable|in:sudah,belum',
+        'jenis_vaksin_1' => 'nullable|in:SINOVAC,VAKSIN COVID-19 BIO DARMA,ASTRAZENECA,SINOPHARM,MODERNA,PFIZER,SPUTNIK V,INDOVAC,INAVAC',
+        'tanggal_vaksin_1' => 'nullable|date',
+        'lokasi_vaksin_1' => 'nullable|string|max:255',
+        'vaksin_2' => 'nullable|in:sudah,belum',
+        'jenis_vaksin_2' => 'nullable|in:SINOVAC,VAKSIN COVID-19 BIO DARMA,ASTRAZENECA,SINOPHARM,MODERNA,PFIZER,SPUTNIK V,INDOVAC,INAVAC',
+        'tanggal_vaksin_2' => 'nullable|date',
+        'lokasi_vaksin_2' => 'nullable|string|max:255',
+        'vaksin_3' => 'nullable|in:sudah,belum',
+        'jenis_vaksin_3' => 'nullable|in:SINOVAC,VAKSIN COVID-19 BIO DARMA,ASTRAZENECA,SINOPHARM,MODERNA,PFIZER,SPUTNIK V,INDOVAC,INAVAC',
+        'tanggal_vaksin_3' => 'nullable|date',
+        'lokasi_vaksin_3' => 'nullable|string|max:255'
+    ]);
+    $pendaftaran = Pendaftaran::findOrFail($id);
+    $pendaftaran->update($validatedData);
+    return redirect('data_pelamar')->with('success', 'Data pelamar berhasil diupdate');
+}
 
     public function hapus_pelamar($id) {
         $pendaftaran = Pendaftaran::findOrFail($id);

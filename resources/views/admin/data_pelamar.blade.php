@@ -57,7 +57,12 @@
                         @else
                         <span class="badge bg-red">Belum Bayar</span>
                         @endif</td>
-                        <td><a href="/storage/bukti_transfer/{{ $data->bukti_transfer }}">lihat</a></td>
+                        @if($data-> bukti_transfer != null)
+                            <td><a target="_blank" href="/storage/bukti_transfer/{{ $data->bukti_transfer }}">lihat</a></td>
+                        @else
+                            <td><span>tidak ada bukti transfer</span></td>
+                        @endif
+                        
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
                                 <a class="btn btn-info" href="/edit_pelamar/{{ $data->id}}">Edit</a>

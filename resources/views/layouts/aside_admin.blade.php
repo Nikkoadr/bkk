@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="data_loker" class="nav-link {{ request()->is('data_loker') ? 'active' : '' }}">
+                    <a href="/data_loker" class="nav-link {{ request()->is('data_loker') ? 'active' : '' }}">
                     <i class="nav-icon fa-solid fa-building"></i>
                     <p>
                         Data Loker
@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="data_pelamar" class="nav-link {{ request()->is('data_pelamar') ? 'active' : '' }}">
+                    <a href="/data_pelamar" class="nav-link {{ request()->is('data_pelamar') ? 'active' : '' }}">
                     <i class="nav-icon fa-solid fa-address-card"></i>
                     <p>
                         Data pelamar

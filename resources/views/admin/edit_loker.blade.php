@@ -34,7 +34,7 @@
         <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="{{ route('update_loker', $data->id_loker) }}" method="post">
+                <form action="/update_loker/{{ $data->id_loker }}" method="post">
                     @csrf
                     @method('put')
                     

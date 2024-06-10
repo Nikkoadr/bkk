@@ -370,11 +370,12 @@
                                                 @enderror
                                             </div>
                                             @if('0'=='1')
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                     <label for="vaksin_1">Vaksin 1</label>
                                                     <select class="form-control @error('vaksin_1') is-invalid @enderror" id="vaksin_1" name="vaksin_1">
-                                                        <option value="sudah">Sudah</option>
-                                                        <option value="belum">Belum</option>
+                                                        <option value="" {{ old('vaksin_1') == '' ? 'selected' : '' }}>Pilih status vaksin</option>
+                                                        <option value="sudah" {{ old('vaksin_1') == 'sudah' ? 'selected' : '' }}>Sudah</option>
+                                                        <option value="belum" {{ old('vaksin_1') == 'belum' ? 'selected' : '' }}>Belum</option>
                                                     </select>
                                                     @error('vaksin_1')
                                                         <span class="invalid-feedback" role="alert">
@@ -382,18 +383,20 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="jenis_vaksin_1">Jenis Vaksin 1</label>
                                                     <select class="form-control @error('jenis_vaksin_1') is-invalid @enderror" id="jenis_vaksin_1" name="jenis_vaksin_1">
-                                                        <option value="SINOVAC">SINOVAC</option>
-                                                        <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
-                                                        <option value="ASTRAZENECA">ASTRAZENECA</option>
-                                                        <option value="SINOPHARM">SINOPHARM</option>
-                                                        <option value="MODERNA">MODERNA</option>
-                                                        <option value="PFIZER">PFIZER</option>
-                                                        <option value="SPUTNIK V">SPUTNIK V</option>
-                                                        <option value="INDOVAC">INDOVAC</option>
-                                                        <option value="INAVAC">INAVAC</option>
+                                                        <option value="" {{ old('jenis_vaksin_1') == '' ? 'selected' : '' }}>Pilih jenis vaksin</option>
+                                                        <option value="SINOVAC" {{ old('jenis_vaksin_1') == 'SINOVAC' ? 'selected' : '' }}>SINOVAC</option>
+                                                        <option value="VAKSIN COVID-19 BIO DARMA" {{ old('jenis_vaksin_1') == 'VAKSIN COVID-19 BIO DARMA' ? 'selected' : '' }}>VAKSIN COVID-19 BIO DARMA</option>
+                                                        <option value="ASTRAZENECA" {{ old('jenis_vaksin_1') == 'ASTRAZENECA' ? 'selected' : '' }}>ASTRAZENECA</option>
+                                                        <option value="SINOPHARM" {{ old('jenis_vaksin_1') == 'SINOPHARM' ? 'selected' : '' }}>SINOPHARM</option>
+                                                        <option value="MODERNA" {{ old('jenis_vaksin_1') == 'MODERNA' ? 'selected' : '' }}>MODERNA</option>
+                                                        <option value="PFIZER" {{ old('jenis_vaksin_1') == 'PFIZER' ? 'selected' : '' }}>PFIZER</option>
+                                                        <option value="SPUTNIK V" {{ old('jenis_vaksin_1') == 'SPUTNIK V' ? 'selected' : '' }}>SPUTNIK V</option>
+                                                        <option value="INDOVAC" {{ old('jenis_vaksin_1') == 'INDOVAC' ? 'selected' : '' }}>INDOVAC</option>
+                                                        <option value="INAVAC" {{ old('jenis_vaksin_1') == 'INAVAC' ? 'selected' : '' }}>INAVAC</option>
                                                     </select>
                                                     @error('jenis_vaksin_1')
                                                         <span class="invalid-feedback" role="alert">
@@ -401,29 +404,33 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="tanggal_vaksin_1">Tanggal Vaksin 1</label>
-                                                    <input type="date" class="form-control @error('tanggal_vaksin_1') is-invalid @enderror" id="tanggal_vaksin_1" name="tanggal_vaksin_1">
+                                                    <input type="date" class="form-control @error('tanggal_vaksin_1') is-invalid @enderror" id="tanggal_vaksin_1" name="tanggal_vaksin_1" value="{{ old('tanggal_vaksin_1') }}">
                                                     @error('tanggal_vaksin_1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="lokasi_vaksin_1">Lokasi Vaksin 1</label>
-                                                    <input type="text" class="form-control @error('lokasi_vaksin_1') is-invalid @enderror" id="lokasi_vaksin_1" name="lokasi_vaksin_1" placeholder="Lokasi Vaksin 1" oninput="this.value = this.value.toUpperCase()">
+                                                    <input type="text" class="form-control @error('lokasi_vaksin_1') is-invalid @enderror" id="lokasi_vaksin_1" name="lokasi_vaksin_1" placeholder="Lokasi Vaksin 1" value="{{ old('lokasi_vaksin_1') }}" oninput="this.value = this.value.toUpperCase()">
                                                     @error('lokasi_vaksin_1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="vaksin_2">Vaksin 2</label>
                                                     <select class="form-control @error('vaksin_2') is-invalid @enderror" id="vaksin_2" name="vaksin_2">
-                                                        <option value="sudah">Sudah</option>
-                                                        <option value="belum">Belum</option>
+                                                        <option value="" {{ old('vaksin_2') == '' ? 'selected' : '' }}>Pilih status vaksin</option>
+                                                        <option value="sudah" {{ old('vaksin_2') == 'sudah' ? 'selected' : '' }}>Sudah</option>
+                                                        <option value="belum" {{ old('vaksin_2') == 'belum' ? 'selected' : '' }}>Belum</option>
                                                     </select>
                                                     @error('vaksin_2')
                                                         <span class="invalid-feedback" role="alert">
@@ -431,18 +438,20 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="jenis_vaksin_2">Jenis Vaksin 2</label>
                                                     <select class="form-control @error('jenis_vaksin_2') is-invalid @enderror" id="jenis_vaksin_2" name="jenis_vaksin_2">
-                                                        <option value="SINOVAC">SINOVAC</option>
-                                                        <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
-                                                        <option value="ASTRAZENECA">ASTRAZENECA</option>
-                                                        <option value="SINOPHARM">SINOPHARM</option>
-                                                        <option value="MODERNA">MODERNA</option>
-                                                        <option value="PFIZER">PFIZER</option>
-                                                        <option value="SPUTNIK V">SPUTNIK V</option>
-                                                        <option value="INDOVAC">INDOVAC</option>
-                                                        <option value="INAVAC">INAVAC</option>
+                                                        <option value="" {{ old('jenis_vaksin_2') == '' ? 'selected' : '' }}>Pilih jenis vaksin</option>
+                                                        <option value="SINOVAC" {{ old('jenis_vaksin_2') == 'SINOVAC' ? 'selected' : '' }}>SINOVAC</option>
+                                                        <option value="VAKSIN COVID-19 BIO DARMA" {{ old('jenis_vaksin_2') == 'VAKSIN COVID-19 BIO DARMA' ? 'selected' : '' }}>VAKSIN COVID-19 BIO DARMA</option>
+                                                        <option value="ASTRAZENECA" {{ old('jenis_vaksin_2') == 'ASTRAZENECA' ? 'selected' : '' }}>ASTRAZENECA</option>
+                                                        <option value="SINOPHARM" {{ old('jenis_vaksin_2') == 'SINOPHARM' ? 'selected' : '' }}>SINOPHARM</option>
+                                                        <option value="MODERNA" {{ old('jenis_vaksin_2') == 'MODERNA' ? 'selected' : '' }}>MODERNA</option>
+                                                        <option value="PFIZER" {{ old('jenis_vaksin_2') == 'PFIZER' ? 'selected' : '' }}>PFIZER</option>
+                                                        <option value="SPUTNIK V" {{ old('jenis_vaksin_2') == 'SPUTNIK V' ? 'selected' : '' }}>SPUTNIK V</option>
+                                                        <option value="INDOVAC" {{ old('jenis_vaksin_2') == 'INDOVAC' ? 'selected' : '' }}>INDOVAC</option>
+                                                        <option value="INAVAC" {{ old('jenis_vaksin_2') == 'INAVAC' ? 'selected' : '' }}>INAVAC</option>
                                                     </select>
                                                     @error('jenis_vaksin_2')
                                                         <span class="invalid-feedback" role="alert">
@@ -450,29 +459,33 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="tanggal_vaksin_2">Tanggal Vaksin 2</label>
-                                                    <input type="date" class="form-control @error('tanggal_vaksin_2') is-invalid @enderror" id="tanggal_vaksin_2" name="tanggal_vaksin_2">
+                                                    <input type="date" class="form-control @error('tanggal_vaksin_2') is-invalid @enderror" id="tanggal_vaksin_2" name="tanggal_vaksin_2" value="{{ old('tanggal_vaksin_2') }}">
                                                     @error('tanggal_vaksin_2')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="lokasi_vaksin_2">Lokasi Vaksin 2</label>
-                                                    <input type="text" class="form-control @error('lokasi_vaksin_2') is-invalid @enderror" id="lokasi_vaksin_2" name="lokasi_vaksin_2" placeholder="Lokasi Vaksin 2" oninput="this.value = this.value.toUpperCase()">
+                                                    <input type="text" class="form-control @error('lokasi_vaksin_2') is-invalid @enderror" id="lokasi_vaksin_2" name="lokasi_vaksin_2" placeholder="Lokasi Vaksin 2" value="{{ old('lokasi_vaksin_2') }}" oninput="this.value = this.value.toUpperCase()">
                                                     @error('lokasi_vaksin_2')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="vaksin_3">Vaksin 3</label>
                                                     <select class="form-control @error('vaksin_3') is-invalid @enderror" id="vaksin_3" name="vaksin_3">
-                                                        <option value="sudah">Sudah</option>
-                                                        <option value="belum">Belum</option>
+                                                        <option value="" {{ old('vaksin_3') == '' ? 'selected' : '' }}>Pilih status vaksin</option>
+                                                        <option value="sudah" {{ old('vaksin_3') == 'sudah' ? 'selected' : '' }}>Sudah</option>
+                                                        <option value="belum" {{ old('vaksin_3') == 'belum' ? 'selected' : '' }}>Belum</option>
                                                     </select>
                                                     @error('vaksin_3')
                                                         <span class="invalid-feedback" role="alert">
@@ -480,18 +493,20 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="jenis_vaksin_3">Jenis Vaksin 3</label>
                                                     <select class="form-control @error('jenis_vaksin_3') is-invalid @enderror" id="jenis_vaksin_3" name="jenis_vaksin_3">
-                                                        <option value="SINOVAC">SINOVAC</option>
-                                                        <option value="VAKSIN COVID-19 BIO DARMA">VAKSIN COVID-19 BIO DARMA</option>
-                                                        <option value="ASTRAZENECA">ASTRAZENECA</option>
-                                                        <option value="SINOPHARM">SINOPHARM</option>
-                                                        <option value="MODERNA">MODERNA</option>
-                                                        <option value="PFIZER">PFIZER</option>
-                                                        <option value="SPUTNIK V">SPUTNIK V</option>
-                                                        <option value="INDOVAC">INDOVAC</option>
-                                                        <option value="INAVAC">INAVAC</option>
+                                                        <option value="" {{ old('jenis_vaksin_3') == '' ? 'selected' : '' }}>Pilih jenis vaksin</option>
+                                                        <option value="SINOVAC" {{ old('jenis_vaksin_3') == 'SINOVAC' ? 'selected' : '' }}>SINOVAC</option>
+                                                        <option value="VAKSIN COVID-19 BIO DARMA" {{ old('jenis_vaksin_3') == 'VAKSIN COVID-19 BIO DARMA' ? 'selected' : '' }}>VAKSIN COVID-19 BIO DARMA</option>
+                                                        <option value="ASTRAZENECA" {{ old('jenis_vaksin_3') == 'ASTRAZENECA' ? 'selected' : '' }}>ASTRAZENECA</option>
+                                                        <option value="SINOPHARM" {{ old('jenis_vaksin_3') == 'SINOPHARM' ? 'selected' : '' }}>SINOPHARM</option>
+                                                        <option value="MODERNA" {{ old('jenis_vaksin_3') == 'MODERNA' ? 'selected' : '' }}>MODERNA</option>
+                                                        <option value="PFIZER" {{ old('jenis_vaksin_3') == 'PFIZER' ? 'selected' : '' }}>PFIZER</option>
+                                                        <option value="SPUTNIK V" {{ old('jenis_vaksin_3') == 'SPUTNIK V' ? 'selected' : '' }}>SPUTNIK V</option>
+                                                        <option value="INDOVAC" {{ old('jenis_vaksin_3') == 'INDOVAC' ? 'selected' : '' }}>INDOVAC</option>
+                                                        <option value="INAVAC" {{ old('jenis_vaksin_3') == 'INAVAC' ? 'selected' : '' }}>INAVAC</option>
                                                     </select>
                                                     @error('jenis_vaksin_3')
                                                         <span class="invalid-feedback" role="alert">
@@ -499,18 +514,20 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="tanggal_vaksin_3">Tanggal Vaksin 3</label>
-                                                    <input type="date" class="form-control @error('tanggal_vaksin_3') is-invalid @enderror" id="tanggal_vaksin_3" name="tanggal_vaksin_3">
+                                                    <input type="date" class="form-control @error('tanggal_vaksin_3') is-invalid @enderror" id="tanggal_vaksin_3" name="tanggal_vaksin_3" value="{{ old('tanggal_vaksin_3') }}">
                                                     @error('tanggal_vaksin_3')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="lokasi_vaksin_3">Lokasi Vaksin 3</label>
-                                                    <input type="text" class="form-control @error('lokasi_vaksin_3') is-invalid @enderror" id="lokasi_vaksin_3" name="lokasi_vaksin_3" placeholder="Lokasi Vaksin 3" oninput="this.value = this.value.toUpperCase()">
+                                                    <input type="text" class="form-control @error('lokasi_vaksin_3') is-invalid @enderror" id="lokasi_vaksin_3" name="lokasi_vaksin_3" placeholder="Lokasi Vaksin 3" value="{{ old('lokasi_vaksin_3') }}" oninput="this.value = this.value.toUpperCase()">
                                                     @error('lokasi_vaksin_3')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>

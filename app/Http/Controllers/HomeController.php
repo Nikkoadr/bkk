@@ -79,4 +79,15 @@ class HomeController extends Controller
         $pendaftaran = Pendaftaran::all();
         return view('admin.data_pelamar', compact('pendaftaran'));
     }
+    public function update_pelamar(Request $request, $id){
+    $pendaftaran = Pendaftaran::findOrFail($id);
+    $pendaftaran-> update($request);
+    return redirect()->back()->with('success', 'data pelamar berhasil di update');
+    }
+
+    public function hapus_pelamar($id) {
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        $pendaftaran->delete();
+        return redirect()->back()->with('success', 'data pelamar berhasil di hapus');
+    }
 }

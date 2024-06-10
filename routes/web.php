@@ -34,3 +34,5 @@ Route::post('tambah_loker',[HomeController::class, 'tambah_loker'])->name('tamba
 Route::get('edit_loker/{id}',[HomeController::class, 'edit_loker']);
 Route::put('update_loker/{id}',[HomeController::class, 'update_loker'])->name('update_loker');
 Route::get('hapus_loker/{id}',[HomeController::class, 'hapus_loker']);
+
+Route::get('hapus_pelamar/{id}',[HomeController::class, 'hapus_pelamar']);

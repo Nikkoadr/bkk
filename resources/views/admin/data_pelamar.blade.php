@@ -60,8 +60,8 @@
                         <td><a href="/storage/bukti_transfer/{{ $data->bukti_transfer }}">lihat</a></td>
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
-                                <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}">Edit</a>
-                                <a class="btn btn-danger konfirmasi" href="/hapus_loker/{{ $data->id_loker }}">Hapus</a>
+                                <a class="btn btn-info" href="/edit_pelamar/{{ $data->id}}">Edit</a>
+                                <a class="btn btn-danger konfirmasi" href="/hapus_pelamar/{{ $data->id}}">Hapus</a>
                                 
                             </div>
                         </td>

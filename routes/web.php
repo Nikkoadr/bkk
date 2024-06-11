@@ -20,7 +20,7 @@ Route::get('/form_daftar', function () {
 Route::post('/daftar', [PendaftaranController::class, 'daftar'])->name('daftar');
 Route::get('/daftar', function () {
     return redirect('/')->with('notif','maaf Pembayaran hanya bisa di Akses Lewat Metode POST. Jika anda belum membayar atau belum upload bukti pembayaran hubungi admin !!!');});
-Route::put('/bukti_pembayaran', [PendaftaranController::class, 'bukti_pembayaran'])->name('bukti_pembayaran');
+Route::put('/bukti_pembayaran', [PendaftaranController::class, 'bukti_pembayaran']);
 Route::get('/bukti_pembayaran', function () {
     return redirect('/')->with('notif','maaf bukti pembayaran tidak bisa di akses lewat url langsung jika ingin melihat bukti pembayaran lakukan pencarian');});
 Route::post('/cari', [PendaftaranController::class, 'cari'])->name('cari');

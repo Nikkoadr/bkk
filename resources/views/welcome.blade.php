@@ -80,12 +80,17 @@
                                                             </div>
                                                         </div>
                                                         <div class="card-footer">
-                                                            <div class="text-right">
-                                                                <form action="form_daftar" method="POST">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
-                                                                    <button class="btn btn-primary" type="submit"><i class="fas fa-user"></i> Daftar</button>
-                                                                </form>
+                                                            <div class="row">
+                                                                <div class="col d-flex align-items-center">
+                                                                    <p class="mb-0">Bergerak Maju Menjadi Yang Terdepan</p>
+                                                                </div>
+                                                                <div class="col text-right">
+                                                                    <form action="form_daftar" method="POST">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
+                                                                        <button class="btn btn-primary" type="submit"><i class="fas fa-user"></i> Daftar</button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

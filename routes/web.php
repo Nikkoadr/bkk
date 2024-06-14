@@ -25,15 +25,17 @@ Route::get('/bukti_pembayaran', function () {
     return redirect('/')->with('notif','maaf bukti pembayaran tidak bisa di akses lewat url langsung jika ingin melihat bukti pembayaran lakukan pencarian');});
 Route::post('/cari', [PendaftaranController::class, 'cari'])->name('cari');
 Route::get('/scan/{code_pendaftaran}', [PendaftaranController::class, 'scan'])->name('scan');
-Route::post('print_bukti_transfer', [PendaftaranController::class, 'print_bukti_transfer'])->name('print_bukti_transfer');
+Route::post('/print_bukti_transfer', [PendaftaranController::class, 'print_bukti_transfer'])->name('print_bukti_transfer');
 
 Route::get('/data_loker', [HomeController::class, 'data_loker'])->name('data_loker');
-Route::post('tambah_loker',[HomeController::class, 'tambah_loker'])->name('tambah_loker');
-Route::get('edit_loker/{id}',[HomeController::class, 'edit_loker']);
-Route::put('update_loker/{id}',[HomeController::class, 'update_loker'])->name('update_loker');
-Route::get('hapus_loker/{id}',[HomeController::class, 'hapus_loker']);
+Route::post('/tambah_loker',[HomeController::class, 'tambah_loker'])->name('tambah_loker');
+Route::get('/edit_loker/{id}',[HomeController::class, 'edit_loker']);
+Route::put('/update_loker/{id}',[HomeController::class, 'update_loker'])->name('update_loker');
+Route::put('/download_pelamar/{id}',[HomeController::class, 'download_pelamar'])->name('download_pelamar');
+Route::get('/hapus_loker/{id}',[HomeController::class, 'hapus_loker']);
 
-Route::get('/data_pelamar', [HomeController::class, 'data_pelamar'])->name('data_pelamar');
-Route::get('hapus_pelamar/{id}',[HomeController::class, 'hapus_pelamar']);
-Route::get('edit_pelamar/{id}',[HomeController::class, 'edit_pelamar']);
-Route::put('update_pelamar/{id}',[HomeController::class, 'update_pelamar']);
+Route::get('/status_pelamar', [HomeController::class, 'status_pelamar'])->name('status_pelamar');
+Route::get('/get_data_pelamar', [HomeController::class, 'get_data_pelamar'])->name('get_data_pelamar');
+Route::delete('/hapus_pelamar/{id}',[HomeController::class, 'hapus_pelamar'])->name('hapus_pelamar');
+Route::get('/edit_pelamar/{id}',[HomeController::class, 'edit_pelamar'])->name('edit_pelamar');
+Route::put('/update_pelamar/{id}',[HomeController::class, 'update_pelamar']);

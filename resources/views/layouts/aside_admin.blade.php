@@ -50,10 +50,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/data_pelamar" class="nav-link {{ request()->is('data_pelamar') ? 'active' : '' }}">
+                    <a href="/status_pelamar" class="nav-link {{ request()->is('status_pelamar') ? 'active' : '' }}">
                     <i class="nav-icon fa-solid fa-address-card"></i>
                     <p>
-                        Data pelamar
+                        Status pelamar
                     </p>
                     </a>
                 </li>

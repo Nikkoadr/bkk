@@ -63,6 +63,11 @@
                         <td>{{ $data->grup_wa }}</td>
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
+                                <form action="/download_pelamar/{{ $data->id_loker }}" method="post">
+                                @csrf
+                                @method('put')
+                                <button class="btn btn-primary" type="submit">Download</button>
+                                </form>
                                 <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}">Edit</a>
                                 <a class="btn btn-danger konfirmasi" href="/hapus_loker/{{ $data->id_loker }}">Hapus</a>
                                 

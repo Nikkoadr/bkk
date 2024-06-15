@@ -75,28 +75,9 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('deskripsi');
-</script>
 <script>
 $(function () {
     bsCustomFileInput.init();
-});
-</script>
-<script>
-$(function () {
-$("#table_pelamar").DataTable({
-    "responsive": true, 
-    "lengthChange": true, 
-    "autoWidth": true, 
-    "pageLength": 50,
-    "aLengthMenu": [
-        [25, 50, 100, 200, -1],
-        [25, 50, 100, 200, "All"]
-    ],
-    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-}).buttons().container().appendTo('#table_pelamar_wrapper .col-md-6:eq(0)');
 });
 </script>
 <script>

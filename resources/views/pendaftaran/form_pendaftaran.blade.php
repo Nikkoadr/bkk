@@ -100,6 +100,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @if($data->form_npwp =='aktif')
                                             <div class="form-group">
                                                 <label for="npwp">NPWP</label>
                                                 <input type="text" class="form-control @error('npwp') is-invalid @enderror" id="npwp" name="npwp" placeholder="NPWP" oninput="this.value = this.value.toUpperCase()">
@@ -109,6 +110,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @endif
                                             <div class="form-group">
                                                 <label for="tempat_lahir">Tempat Lahir</label>
                                                 <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" oninput="this.value = this.value.toUpperCase()">
@@ -165,6 +167,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @if($data->form_npsn =='aktif')
                                             <div class="form-group">
                                                 <label for="npsn">NPSN</label>
                                                 <input type="number" class="form-control @error('npsn') is-invalid @enderror" id="npsn" name="npsn" placeholder="NPSN" oninput="this.value = this.value.toUpperCase()">
@@ -174,6 +177,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @endif
                                             <div class="form-group">
                                                 <label for="nama_sekolah">Nama Sekolah</label>
                                                 <input type="text" class="form-control @error('nama_sekolah') is-invalid @enderror" id="nama_sekolah" name="nama_sekolah" placeholder="Nama Sekolah" oninput="this.value = this.value.toUpperCase()">
@@ -210,7 +214,8 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="form-group">
+                                            @if($data->form_nilai_ijazah == 'aktif')
+                                                <div class="form-group">
                                                 <label for="nilai_rata_rata_ijazah">Nilai Rata-Rata Ijazah</label>
                                                 <input type="text" class="form-control @error('nilai_rata_rata_ijazah') is-invalid @enderror" id="nilai_rata_rata_ijazah" name="nilai_rata_rata_ijazah" placeholder="Nilai Rata-Rata Ijazah" oninput="this.value = this.value.toUpperCase()">
                                                 @error('nilai_rata_rata_ijazah')
@@ -219,6 +224,8 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @endif
+                                            @if($data->form_nilai_matematika == "aktif")
                                             <div class="form-group">
                                                 <label for="nilai_rata_rata_matematika">Nilai Rata-Rata Matematika</label>
                                                 <input type="text" class="form-control @error('nilai_rata_rata_matematika') is-invalid @enderror" id="nilai_rata_rata_matematika" name="nilai_rata_rata_matematika" placeholder="Nilai Rata-Rata Matematika" oninput="this.value = this.value.toUpperCase()">
@@ -228,6 +235,8 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @endif
+                                            
                                             <div class="form-group">
                                                 <label for="blok">Blok</label>
                                                 <input type="text" class="form-control @error('blok') is-invalid @enderror" id="blok" name="blok" placeholder="Blok" oninput="this.value = this.value.toUpperCase()">
@@ -319,7 +328,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="pengalaman_kerja">Pengalaman Kerja</label>
+                                                <label for="pengalaman_kerja">Pengalaman  (Bukan PKL)</label>
                                                 <input type="text" class="form-control @error('pengalaman_kerja') is-invalid @enderror" id="pengalaman_kerja" name="pengalaman_kerja" placeholder="Pengalaman Kerja" oninput="this.value = this.value.toUpperCase()">
                                                 @error('pengalaman_kerja')
                                                     <span class="invalid-feedback" role="alert">
@@ -327,20 +336,23 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="form-group">
-                                                <label for="pernah_mengikuti_reqrutment_calon_karyawan">Pernah Mengikuti Recruitment Calon Karyawan</label>
-                                                <select class="form-control @error('pernah_mengikuti_reqrutment_calon_karyawan') is-invalid @enderror" id="pernah_mengikuti_reqrutment_calon_karyawan" name="pernah_mengikuti_reqrutment_calon_karyawan">
-                                                    <option value="BELUM PERNAH">BELUM PERNAH</option>
-                                                    <option value="SUDAH PERNAH">SUDAH PERNAH</option>
-                                                </select>
-                                                @error('pernah_mengikuti_reqrutment_calon_karyawan')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="pernah_bekerja">Pernah Bekerja</label>
+                                            @if($data->form_pernah_mengikuti_reqrutment_calon_karyawan == 'aktif')
+                                                <div class="form-group">
+                                                    <label for="pernah_mengikuti_reqrutment_calon_karyawan">Pernah Mengikuti Recruitment Calon Karyawan {{ $data->nama_loker }}</label>
+                                                    <select class="form-control @error('pernah_mengikuti_reqrutment_calon_karyawan') is-invalid @enderror" id="pernah_mengikuti_reqrutment_calon_karyawan" name="pernah_mengikuti_reqrutment_calon_karyawan">
+                                                        <option value="BELUM PERNAH">BELUM PERNAH</option>
+                                                        <option value="SUDAH PERNAH">SUDAH PERNAH</option>
+                                                    </select>
+                                                    @error('pernah_mengikuti_reqrutment_calon_karyawan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            @endif
+                                            @if($data->form_pernah_bekerja == 'aktif')
+                                                <div class="form-group">
+                                                <label for="pernah_bekerja">Pernah Bekerja {{ $data->nama_loker }}</label>
                                                 <select class="form-control @error('pernah_bekerja') is-invalid @enderror" id="pernah_bekerja" name="pernah_bekerja">
                                                     <option value="BELUM PERNAH">BELUM PERNAH</option>
                                                     <option value="SUDAH PERNAH">SUDAH PERNAH</option>
@@ -351,6 +363,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @endif
                                             <div class="form-group">
                                                 <label for="source">Sumber Informasi</label>
                                                 <input readonly type="text" class="form-control @error('source') is-invalid @enderror" id="source" name="source" value="BKK SMK MUHAMMADIYAH KANDANGHAUR" placeholder="Sumber Informasi" oninput="this.value = this.value.toUpperCase()">
@@ -369,7 +382,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            @if('0'=='1')
+                                            @if($data->form_vaksin == 'aktif')
                                                 <div class="form-group">
                                                     <label for="vaksin_1">Vaksin 1</label>
                                                     <select class="form-control @error('vaksin_1') is-invalid @enderror" id="vaksin_1" name="vaksin_1">

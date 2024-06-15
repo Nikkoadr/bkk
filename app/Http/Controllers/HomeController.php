@@ -59,13 +59,32 @@ class HomeController extends Controller
     {
         $request->validate([
             'nama_loker' => 'required|string|max:255',
-            'deskripsi' => 'required|string|',
+            'deskripsi' => 'required|string',
             'status_loker' => 'required|string|max:255',
             'grup_wa' => 'required|string',
+            'form_npwp' => 'required|in:aktif,tidak aktif',
+            'form_npsn' => 'required|in:aktif,tidak aktif',
+            'form_nilai_ijazah' => 'required|in:aktif,tidak aktif',
+            'form_nilai_matematika' => 'required|in:aktif,tidak aktif',
+            'form_pernah_mengikuti_reqrutment_calon_karyawan' => 'required|in:aktif,tidak aktif',
+            'form_pernah_bekerja' => 'required|in:aktif,tidak aktif',
+            'form_vaksin' => 'required|in:aktif,tidak aktif',
         ]);
 
         $loker = Loker::findOrFail($id);
-        $loker->update($request->only(['nama_loker', 'deskripsi', 'status_loker', 'grup_wa']));
+        $loker->update($request->only([
+            'nama_loker', 
+            'deskripsi', 
+            'status_loker', 
+            'grup_wa',
+            'form_npwp',
+            'form_npsn',
+            'form_nilai_ijazah',
+            'form_nilai_matematika',
+            'form_pernah_mengikuti_reqrutment_calon_karyawan',
+            'form_pernah_bekerja',
+            'form_vaksin'
+        ]));
 
         return redirect()->route('data_loker')->with('success', 'Loker updated successfully');
     }
@@ -90,44 +109,47 @@ class HomeController extends Controller
         return view('admin.status_pelamar', compact('pendaftaran'));
     }
 
-    public function get_data_pelamar( Request $request){
-                $dataPelamar = Pendaftaran::query()->orderBy('created_at', 'desc');
+    public function get_data_pelamar(Request $request)
+{
+    $dataPelamar = Pendaftaran::query()->orderBy('created_at', 'desc');
 
-        if ($request->has('search') && !empty($request->search['value'])) {
-            $keyword = $request->search['value'];
-            $dataPelamar->where(function ($query) use ($keyword) {
-                $query->where('nama', 'like', "%{$keyword}%")
-                    ->orWhere('code_pendaftaran', 'like', "%{$keyword}%")
-                    ->orWhere('nomor_wa', 'like', "%{$keyword}%")
-                    ->orWhere('status_bayar', 'like', "%{$keyword}%")
-                    ->orWhere('bukti_transfer', 'like', "%{$keyword}%");
-            });
-        }
-
-        return DataTables::of($dataPelamar)
-            ->addColumn('action', function ($data) {
-                $editUrl = route('edit_pelamar', $data->id);
-                $deleteUrl = route('hapus_pelamar', $data->id);
-
-                return '
-                    <a href="'.$editUrl.'" class="btn btn-sm btn-primary">Edit</a>
-                    <form action="'.$deleteUrl.'" method="POST" style="display:inline;">
-                        '.csrf_field().'
-                        '.method_field('DELETE').'
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                ';
-            })
-            ->editColumn('bukti_transfer', function ($data) {
-                if ($data->bukti_transfer) {
-                    return '<a href="' . asset('storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">Lihat</a>';
-                } else {
-                    return 'N/A';
-                }
-            })
-            ->rawColumns(['action', 'bukti_transfer'])
-            ->make(true);
+    if ($request->has('search') && !empty($request->search['value'])) {
+        $keyword = $request->search['value'];
+        $dataPelamar->where(function ($query) use ($keyword) {
+            $query->where('nama', 'like', "%{$keyword}%")
+                ->orWhere('code_pendaftaran', 'like', "%{$keyword}%")
+                ->orWhere('nomor_wa', 'like', "%{$keyword}%")
+                ->orWhere('status_bayar', 'like', "%{$keyword}%")
+                ->orWhere('bukti_transfer', 'like', "%{$keyword}%");
+        });
     }
+
+    return DataTables::of($dataPelamar)
+        ->addColumn('action', function ($data) {
+            $editUrl = route('edit_pelamar', $data->id);
+            $deleteUrl = route('hapus_pelamar', $data->id);
+
+            return '
+                <a href="' . $editUrl . '" class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </form>
+            ';
+        })
+        ->editColumn('bukti_transfer', function ($data) {
+            return $data->bukti_transfer
+                ? '<a href="' . asset('storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">Lihat</a>'
+                : 'N/A';
+        })
+        ->rawColumns(['action', 'bukti_transfer'])
+        ->make(true);
+}
 
     public function edit_pelamar($id){
         $data = Pendaftaran::find($id);

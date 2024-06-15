@@ -50,7 +50,6 @@
                         <div class="form-group">
                             <label for="status_bayar">Status Bayar</label>
                             <select class="form-control @error('status_bayar') is-invalid @enderror" id="status_bayar" name="status_bayar">
-                                <option value="" {{ old('status_bayar', $data->status_bayar) == '' ? 'selected' : '' }}>Pilih status vaksin</option>
                                 <option value="sudah" {{ old('status_bayar', $data->status_bayar) == 'sudah' ? 'selected' : '' }}>Sudah</option>
                                 <option value="menunggu" {{ old('status_bayar', $data->status_bayar) == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
                                 <option value="belum" {{ old('status_bayar', $data->status_bayar) == 'belum' ? 'selected' : '' }}>Belum</option>
@@ -533,7 +532,7 @@
                             </div>
                         @endif
                     </div>
-                        <a class="btn btn-secondary" href="/data_pelamar">Kembali</a>
+                        <a class="btn btn-secondary" href="/status_pelamar">Kembali</a>
                         <button type="submit" class="btn btn-primary float-right">Edit</button>
                 </form>
             </div>

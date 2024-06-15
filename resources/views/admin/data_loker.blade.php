@@ -66,10 +66,10 @@
                                 <form action="/download_pelamar/{{ $data->id_loker }}" method="post">
                                 @csrf
                                 @method('put')
-                                <button class="btn btn-primary" type="submit">Download</button>
+                                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-file-arrow-down"></i></button>
                                 </form>
-                                <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}">Edit</a>
-                                <a class="btn btn-danger konfirmasi" href="/hapus_loker/{{ $data->id_loker }}">Hapus</a>
+                                <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-danger konfirmasi" href="/hapus_loker/{{ $data->id_loker }}"><i class="fa-solid fa-trash-can"></i></a>
                                 
                             </div>
                         </td>

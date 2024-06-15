@@ -55,7 +55,7 @@
                                 });
                             @endphp
                             @if($loker_aktif->isEmpty())
-                            <H3 class="text-center m-2">Tidak Ada Loker Yang Dibuka</H3>
+                            <H3 class="text-center m-2"><b><i>LOWONGAN KERJA BELUM TERSEDIA</i></b></H3>
                             @else
                                 <div class="card-body pb-0">
                                     <div class="row">

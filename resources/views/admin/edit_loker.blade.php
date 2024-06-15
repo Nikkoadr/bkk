@@ -55,7 +55,131 @@
                             <option value="tidak aktif" {{ $data->status_loker == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="form_npwp">Form NPWP</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_npwp" id="form_npwp_aktif" value="aktif" {{ $data->form_npwp == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_npwp_aktif">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_npwp" id="form_npwp_tidak_aktif" value="tidak aktif" {{ $data->form_npwp == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_npwp_tidak_aktif">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="form_npsn">Form NPSN</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_npsn" id="form_npsn_aktif" value="aktif" {{ $data->form_npsn == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_npsn_aktif">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_npsn" id="form_npsn_tidak_aktif" value="tidak aktif" {{ $data->form_npsn == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_npsn_tidak_aktif">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form_nilai_ijazah">Form Nilai Ijazah</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_nilai_ijazah" id="form_nilai_ijazah_aktif" value="aktif" {{ $data->form_nilai_ijazah == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_nilai_ijazah_aktif">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_nilai_ijazah" id="form_nilai_ijazah_tidak_aktif" value="tidak aktif" {{ $data->form_nilai_ijazah == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_nilai_ijazah_tidak_aktif">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form_nilai_matematika">Form Nilai Matematika</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_nilai_matematika" id="form_nilai_matematika_aktif" value="aktif" {{ $data->form_nilai_matematika == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_nilai_matematika_aktif">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_nilai_matematika" id="form_nilai_matematika_tidak_aktif" value="tidak aktif" {{ $data->form_nilai_matematika == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_nilai_matematika_tidak_aktif">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form_pernah_mengikuti_reqrutment_calon_karyawan">Form Pernah Mengikuti Rekrutmen Calon Karyawan</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_pernah_mengikuti_reqrutment_calon_karyawan" id="form_pernah_mengikuti_reqrutment_calon_karyawan_aktif" value="aktif" {{ $data->form_pernah_mengikuti_reqrutment_calon_karyawan == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_pernah_mengikuti_reqrutment_calon_karyawan_aktif">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_pernah_mengikuti_reqrutment_calon_karyawan" id="form_pernah_mengikuti_reqrutment_calon_karyawan_tidak_aktif" value="tidak aktif" {{ $data->form_pernah_mengikuti_reqrutment_calon_karyawan == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_pernah_mengikuti_reqrutment_calon_karyawan_tidak_aktif">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form_pernah_bekerja">Form Pernah Bekerja</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_pernah_bekerja" id="form_pernah_bekerja_aktif" value="aktif" {{ $data->form_pernah_bekerja == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_pernah_bekerja_aktif">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_pernah_bekerja" id="form_pernah_bekerja_tidak_aktif" value="tidak aktif" {{ $data->form_pernah_bekerja == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_pernah_bekerja_tidak_aktif">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form_vaksin">Form Vaksin</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_vaksin" id="form_vaksin_aktif" value="aktif" {{ $data->form_vaksin == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_vaksin_aktif">
+                                    Aktif
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="form_vaksin" id="form_vaksin_tidak_aktif" value="tidak aktif" {{ $data->form_vaksin == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_vaksin_tidak_aktif">
+                                    Tidak Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="grup_wa">Grup WA:</label>
                         <input type="text" class="form-control" name="grup_wa" id="grup_wa" value="{{ $data->grup_wa }}" required>

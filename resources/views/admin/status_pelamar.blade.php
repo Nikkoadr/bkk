@@ -115,110 +115,104 @@ var Toast = Swal.mixin({
 </script>
 <script>
     $(document).ready(function() {
-        $('#tabel_pelamar').DataTable({
-            responsive: true,
-            lengthChange: true,
-            autoWidth: true,
-            processing: true,
-            serverSide: true,
-            searching: true,
-            ajax: {
-                url: '{{ route('get_data_pelamar') }}',
-                type: 'GET'
-            },
-            columns: [
-                { data: null, orderable: false, searchable: false, 
-                    render: function (data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    }
-                },
-                { data: 'code_pendaftaran', name: 'code_pendaftaran' },
-                { data: 'nama', name: 'nama' },
-                { data: 'nomor_wa', name: 'nomor_wa' },
-                { 
-                    data: 'status_bayar', 
-                    name: 'status_bayar',
-                    render: function (data, type, row, meta) {
-                        var badgeClass = '';
-                        var statusText = '';
-                        switch (data) {
-                            case 'sudah':
-                                badgeClass = 'badge bg-success';
-                                statusText = 'Sudah';
-                                break;
-                            case 'menunggu':
-                                badgeClass = 'badge bg-warning text-dark';
-                                statusText = 'Menunggu';
-                                break;
-                            case 'belum':
-                                badgeClass = 'badge bg-danger';
-                                statusText = 'Belum';
-                                break;
-                            default:
-                                badgeClass = 'badge bg-secondary';
-                                statusText = 'Unknown';
-                                break;
-                        }
-                        return '<span class="' + badgeClass + '">' + statusText + '</span>';
-                    }
-                },
-                { data: 'bukti_transfer', name: 'bukti_transfer', orderable: false, searchable: false },
-                { 
-                    data: 'id', 
-                    name: 'action', 
-                    orderable: false, 
-                    searchable: false,
-                    render: function(data, type, full, meta) {
-                        var editUrl = '{{ route("edit_pelamar", ":id") }}'.replace(':id', data);
-                        var deleteUrl = '{{ route("hapus_pelamar", ":id") }}'.replace(':id', data);
-                        return `
-                            <a href="${editUrl}" class="btn btn-sm btn-primary">Edit</a>
-                            <button class="btn btn-sm btn-danger delete-btn" data-id="${data}">Delete</button>
-                        `;
-                    }
-                }
-            ]
-        });
-        $('#tabel_pelamar').on('click', '.delete-btn', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            Swal.fire({
-                title: 'Anda yakin?',
-                text: "Data ini akan dihapus secara permanen!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ url("hapus_pelamar") }}/' + id,
-                        type: 'DELETE',
-                        data: {
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function(data) {
-                            Swal.fire(
-                                'Terhapus!',
-                                'Data telah berhasil dihapus.',
-                                'success'
-                            ).then(() => {
+    function renderStatusBadge(data) {
+        const statusMap = {
+            'sudah': { class: 'badge bg-success', text: 'Sudah' },
+            'menunggu': { class: 'badge bg-warning text-dark', text: 'Menunggu' },
+            'belum': { class: 'badge bg-danger', text: 'Belum' },
+            'default': { class: 'badge bg-secondary', text: 'Unknown' }
+        };
+        const status = statusMap[data] || statusMap['default'];
+        return `<span class="${status.class}">${status.text}</span>`;
+    }
+
+    function deleteConfirmation(id) {
+        Swal.fire({
+            title: 'Anda yakin?',
+            text: "Data ini akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '{{ url("hapus_pelamar") }}/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        Swal.fire('Terhapus!', 'Data telah berhasil dihapus.', 'success')
+                            .then(() => {
                                 $('#tabel_pelamar').DataTable().ajax.reload();
                             });
-                        },
-                        error: function(err) {
-                            Swal.fire(
-                                'Error!',
-                                'Terjadi kesalahan saat menghapus data.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
+                    },
+                    error: function(err) {
+                        Swal.fire('Error!', 'Terjadi kesalahan saat menghapus data.', 'error');
+                    }
+                });
+            }
         });
+    }
+
+    $('#tabel_pelamar').DataTable({
+        responsive: true,
+        lengthChange: true,
+        autoWidth: true,
+        processing: true,
+        serverSide: true,
+        searching: true,
+        ajax: {
+            url: '{{ route("get_data_pelamar") }}',
+            type: 'GET'
+        },
+        columns: [
+            { data: null, orderable: false, searchable: false, 
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            { data: 'code_pendaftaran', name: 'code_pendaftaran' },
+            { data: 'nama', name: 'nama' },
+            { data: 'nomor_wa', name: 'nomor_wa' },
+            { 
+                data: 'status_bayar', 
+                name: 'status_bayar',
+                render: function (data) {
+                    return renderStatusBadge(data);
+                }
+            },
+            { data: 'bukti_transfer', name: 'bukti_transfer', orderable: false, searchable: false },
+            { 
+                data: 'id', 
+                name: 'action', 
+                orderable: false, 
+                searchable: false,
+                render: function(data) {
+                    var editUrl = '{{ route("edit_pelamar", ":id") }}'.replace(':id', data);
+                    var deleteUrl = '{{ route("hapus_pelamar", ":id") }}'.replace(':id', data);
+                    return `
+                        <a href="${editUrl}" class="btn btn-sm btn-primary">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <button class="btn btn-sm btn-danger delete-btn" data-id="${data}">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    `;
+                }
+            }
+        ]
     });
+
+    $('#tabel_pelamar').on('click', '.delete-btn', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        deleteConfirmation(id);
+    });
+});
+
 </script>
 @endsection

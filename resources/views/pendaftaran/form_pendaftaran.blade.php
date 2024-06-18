@@ -32,20 +32,20 @@
             <div class="content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <div class="card">
                                 <div class="card-header bg-info">
                                     <h5 class="card-title m-0 text-bold">Info Loker</h5>
                                 </div>
                                 <div class="card-body">
                                     <h5>Nama Perusahaan : </h5>
-                                    <h6><b>{{ $data->nama_loker }}</b></h6>
+                                    <h5><b>{{ $data->nama_loker }}</b></h5>
                                     <h5>Deskripsi :</h5>
                                     <h6><b>{!! $data->deskripsi !!}</b></h6>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8">
+                        <div class="col-lg-7">
                             <div class="card">
                                 <div class="card-header bg-primary">
                                     <h5 class="card-title m-0 text-bold">Form Pendaftaran</h5>
@@ -300,6 +300,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @if($data->form_domisili == 'aktif')
                                             <div class="form-group">
                                                 <label for="domisili">Domisili</label>
                                                 <input type="text" class="form-control @error('domisili') is-invalid @enderror" id="domisili" name="domisili" placeholder="Domisili" oninput="this.value = this.value.toUpperCase()">
@@ -309,6 +310,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            @endif
                                             <div class="form-group">
                                                 <label for="tinggi_badan">Tinggi Badan</label>
                                                 <input type="number" class="form-control @error('tinggi_badan') is-invalid @enderror" id="tinggi_badan" name="tinggi_badan" placeholder="Tinggi Badan" oninput="this.value = this.value.toUpperCase()">

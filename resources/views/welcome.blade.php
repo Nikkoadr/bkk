@@ -67,24 +67,21 @@
                                                         </div>
                                                         <div class="card-body pt-0">
                                                             <div class="row">
-                                                                <div class="col-7">
+                                                                <div class="col-12">
                                                                     <h2 class="lead"><b>{{ $data->nama_loker }}</b></h2>
-                                                                    <p class="text-muted text-sm"><b>Deskripsi: </b> {!! $data->deskripsi !!}</p>
-                                                                    {{-- <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                                        <li class="small"><span class="fa-li"><i class="fa-solid fa-users"></i></span> Jumlah Pendaftar : {{ $data->jumlah_pendaftar }}</li>
-                                                                    </ul> --}}
-                                                                </div>
-                                                                <div class="col-4 text-center">
-                                                                    <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="user-avatar" class="img-box img-fluid">
+                                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/600px-Instagram_logo_2022.svg.png" alt="ig" width="20" height="20">
+                                                                    <a target="_blank" href="https://www.instagram.com/bkk.smkmuhkandanghaur/">instagram BKK BKK</a>
+                                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg" alt="ig" width="20" height="20">
+                                                                    <a target="_blank" href="https://www.facebook.com/profile.php?id=61552243586350&locale=id_ID">Fanspage BKK</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="card-footer">
                                                             <div class="row">
-                                                                <div class="col d-flex align-items-center">
+                                                                <div class="col-7 d-flex align-items-center">
                                                                     <p class="mb-0">Bergerak Maju Menjadi Yang Terdepan</p>
                                                                 </div>
-                                                                <div class="col text-right">
+                                                                <div class="col-5 text-right">
                                                                     <form action="form_daftar" method="POST">
                                                                         @csrf
                                                                         <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">

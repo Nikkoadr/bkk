@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('form_npsn',['aktif','tidak aktif'])->default('aktif');
             $table->enum('form_nilai_ijazah',['aktif','tidak aktif'])->default('aktif');
             $table->enum('form_nilai_matematika',['aktif','tidak aktif'])->default('aktif');
+            $table->enum('form_domisili',['aktif','tidak aktif'])->default('aktif');
             $table->enum('form_pernah_mengikuti_reqrutment_calon_karyawan',['aktif','tidak aktif'])->default('aktif');
             $table->enum('form_pernah_bekerja',['aktif','tidak aktif'])->default('aktif');
             $table->enum('form_vaksin',['aktif','tidak aktif'])->default('aktif');

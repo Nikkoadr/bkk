@@ -66,6 +66,7 @@ class HomeController extends Controller
             'form_npsn' => 'required|in:aktif,tidak aktif',
             'form_nilai_ijazah' => 'required|in:aktif,tidak aktif',
             'form_nilai_matematika' => 'required|in:aktif,tidak aktif',
+            'form_domisili' => 'required|in:aktif,tidak aktif',
             'form_pernah_mengikuti_reqrutment_calon_karyawan' => 'required|in:aktif,tidak aktif',
             'form_pernah_bekerja' => 'required|in:aktif,tidak aktif',
             'form_vaksin' => 'required|in:aktif,tidak aktif',
@@ -81,6 +82,7 @@ class HomeController extends Controller
             'form_npsn',
             'form_nilai_ijazah',
             'form_nilai_matematika',
+            'form_domisili',
             'form_pernah_mengikuti_reqrutment_calon_karyawan',
             'form_pernah_bekerja',
             'form_vaksin'

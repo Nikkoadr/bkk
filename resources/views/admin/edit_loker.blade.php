@@ -110,6 +110,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="form_domisili">Form Domisili : </label>
+                        <div class="row">
+                            <div class="form-check col-1">
+                                <input class="form-check-input" type="radio" name="form_domisili" id="form_domisili" value="aktif" {{ $data->form_domisili == 'aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_domisili">Aktif</label>
+                            </div>
+                            <div class="form-check col">
+                                <input class="form-check-input" type="radio" name="form_domisili" id="form_domisili" value="tidak aktif" {{ $data->form_domisili == 'tidak aktif' ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="form_domisili">Tidak Aktif</label>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="form_pernah_mengikuti_reqrutment_calon_karyawan">Form Pernah Mengikuti Rekrutmen Calon Karyawan di {{ $data->nama_loker }} : </label>

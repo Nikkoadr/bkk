@@ -70,9 +70,11 @@
                                                                 <div class="col-12">
                                                                     <h2 class="lead"><b>{{ $data->nama_loker }}</b></h2>
                                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/600px-Instagram_logo_2022.svg.png" alt="ig" width="20" height="20">
-                                                                    <a target="_blank" href="https://www.instagram.com/bkk.smkmuhkandanghaur/">instagram BKK BKK</a>
+                                                                    <a target="_blank" href="https://www.instagram.com/bkk.smkmuhkandanghaur/">Instagram BKK</a><br>
                                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg" alt="ig" width="20" height="20">
-                                                                    <a target="_blank" href="https://www.facebook.com/profile.php?id=61552243586350&locale=id_ID">Fanspage BKK</a>
+                                                                    <a target="_blank" href="https://www.facebook.com/profile.php?id=61552243586350&locale=id_ID">Fanspage BKK</a><br>
+                                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1024px-Telegram_2019_Logo.svg.png" alt="ig" width="20" height="20">
+                                                                    <a target="_blank" href="https://t.me/grupinfoloker28">Telegram Grup</a>
                                                                 </div>
                                                             </div>
                                                         </div>

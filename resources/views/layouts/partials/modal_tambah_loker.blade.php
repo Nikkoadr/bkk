@@ -25,6 +25,10 @@
                         <textarea name="deskripsi" id="deskripsi" class="form-control" placeholder="Deskripsi loker"></textarea>
                     </div>
                     <div class="form-group">
+                        <label for="administrasi">Administrasi</label>
+                        <input type="number" name="administrasi" id="administrasi" class="form-control" placeholder="50000" required>
+                    </div>
+                    <div class="form-group">
                         <label for="status_loker">Status Loker</label>
                         <select name="status_loker" id="status_loker" class="form-control">
                             <option value="aktif">Aktif</option>

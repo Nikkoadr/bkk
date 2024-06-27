@@ -43,6 +43,7 @@
                         <th>No</th>
                         <th>Nama loker</th>
                         <th>Deskripsi</th>
+                        <th>Administrasi</th>
                         <th>Status Loker</th>
                         <th>grup WA</th>
                         <th data-orderable="false">Menu</th>
@@ -54,6 +55,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->nama_loker }}</td>
                         <td>{{ $data->deskripsi }}</td>
+                        <td>{{ $data->administrasi }}</td>
                         
                         <td>@if($data -> status_loker == 'aktif')
                             <span class="badge bg-green">Aktif</span>

@@ -43,10 +43,13 @@
                         <label for="nama_loker">Nama loker : </label>
                         <input type="text" class="form-control" name="nama_loker" id="nama_loker" value="{{ $data->nama_loker }}" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi :</label>
                         <textarea class="form-control" name="deskripsi" id="deskripsi" required>{{ $data->deskripsi }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="deskripsi">Administrasi :</label>
+                        <input  type="number" class="form-control" name="administrasi" id="administrasi" value="{{ $data->administrasi }}" required>
                     </div>
                     <div class="form-group">
                         <label for="status_loker">Status loker : </label>

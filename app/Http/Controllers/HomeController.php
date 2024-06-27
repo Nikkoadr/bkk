@@ -41,6 +41,7 @@ class HomeController extends Controller
         $request->validate([
             'nama_loker' => 'required|string|max:255',
             'deskripsi' => 'required|string',
+            'administrasi' => 'required|string',
             'status_loker' => 'required|string|max:255',
             'grup_wa' => 'required|string',
         ]);
@@ -60,6 +61,7 @@ class HomeController extends Controller
         $request->validate([
             'nama_loker' => 'required|string|max:255',
             'deskripsi' => 'required|string',
+            'administrasi' => 'required|string',
             'status_loker' => 'required|string|max:255',
             'grup_wa' => 'required|string',
             'form_npwp' => 'required|in:aktif,tidak aktif',

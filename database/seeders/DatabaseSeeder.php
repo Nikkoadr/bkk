@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         Loker::create([
             'nama_loker' => 'PT.Astra Honda Motor Jakarta',
             'deskripsi' => 'lorem ipsum',
+            'administrasi' => '50000',
             'grup_wa' => 'lorem ipsum',
         ]);
 

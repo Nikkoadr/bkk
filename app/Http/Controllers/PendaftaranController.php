@@ -27,7 +27,11 @@ class PendaftaranController extends Controller
             ->select('pendaftaran.*', 'loker.*', 'loker.nama_loker as nama_loker')
             ->where('pendaftaran.id', $pendaftaran->id)
             ->first();
-        return view('pendaftaran.pembayaran', compact('pendaftaran'));
+        $bayar = DB::table('loker')
+            ->where('id_loker', $pendaftaran->id_loker)
+            ->select('administrasi')
+            ->first();
+        return view('pendaftaran.pembayaran', compact('pendaftaran','bayar'));
     }
 
     public function bukti_pembayaran(Request $request) {

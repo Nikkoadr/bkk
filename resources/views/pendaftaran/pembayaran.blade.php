@@ -79,7 +79,7 @@
                                         <tr>
                                             <td><b>Administrasi</b></td>
                                             <td><b>:</b></td>
-                                            <td><b>Rp.37.000,-</b></td>
+                                            <td><b>{{ number_format($bayar->administrasi, 0, ',', '.') }}</b></td>
                                         </tr>
                                     </table>
                                     <hr>
@@ -89,9 +89,9 @@
                                             <tr>
                                                 <td><img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
                                                 <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span>
-                                                </td>
+                                                {{-- </td>
                                                 <td><img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span></td>
-                                            </tr>
+                                            </tr> --}}
                                         </table>
                                     </div>
                                     @if($pendaftaran -> status_bayar  == 'sudah')

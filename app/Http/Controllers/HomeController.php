@@ -130,23 +130,6 @@ class HomeController extends Controller
     }
 
     return DataTables::of($dataPelamar)
-        ->addColumn('action', function ($data) {
-            $editUrl = route('edit_pelamar', $data->id);
-            $deleteUrl = route('hapus_pelamar', $data->id);
-
-            return '
-                <a href="' . $editUrl . '" class="btn btn-sm btn-primary">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </a>
-                <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
-                    ' . csrf_field() . '
-                    ' . method_field('DELETE') . '
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                </form>
-            ';
-        })
         ->editColumn('bukti_transfer', function ($data) {
             return $data->bukti_transfer
                 ? '<a href="' . asset('storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">Lihat</a>'

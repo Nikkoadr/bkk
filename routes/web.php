@@ -36,6 +36,6 @@ Route::get('/hapus_loker/{id}',[HomeController::class, 'hapus_loker']);
 
 Route::get('/status_pelamar', [HomeController::class, 'status_pelamar'])->name('status_pelamar');
 Route::get('/get_data_pelamar', [HomeController::class, 'get_data_pelamar'])->name('get_data_pelamar');
-Route::delete('/hapus_pelamar/{id}',[HomeController::class, 'hapus_pelamar'])->name('hapus_pelamar');
+Route::get('/hapus_pelamar/{id}',[HomeController::class, 'hapus_pelamar'])->name('hapus_pelamar');
 Route::get('/edit_pelamar/{id}',[HomeController::class, 'edit_pelamar'])->name('edit_pelamar');
 Route::put('/update_pelamar/{id}',[HomeController::class, 'update_pelamar']);

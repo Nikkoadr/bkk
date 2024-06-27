@@ -107,38 +107,6 @@ var Toast = Swal.mixin({
         return `<span class="${status.class}">${status.text}</span>`;
     }
 
-    function deleteConfirmation(id) {
-        Swal.fire({
-            title: 'Anda yakin?',
-            text: "Data ini akan dihapus secara permanen!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '{{ url("hapus_pelamar") }}/' + id,
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(data) {
-                        Swal.fire('Terhapus!', 'Data telah berhasil dihapus.', 'success')
-                            .then(() => {
-                                $('#tabel_pelamar').DataTable().ajax.reload();
-                            });
-                    },
-                    error: function(err) {
-                        Swal.fire('Error!', 'Terjadi kesalahan saat menghapus data.', 'error');
-                    }
-                });
-            }
-        });
-    }
-
     $('#tabel_pelamar').DataTable({
         responsive: true,
         lengthChange: true,
@@ -174,7 +142,6 @@ var Toast = Swal.mixin({
                 searchable: false,
                 render: function(data) {
                     var editUrl = '{{ route("edit_pelamar", ":id") }}'.replace(':id', data);
-                    var deleteUrl = '{{ route("hapus_pelamar", ":id") }}'.replace(':id', data);
                     return `
                         <a href="${editUrl}" class="btn btn-sm btn-primary">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -195,5 +162,22 @@ var Toast = Swal.mixin({
     });
 });
 
+function deleteConfirmation(id) {
+    Swal.fire({
+        title: 'Anda yakin?',
+        text: "Data ini akan dihapus secara permanen!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var url = '/hapus_pelamar/' + id;
+            window.location.href = url;
+        }
+    });
+}
 </script>
 @endsection

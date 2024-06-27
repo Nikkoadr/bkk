@@ -48,7 +48,7 @@
                         <textarea class="form-control" name="deskripsi" id="deskripsi" required>{{ $data->deskripsi }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="deskripsi">Administrasi :</label>
+                        <label for="administrasi">Administrasi :</label>
                         <input  type="number" class="form-control" name="administrasi" id="administrasi" value="{{ $data->administrasi }}" required>
                     </div>
                     <div class="form-group">

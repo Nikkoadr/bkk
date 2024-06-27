@@ -78,6 +78,7 @@ class HomeController extends Controller
         $loker->update($request->only([
             'nama_loker', 
             'deskripsi', 
+            'administrasi', 
             'status_loker', 
             'grup_wa',
             'form_npwp',

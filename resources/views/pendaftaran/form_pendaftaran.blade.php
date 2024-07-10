@@ -40,8 +40,8 @@
                                 <div class="card-body">
                                     <h5>Nama Perusahaan : </h5>
                                     <h5><b>{{ $data->nama_loker }}</b></h5>
-                                    <h5>Deskripsi :</h5>
-                                    <h6><b>{!! $data->deskripsi !!}</b></h6>
+                                    <h5>Kualifikasi :</h5>
+                                    <h6>{!! $data->deskripsi !!}</h6>
                                 </div>
                             </div>
                         </div>

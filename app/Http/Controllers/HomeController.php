@@ -116,8 +116,9 @@ class HomeController extends Controller
 
     public function get_data_pelamar(Request $request)
 {
-    $dataPelamar = Pendaftaran::query()->orderBy('created_at', 'desc');
+    $dataPelamar = Pendaftaran::query();
 
+    // Handle search functionality
     if ($request->has('search') && !empty($request->search['value'])) {
         $keyword = $request->search['value'];
         $dataPelamar->where(function ($query) use ($keyword) {
@@ -127,6 +128,20 @@ class HomeController extends Controller
                 ->orWhere('status_bayar', 'like', "%{$keyword}%")
                 ->orWhere('bukti_transfer', 'like', "%{$keyword}%");
         });
+    }
+
+    // Handle ordering functionality
+    if ($request->has('order')) {
+        foreach ($request->order as $order) {
+            $orderColumn = $order['column'];
+            $orderDir = $order['dir'];
+            $columns = $request->columns;
+
+            $orderColumnName = $columns[$orderColumn]['name'];
+            $dataPelamar->orderBy($orderColumnName, $orderDir);
+        }
+    } else {
+        $dataPelamar->orderBy('nama', 'asc')->orderBy('status_bayar', 'asc');
     }
 
     return DataTables::of($dataPelamar)

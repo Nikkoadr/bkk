@@ -118,6 +118,10 @@ $('#tabel_pelamar').DataTable({
         url: '{{ route("get_data_pelamar") }}',
         type: 'GET'
     },
+    order: [
+        [2, 'asc'], // Default ordering by 'nama' column (index 2)
+        [4, 'asc']  // Secondary ordering by 'status_bayar' column (index 4)
+    ],
     columns: [
         { 
             data: null, 
@@ -127,8 +131,8 @@ $('#tabel_pelamar').DataTable({
                 return meta.row + meta.settings._iDisplayStart + 1;
             }
         },
-        { data: 'code_pendaftaran', name: 'code_pendaftaran' },
-        { data: 'nama', name: 'nama',orderable: true },
+        { data: 'code_pendaftaran', name: 'code_pendaftaran', orderable: true },
+        { data: 'nama', name: 'nama', orderable: true },
         { 
             data: 'nomor_wa', 
             name: 'nomor_wa',
@@ -148,10 +152,10 @@ $('#tabel_pelamar').DataTable({
         { 
             data: 'status_bayar', 
             name: 'status_bayar',
-            orderable: true,
             render: function (data) {
                 return renderStatusBadge(data);
-            }
+            },
+            orderable: true,
         },
         { 
             data: 'bukti_transfer', 
@@ -178,6 +182,7 @@ $('#tabel_pelamar').DataTable({
         }
     ]
 });
+
 
 function convertNumber(number) {
     if (number.startsWith('086')) {

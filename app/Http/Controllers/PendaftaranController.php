@@ -15,7 +15,7 @@ class PendaftaranController extends Controller
         return view('pendaftaran.form_pendaftaran', compact('data'));
     }
 
-    public function daftar(Request $request)
+    public function bayar(Request $request)
     {
         $pendaftaran = Pendaftaran::where('code_pendaftaran', $request->code_pendaftaran)->first();
         if (!$pendaftaran) {

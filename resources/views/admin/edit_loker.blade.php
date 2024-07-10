@@ -195,9 +195,13 @@
 <!-- /.content-wrapper -->
 @endsection
 @section('script')
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('deskripsi');
+    ClassicEditor
+        .create(document.querySelector('#deskripsi'))
+        .catch(error => {
+            console.error(error);
+        });
 </script>
 <script>
 @if (session()->has('success'))

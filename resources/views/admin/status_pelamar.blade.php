@@ -114,7 +114,6 @@ $('#tabel_pelamar').DataTable({
     processing: true,
     serverSide: true,
     searching: true,
-    orderable: true, 
     ajax: {
         url: '{{ route("get_data_pelamar") }}',
         type: 'GET'
@@ -129,10 +128,11 @@ $('#tabel_pelamar').DataTable({
             }
         },
         { data: 'code_pendaftaran', name: 'code_pendaftaran' },
-        { data: 'nama', name: 'nama' },
+        { data: 'nama', name: 'nama',orderable: true },
         { 
             data: 'nomor_wa', 
             name: 'nomor_wa',
+            orderable: true,
             render: function(data, type, row) {
                 var nomor = data;
                 var message = `Assalamu'alaikum Wr Wb ka.\n` +
@@ -148,6 +148,7 @@ $('#tabel_pelamar').DataTable({
         { 
             data: 'status_bayar', 
             name: 'status_bayar',
+            orderable: true,
             render: function (data) {
                 return renderStatusBadge(data);
             }

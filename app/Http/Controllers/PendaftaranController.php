@@ -99,22 +99,35 @@ public function bukti_pembayaran(Request $request)
     return view('pendaftaran.bukti_pembayaran', compact('pendaftaran'));
 }
     
-    public function cari(Request $request) {
-        $pendaftaran = DB::table('pendaftaran')
-            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
-            ->select(
-                'pendaftaran.*', 
-                'pendaftaran.created_at as pendaftaran_created_at',
-                'loker.*', 
-                'loker.created_at as loker_created_at'
-            )
-            ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
-            ->first();
-        if (!$pendaftaran) {
+public function cari(Request $request) {
+    $pendaftaran = DB::table('pendaftaran')
+        ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+        ->select(
+            'pendaftaran.*', 
+            'pendaftaran.created_at as pendaftaran_created_at',
+            'loker.*', 
+            'loker.created_at as loker_created_at'
+        )
+        ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
+        ->first();
+        
+    if (!$pendaftaran) {
         return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
-        }
-        return view('pendaftaran.cari_pendaftaran', compact('pendaftaran'));
     }
+
+    // Check if the status is 'belum'
+    if ($pendaftaran->status_bayar == 'belum') {
+        // Get payment details
+        $bayar = DB::table('loker')
+            ->where('id_loker', $pendaftaran->id_loker)
+            ->select('administrasi')
+            ->first();
+        
+        return view('pendaftaran.pembayaran', compact('pendaftaran', 'bayar'));
+    }
+
+    return view('pendaftaran.cari_pendaftaran', compact('pendaftaran'));
+}
 
     public function scan($code_pendaftaran) {
     $pendaftaran = DB::table('pendaftaran')

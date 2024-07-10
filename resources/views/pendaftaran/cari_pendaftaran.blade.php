@@ -60,11 +60,23 @@
                                             <td><b>Status Pembayaran</b></td>
                                             <td><b>:</b></td>
                                             <td>
-                                            @if( $pendaftaran -> status_bayar  == 'sudah')
-                                                <span class="badge bg-green">{{ $pendaftaran -> status_bayar }}</span>
-                                            @else
-                                                <span class="badge bg-yellow">{{ $pendaftaran -> status_bayar }}</span>
-                                            @endif</td>
+                                            @switch($pendaftaran->status_bayar)
+                                                @case('sudah')
+                                                    <span class="badge bg-green">{{ $pendaftaran->status_bayar }}</span>
+                                                    @break
+
+                                                @case('menunggu')
+                                                    <span class="badge bg-yellow">{{ $pendaftaran->status_bayar }}</span>
+                                                    @break
+
+                                                @case('belum')
+                                                    <span class="badge bg-danger">{{ $pendaftaran->status_bayar }}</span>
+                                                    @break
+
+                                                @default
+                                                    <span class="badge bg-secondary">Status Tidak Diketahui</span>
+                                            @endswitch
+                                            </td>
                                         </tr>
                                     </table>
                                     <p class="mt-4 mb-3 text-center">Telah mendaftar sebagai calon pelamar pada :</p>

@@ -107,53 +107,110 @@ var Toast = Swal.mixin({
         return `<span class="${status.class}">${status.text}</span>`;
     }
 
-    $('#tabel_pelamar').DataTable({
-        responsive: true,
-        lengthChange: true,
-        autoWidth: true,
-        processing: true,
-        serverSide: true,
-        searching: true,
-        ajax: {
-            url: '{{ route("get_data_pelamar") }}',
-            type: 'GET'
-        },
-        columns: [
-            { data: null, orderable: false, searchable: false, 
-                render: function (data, type, row, meta) {
-                    return meta.row + meta.settings._iDisplayStart + 1;
-                }
-            },
-            { data: 'code_pendaftaran', name: 'code_pendaftaran' },
-            { data: 'nama', name: 'nama' },
-            { data: 'nomor_wa', name: 'nomor_wa' },
-            { 
-                data: 'status_bayar', 
-                name: 'status_bayar',
-                render: function (data) {
-                    return renderStatusBadge(data);
-                }
-            },
-            { data: 'bukti_transfer', name: 'bukti_transfer', orderable: false, searchable: false },
-            { 
-                data: 'id', 
-                name: 'action', 
-                orderable: false, 
-                searchable: false,
-                render: function(data) {
-                    var editUrl = '{{ route("edit_pelamar", ":id") }}'.replace(':id', data);
-                    return `
-                        <a href="${editUrl}" class="btn btn-sm btn-primary">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <button class="btn btn-sm btn-danger delete-btn" data-id="${data}">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    `;
-                }
+$('#tabel_pelamar').DataTable({
+    responsive: true,
+    lengthChange: true,
+    autoWidth: true,
+    processing: true,
+    serverSide: true,
+    searching: true,
+    orderable: true, 
+    ajax: {
+        url: '{{ route("get_data_pelamar") }}',
+        type: 'GET'
+    },
+    columns: [
+        { 
+            data: null, 
+            orderable: false, 
+            searchable: false, 
+            render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
             }
-        ]
-    });
+        },
+        { data: 'code_pendaftaran', name: 'code_pendaftaran' },
+        { data: 'nama', name: 'nama' },
+        { 
+            data: 'nomor_wa', 
+            name: 'nomor_wa',
+            render: function(data, type, row) {
+                var nomor = data;
+                var message = `Assalamu'alaikum Wr Wb ka.\n` +
+                                `kami dari BKK SMK Muhammadiyah kandanghaur ingin mengonfirmasi terakit status pendaftaran kaka yang becode *${row.code_pendaftaran}* ` +
+                                `yang masih berstatus belum sukses. mohon kesediaanya membalas chat kami terkait permasalahannya. terimakasih`;
+
+                var encodedMessage = encodeURIComponent(message);
+                var waLink = `https://wa.me/62${nomor}?text=${encodedMessage}`;
+
+                return `<a href="${waLink}" target="_blank">${data}</a>`;
+            }
+        },
+        { 
+            data: 'status_bayar', 
+            name: 'status_bayar',
+            render: function (data) {
+                return renderStatusBadge(data);
+            }
+        },
+        { 
+            data: 'bukti_transfer', 
+            name: 'bukti_transfer', 
+            orderable: false, 
+            searchable: false 
+        },
+        { 
+            data: 'id', 
+            name: 'action', 
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                var editUrl = '{{ route("edit_pelamar", ":id") }}'.replace(':id', data);
+                return `
+                    <a href="${editUrl}" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <button class="btn btn-sm btn-danger delete-btn" data-id="${data}">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+            }
+        }
+    ]
+});
+
+function convertNumber(number) {
+    if (number.startsWith('086')) {
+        return '628' + number.substring(1);
+    }
+    return number;
+}
+
+function renderStatusBadge(status) {
+    switch(status) {
+        case 'sudah':
+            return '<span class="badge bg-green">' + status + '</span>';
+        case 'menunggu':
+            return '<span class="badge bg-yellow">' + status + '</span>';
+        case 'belum':
+            return '<span class="badge bg-danger">' + status + '</span>';
+        default:
+            return '<span class="badge bg-secondary">' + status + '</span>';
+    }
+}
+
+
+function renderStatusBadge(status) {
+    switch(status) {
+        case 'sudah':
+            return '<span class="badge bg-green">' + status + '</span>';
+        case 'menunggu':
+            return '<span class="badge bg-yellow">' + status + '</span>';
+        case 'belum':
+            return '<span class="badge bg-danger">' + status + '</span>';
+        default:
+            return '<span class="badge bg-secondary">' + status + '</span>';
+    }
+}
 
     $('#tabel_pelamar').on('click', '.delete-btn', function(e) {
         e.preventDefault();

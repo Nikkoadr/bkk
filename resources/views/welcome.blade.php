@@ -68,8 +68,8 @@
                                                         <div class="card-body pt-0">
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <h2><b>{{ $data->nama_loker }}</b></h2>
-                                                                    <h3>Posisi :</h3>
+                                                                    <h3><b>{{ $data->nama_loker }}</b></h3>
+                                                                    {{-- <h3>Posisi :</h3> --}}
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/600px-Instagram_logo_2022.svg.png" alt="ig" width="20" height="20">
@@ -81,7 +81,7 @@
                                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1024px-Telegram_2019_Logo.svg.png" alt="ig" width="20" height="20">
                                                                     <a target="_blank" href="https://t.me/grupinfoloker28">Telegram Grup</a><br>
                                                                     <img src="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN" alt="ig" width="20" height="20">
-                                                                    <a target="_blank" href="https://t.me/grupinfoloker28">Whatsapp</a>
+                                                                    <a target="_blank" href="https://wa.me/628112390028">Whatsapp</a>
                                                                     </div>
                                                             </div>
                                                         </div>

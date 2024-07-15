@@ -19,8 +19,7 @@
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
                     <a href="/" class="navbar-brand">
-                        <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="dosq" class="brand-image">
-                        <span class="brand-text font-weight-bold">Smkmuhkandanghaur</span>
+                        <img src="{{ asset('assets/dist/img/logobkk.png') }}" alt="dosq" class="brand-image">
                     </a>
                 </div>
             </nav>

@@ -21,6 +21,10 @@
                         <input type="text" name="nama_loker" id="nama_loker" class="form-control" placeholder="Nama loker" required>
                     </div>
                     <div class="form-group">
+                        <label for="posisi">Posisi</label>
+                        <input type="text" name="posisi" id="posisi" class="form-control" placeholder="Posisi" required>
+                    </div>
+                    <div class="form-group">
                         <label for="deskripsi">Deskripsi</label>
                         <textarea name="deskripsi" id="deskripsi" class="form-control" placeholder="Deskripsi loker"></textarea>
                     </div>

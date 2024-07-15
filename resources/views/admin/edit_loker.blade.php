@@ -44,6 +44,10 @@
                         <input type="text" class="form-control" name="nama_loker" id="nama_loker" value="{{ $data->nama_loker }}" required>
                     </div>
                     <div class="form-group">
+                        <label for="posisi">Posisi : </label>
+                        <input type="text" class="form-control" name="posisi" id="posisi" value="{{ $data->posisi }}" required>
+                    </div>
+                    <div class="form-group">
                         <label for="deskripsi">Deskripsi :</label>
                         <textarea class="form-control" name="deskripsi" id="deskripsi" required>{{ $data->deskripsi }}</textarea>
                     </div>

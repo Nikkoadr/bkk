@@ -16,8 +16,7 @@
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
                     <a href="/" class="navbar-brand">
-                        <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="dosq" class="brand-image">
-                        <span class="brand-text font-weight-bold">Smkmuhkandanghaur</span>
+                        <img src="{{ asset('assets/dist/img/logobkk.png') }}" alt="dosq" class="brand-image">
                     </a>
 
                 </div>
@@ -40,6 +39,7 @@
                                 <div class="card-body">
                                     <h5>Nama Perusahaan : </h5>
                                     <h5><b>{{ $data->nama_loker }}</b></h5>
+                                    <h5>Posisi : {{ $data->posisi }}</h5>
                                     <h5>Kualifikasi :</h5>
                                     <h6>{!! $data->deskripsi !!}</h6>
                                 </div>

@@ -42,6 +42,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama loker</th>
+                        <th>Posisi</th>
                         <th>Deskripsi</th>
                         <th>Administrasi</th>
                         <th>Status Loker</th>
@@ -54,6 +55,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->nama_loker }}</td>
+                        <td>{{ $data->posisi }}</td>
                         <td>{{ $data->deskripsi }}</td>
                         <td>{{ $data->administrasi }}</td>
                         

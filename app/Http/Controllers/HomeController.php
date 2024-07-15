@@ -40,6 +40,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'nama_loker' => 'required|string|max:255',
+            'posisi' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'administrasi' => 'required|string',
             'status_loker' => 'required|string|max:255',
@@ -60,6 +61,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'nama_loker' => 'required|string|max:255',
+            'posisi' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'administrasi' => 'required|string',
             'status_loker' => 'required|string|max:255',
@@ -77,6 +79,7 @@ class HomeController extends Controller
         $loker = Loker::findOrFail($id);
         $loker->update($request->only([
             'nama_loker', 
+            'posisi', 
             'deskripsi', 
             'administrasi', 
             'status_loker', 

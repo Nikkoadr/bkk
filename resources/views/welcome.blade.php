@@ -77,8 +77,8 @@
                                                         <div class="card-body pt-0">
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <h3><b>{{ $data->nama_loker }}</b></h3>
-                                                                    <h4>Posisi : {{ $data->posisi }}</Posisi></h4>
+                                                                    <h5><b>{{ $data->nama_loker }}</b></h5>
+                                                                    <p>Posisi : {{ $data->posisi }}</p>
                                                                     {{-- <h3>Posisi :</h3> --}}
                                                                 </div>
                                                                 <div class="col-6">

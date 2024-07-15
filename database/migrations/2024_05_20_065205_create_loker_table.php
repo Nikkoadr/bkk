@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('loker', function (Blueprint $table) {
             $table->id('id_loker');
             $table->string('nama_loker');
+            $table->string('posisi');
             $table->text('deskripsi');
             $table->string('administrasi');
             $table->enum('status_loker',['aktif','tidak aktif'])->default('tidak aktif');

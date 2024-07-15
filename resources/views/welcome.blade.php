@@ -16,8 +16,7 @@
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
                 <div class="container">
                     <a href="/" class="navbar-brand">
-                        <img src="{{ asset('assets/dist/img/BKK.png') }}" alt="dosq" class="brand-image">
-                        <span class="brand-text font-weight-bold"> Smkmuhkandanghaur</span>
+                        <img src="{{ asset('assets/dist/img/logobkk.png') }}" alt="dosq" class="brand-image">
                     </a>
                     <ul class="navbar-nav ms-auto">
                         @if (Route::has('login'))
@@ -79,6 +78,7 @@
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <h3><b>{{ $data->nama_loker }}</b></h3>
+                                                                    <h4>Posisi : {{ $data->posisi }}</Posisi></h4>
                                                                     {{-- <h3>Posisi :</h3> --}}
                                                                 </div>
                                                                 <div class="col-6">

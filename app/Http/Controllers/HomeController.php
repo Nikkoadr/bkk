@@ -8,6 +8,7 @@ use App\Models\Pendaftaran;
 use App\Exports\PendaftaranExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $lokerData = Loker::select('loker.nama_loker',
+        DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "belum" THEN 1 ELSE 0 END) as belum_bayar'),
+        DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "menunggu" THEN 1 ELSE 0 END) as menunggu'),
+        DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "sudah" THEN 1 ELSE 0 END) as sudah_bayar'))
+        ->leftJoin('pendaftaran', 'loker.id_loker', '=', 'pendaftaran.id_loker')
+        ->where('loker.status_loker', 'aktif')
+        ->groupBy('loker.nama_loker')
+        ->get();
+        return view('admin.home',compact('lokerData'));
     }
 
     public function data_loker() {

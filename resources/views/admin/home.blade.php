@@ -21,7 +21,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Data loker</h3>
@@ -43,16 +43,11 @@
 <script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Ambil data dari controller
         var lokerData = @json($lokerData);
-
-        // Siapkan data untuk chart
         var labels = lokerData.map(item => item.nama_loker);
         var dataSudahDaftar = lokerData.map(item => item.sudah_bayar);
         var dataMenungguKonfirmasi = lokerData.map(item => item.menunggu);
         var dataBelumDaftar = lokerData.map(item => item.belum_bayar);
-
-        // Bar Chart
         var ctx = document.getElementById('barChart').getContext('2d');
         var barChart = new Chart(ctx, {
             type: 'bar',

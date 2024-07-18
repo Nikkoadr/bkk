@@ -12,6 +12,7 @@
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
         @yield('link')
     </head>
     <body class="hold-transition sidebar-mini">

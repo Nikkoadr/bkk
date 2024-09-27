@@ -4,6 +4,7 @@ namespace App\Exports;
 use App\Models\Pendaftaran;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Facades\DB;
 
 class PendaftaranExport implements FromCollection, WithHeadings
 {
@@ -29,7 +30,7 @@ class PendaftaranExport implements FromCollection, WithHeadings
                             'pendaftaran.email', 
                             'pendaftaran.nomor_wa', 
                             'pendaftaran.nama', 
-                            'pendaftaran.nomor_nik', 
+                            DB::raw('CAST(pendaftaran.nomor_nik AS CHAR) as nomor_nik'), 
                             'pendaftaran.npwp', 
                             'pendaftaran.tempat_lahir', 
                             'pendaftaran.tanggal_lahir', 

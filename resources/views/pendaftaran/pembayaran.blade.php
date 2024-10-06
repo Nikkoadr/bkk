@@ -33,7 +33,7 @@
                             <div class="card card-solid">
                                 <div class="card-body pb-0">
                                     <h3 class="text-center">
-                                        <b>Proses Pendaftaran</b>
+                                        <b>Proses Pembayaran</b>
                                     </h3>
                                     <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
                                     <hr>
@@ -72,7 +72,7 @@
                                             @elseif($pendaftaran -> status_bayar  == 'menunggu')
                                                 <span class="badge bg-yellow">{{ $pendaftaran -> status_bayar }}</span>
                                             @else
-                                                <span class="badge bg-green">Sudah</span>
+                                                <span class="badge bg-red">{{ $pendaftaran -> status_bayar }}</span>
                                             @endif</td>
                                         </tr>
                                         <tr>
@@ -82,25 +82,24 @@
                                         </tr>
                                     </table>
                                     <hr>
-                                    {{-- <div class="col-12 m-3">
+                                    <div class="col-12 m-3">
                                         <p class="lead">Metode Pembayaran :</p>
                                         <table>
                                             <tr>
                                                 <td><img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
                                                 <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span>
-                                                </td>
+                                                {{-- </td>
                                                 <td><img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span></td>
-                                            </tr>
+                                            </tr> --}}
                                         </table>
-                                    </div> --}}
-                                    
+                                    </div>
                                     @if($pendaftaran -> status_bayar  == 'sudah')
                                         <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/scan/'.$pendaftaran->code_pendaftaran) !!}</p>
                                     @elseif($pendaftaran -> status_bayar  == 'menunggu')
                                         <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/scan/'.$pendaftaran->code_pendaftaran) !!}</p>
                                     @else
                                         <div class="col-12">
-                                            {{-- <form action="/bukti_pembayaran" method="post" enctype="multipart/form-data">
+                                            <form action="/bukti_pembayaran" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('put')
                                                 <input type="hidden" name="id" value="{{ $pendaftaran->id }}">
@@ -114,10 +113,9 @@
                                                         <button class="btn btn-primary" type="submit">Upload</button>
                                                     </div>
                                                 </div>
-                                            </form> --}}
-                                            <a class="btn btn-success" href="{{ $pendaftaran -> grup_wa }}">Join Grup Telegram</a>
+                                            </form>
                                             <p class="text-center text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                                Proses pendaftaran sudah selesai simpan bukti pendaftaran ini
+                                                Segera lakukan Pembayaran Sebelum loker di tutup atau sampai kuota terpenuhi
                                             </p>
                                         </div>
                                     @endif

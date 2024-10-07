@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nomor_nik')->nullable();
             $table->string('npwp')->nullable();
+            $table->string('sim')->nullable();
+            $table->enum('posisi yang dilamar', ['Oprator','Mekanik'])->nullable()->default('Oprator');
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->enum('jenis_kelamin', ['L','P'])->nullable();

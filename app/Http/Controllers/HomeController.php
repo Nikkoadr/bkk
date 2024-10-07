@@ -159,7 +159,7 @@ class HomeController extends Controller
     return DataTables::of($dataPelamar)
         ->editColumn('bukti_transfer', function ($data) {
             return $data->bukti_transfer
-                ? '<a href="' . asset('/storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">Lihat</a>'
+                ? '<a href="' . asset('/storage/app/public/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">Lihat</a>'
                 : 'N/A';
         })
         ->rawColumns(['action', 'bukti_transfer'])

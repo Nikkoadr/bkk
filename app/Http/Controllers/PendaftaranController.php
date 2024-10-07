@@ -81,7 +81,7 @@ public function bukti_pembayaran(Request $request)
     }
 
     // Simpan file bukti transfer
-    $nama_file = 'bukti_transfer_'.$request->id.'_'.$request->nama.'.'.$request->bukti_transfer->getClientOriginalExtension();
+    $nama_file = 'bukti_transfer_'.$request->id.'.'.$request->bukti_transfer->getClientOriginalExtension();
     Storage::disk(env('STORAGE_DISK'))->put($nama_file, file_get_contents($request->bukti_transfer));
 
     // Siapkan data untuk diupdate

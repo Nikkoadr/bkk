@@ -112,6 +112,27 @@
                                             </div>
                                             @endif
                                             <div class="form-group">
+                                                <label for="sim">SIM</label>
+                                                <select class="form-control @error('sim') is-invalid @enderror" name="sim" id="sim">
+                                                    <option value="">Tidak Ada</option>
+                                                    <option value="D">D</option>
+                                                    <option value="C1">C1</option>
+                                                    <option value="C2">C2</option>
+                                                    <option value="C3">C3</option>
+                                                    <option value="A">A</option>
+                                                    <option value="A UMUM">A UMUM</option>
+                                                    <option value="B1">B1</option>
+                                                    <option value="B2">B2</option>
+                                                    <option value="B1 UMUM">B1 UMUM</option>
+                                                    <option value="B2 UMUM">B2 UMUM</option>
+                                                </select>
+                                                @error('sim')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="tempat_lahir">Tempat Lahir</label>
                                                 <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" oninput="this.value = this.value.toUpperCase()">
                                                 @error('tempat_lahir')
@@ -160,6 +181,13 @@
                                                     <option value="MAK">MAK</option>
                                                     <option value="SMA">SMA</option>
                                                     <option value="SMK">SMK</option>
+                                                    <option value="D1">D1</option>
+                                                    <option value="D2">D2</option>
+                                                    <option value="D3">D3</option>
+                                                    <option value="D4">D4</option>
+                                                    <option value="S1">S1</option>
+                                                    <option value="S2">S2</option>
+                                                    <option value="S3">S3</option>
                                                 </select>
                                                 @error('jenis_pendidikan_terakhir')
                                                     <span class="invalid-feedback" role="alert">
@@ -324,6 +352,15 @@
                                                 <label for="berat_badan">Berat Badan</label>
                                                 <input type="number" class="form-control @error('berat_badan') is-invalid @enderror" id="berat_badan" name="berat_badan" placeholder="Berat Badan" oninput="this.value = this.value.toUpperCase()">
                                                 @error('berat_badan')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="posisi_yang_dilamar">Posisi yang Dilamar</label>
+                                                <input type="text" class="form-control @error('posisi_yang_dilamar') is-invalid @enderror" id="posisi_yang_dilamar" name="posisi_yang_dilamar" placeholder="Posisi yang Dilamar" oninput="this.value = this.value.toUpperCase()">
+                                                @error('posisi_yang_dilamar')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

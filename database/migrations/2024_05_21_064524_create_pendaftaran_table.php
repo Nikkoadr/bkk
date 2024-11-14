@@ -22,13 +22,12 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nomor_nik')->nullable();
             $table->string('npwp')->nullable();
-            $table->string('sim')->nullable();
-            $table->enum('posisi yang dilamar', ['Oprator','Mekanik'])->nullable()->default('Oprator');
+            $table->enum('sim', ['D','C1','C2','C3','A','A UMUM','B1','B2','B1 UMUM','B2 UMUM'])->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->enum('jenis_kelamin', ['L','P'])->nullable();
             $table->enum('status_perkawinan',['MENIKAH','BELUM MENIKAH'])->nullable();
-            $table->enum('jenis_pendidikan_terakhir', ['MA','MAK','SMA','SMK'])->nullable();
+            $table->enum('jenis_pendidikan_terakhir', ['MA','MAK','SMA','SMK','D1','D2','D3','S1','S2','S3'])->nullable();
             $table->string('npsn')->nullable();
             $table->string('nama_sekolah')->nullable();
             $table->string('jurusan_pendidikan')->nullable();
@@ -46,6 +45,7 @@ return new class extends Migration
             $table->string('domisili')->nullable();
             $table->string('tinggi_badan')->nullable();
             $table->string('berat_badan')->nullable();
+            $table->string('posisi_yang_dilamar')->nullable();
             $table->string('pengalaman_kerja')->nullable();
             $table->enum('pernah_mengikuti_reqrutment_calon_karyawan',['BELUM PERNAH','SUDAH PERNAH'])->nullable();
             $table->enum('pernah_bekerja',['BELUM PERNAH','SUDAH PERNAH'])->nullable();

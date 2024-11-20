@@ -158,14 +158,17 @@ class HomeController extends Controller
         $dataPelamar->orderBy('nama', 'asc')->orderBy('status_bayar', 'asc');
     }
 
-    return DataTables::of($dataPelamar)
-        ->editColumn('bukti_transfer', function ($data) {
-            return $data->bukti_transfer
-                ? '<a href="' . asset('/storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">Lihat</a>'
-                : 'N/A';
-        })
-        ->rawColumns(['action', 'bukti_transfer'])
-        ->make(true);
+return DataTables::of($dataPelamar)
+    ->editColumn('bukti_transfer', function ($data) {
+        return $data->bukti_transfer
+            ? '<a href="' . asset('/storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">
+                    <img width="50" height="50" src="' . asset('/storage/bukti_transfer/' . $data->bukti_transfer) . '" alt="Bukti Transfer">
+            </a>'
+            : 'N/A';
+    })
+    ->rawColumns(['action', 'bukti_transfer'])
+    ->make(true);
+
 }
 
     public function edit_pelamar($id){

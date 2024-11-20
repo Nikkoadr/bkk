@@ -241,4 +241,15 @@ return DataTables::of($dataPelamar)
         $nama_file = 'Seluruh Data Pelamar_' . date('Y-m-d') . '.xlsx';
         return Excel::download(new LaporanExport, $nama_file);
     }
+
+    public function update_status_pembayaran($id)
+{
+    $pelamar = Pendaftaran::find($id);
+    if ($pelamar) {
+        $pelamar->status_bayar = 'sudah';
+        $pelamar->save();
+        return response()->json(['success' => true, 'message' => 'Status pembayaran berhasil diperbarui']);
+    }
+    return response()->json(['success' => false, 'message' => 'Data tidak ditemukan']);
+}
 }

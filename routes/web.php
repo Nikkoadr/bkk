@@ -40,3 +40,5 @@ Route::get('/hapus_pelamar/{id}',[HomeController::class, 'hapus_pelamar'])->name
 Route::get('/edit_pelamar/{id}',[HomeController::class, 'edit_pelamar'])->name('edit_pelamar');
 Route::put('/update_pelamar/{id}',[HomeController::class, 'update_pelamar']);
 Route::get('/laporan/download',[HomeController::class, 'download_laporan']);
+
+Route::post('/update_status_pembayaran/{id}', [HomeController::class, 'update_status_pembayaran']);

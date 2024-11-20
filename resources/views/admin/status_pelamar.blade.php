@@ -119,8 +119,12 @@ $('#tabel_pelamar').DataTable({
         type: 'GET'
     },
     order: [
-        [2, 'asc'], // Default ordering by 'nama' column (index 2)
-        [4, 'asc']  // Secondary ordering by 'status_bayar' column (index 4)
+        [2, 'asc'],
+        [4, 'asc']
+    ],
+        lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, "Semua"]
     ],
     columns: [
         { 
@@ -152,10 +156,17 @@ $('#tabel_pelamar').DataTable({
         { 
             data: 'status_bayar', 
             name: 'status_bayar',
-            render: function (data) {
-                return renderStatusBadge(data);
-            },
             orderable: true,
+            render: function(data, type, row) {
+                let badge = renderStatusBadge(data);
+                if (data !== 'sudah') {
+                    badge += ` 
+                        <button class="btn btn-sm btn-success update-status" data-id="${row.id}">
+                            <i class="fa-solid fa-check"></i>
+                        </button>`;
+                }
+                return badge;
+            }
         },
         { 
             data: 'bukti_transfer', 
@@ -242,5 +253,43 @@ function deleteConfirmation(id) {
         }
     });
 }
+
+$('#tabel_pelamar').on('click', '.update-status', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    
+    Swal.fire({
+        title: 'Konfirmasi?',
+        text: "Anda yakin ingin mengubah status pembayaran menjadi sudah?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, konfirmasi!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `/update_status_pembayaran/${id}`,
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire('Berhasil!', response.message, 'success');
+                        $('#tabel_pelamar').DataTable().ajax.reload(null, false);
+                    } else {
+                        Swal.fire('Gagal!', response.message, 'error');
+                    }
+                },
+                error: function() {
+                    Swal.fire('Gagal!', 'Terjadi kesalahan saat memproses permintaan.', 'error');
+                }
+            });
+        }
+    });
+});
+
 </script>
 @endsection

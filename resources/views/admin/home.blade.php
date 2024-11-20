@@ -23,6 +23,10 @@
     </div>
     <section class="content">
         <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Perusahaan</h3>
+                <a href="laporan/download" class="btn btn-primary float-right">Download Seluruh Data Pendaftar</a>
+            </div>
             <div class="card-body">
                 <table class="table table-striped table-bordered">
                     <thead>

@@ -39,3 +39,4 @@ Route::get('/get_data_pelamar', [HomeController::class, 'get_data_pelamar'])->na
 Route::get('/hapus_pelamar/{id}',[HomeController::class, 'hapus_pelamar'])->name('hapus_pelamar');
 Route::get('/edit_pelamar/{id}',[HomeController::class, 'edit_pelamar'])->name('edit_pelamar');
 Route::put('/update_pelamar/{id}',[HomeController::class, 'update_pelamar']);
+Route::get('/laporan/download',[HomeController::class, 'download_laporan']);

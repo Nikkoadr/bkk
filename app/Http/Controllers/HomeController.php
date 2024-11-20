@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanExport;
 use App\Models\Loker;
 use Illuminate\Http\Request;
 use App\Models\Pendaftaran;
@@ -116,7 +117,8 @@ class HomeController extends Controller
 
     public function download_pelamar($id)
     {
-        return Excel::download(new PendaftaranExport($id), date('Y-m-d_H-i-s').'_pendaftaran_'.$id.'.xlsx');
+        $nama_loker = DB::table('loker')->where('id_loker', $id)->first()->nama_loker;
+        return Excel::download(new PendaftaranExport($id), date('Y-m-d_H-i-s').'_'.$nama_loker.'_'.$id.'.xlsx');
     }
 
 
@@ -230,5 +232,10 @@ class HomeController extends Controller
         $pendaftaran = Pendaftaran::findOrFail($id);
         $pendaftaran->delete();
         return redirect()->back()->with('success', 'data pelamar berhasil di hapus');
+    }
+
+    public function download_laporan(){
+        $nama_file = 'Seluruh Data Pelamar_' . date('Y-m-d') . '.xlsx';
+        return Excel::download(new LaporanExport, $nama_file);
     }
 }

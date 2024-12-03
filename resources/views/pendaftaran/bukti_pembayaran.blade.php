@@ -1,27 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BKK SMK Muhammadiyah Kandanghaur</title>
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free-6.5.2-web/css/all.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
+</head>
+<body class="hold-transition layout-top-nav layout-navbar-fixed" style="font-family:'Times New Roman', Times, serif">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                    <img src="{{ asset('assets/dist/img/logobkk.png') }}" alt="dosq" class="brand-image">
+                </a>
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>BKK SMK Muhammadiyah Kandanghaur</title>
-        <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
-        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free-6.5.2-web/css/all.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
-    </head>
-        <body class="hold-transition layout-top-nav layout-navbar-fixed" style="font-family:'Times New Roman', Times, serif">
-        <div class="wrapper">
-            <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
-                <div class="container">
-                    <a href="/" class="navbar-brand">
-                        <img src="{{ asset('assets/dist/img/logobkk.png') }}" alt="dosq" class="brand-image">
-                    </a>
-
-                </div>
-            </nav>
+            </div>
+        </nav>
         <div class="content-wrapper">
             <div class="content-header">
             </div>
@@ -36,14 +35,21 @@
                                     </h3>
                                     <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
                                     <hr>
-                                    <p class="text-center"><b>Code Registrasi: {{ $pendaftaran -> code_pendaftaran }}</b></p>
+                                        <p class="text-center">
+                                            <b>Code Registrasi: 
+                                                <span id="code_pendaftaran">{{ $pendaftaran->code_pendaftaran }}</span>
+                                            </b>
+                                            <button onclick="copyToClipboard()" class="btn btn-sm btn-secondary ml-2" title="Copy to Clipboard">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </p>
 
                                     <p class="mt-3 mb-5 text-center">dokument ini menyatakan bahwa :</p>
                                     <table class="table">
                                         <tr>
                                             <td><b>Nama</b></td>
                                             <td><b>:</b></td>
-                                            <td><b>{{ $pendaftaran -> nama }}</b</td>
+                                            <td><b>{{ $pendaftaran -> nama }}</b></td>
                                         </tr>
                                         <tr>
                                             <td><b>No Whatsapp</b></td>
@@ -93,17 +99,38 @@
                 </div>
             </div>
         </div>
-        </div>
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 2.1.0
-            </div>
-            <strong
-            >Copyright &copy; 2024-2025
-            <a href="https://bkk.smkmuhkandanghaur.sch.id">Nikko Adrian</a>.</strong
-            >
-            All rights reserved.
-        </footer>
     </div>
-    </body>
-    </html>
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 2.1.0
+        </div>
+        <strong
+        >Copyright &copy; 2024-2025
+        <a href="https://bkk.smkmuhkandanghaur.sch.id">Nikko Adrian</a>.</strong
+        >
+        All rights reserved.
+    </footer>
+
+<script>
+    function copyToClipboard() {
+        const codeText = document.getElementById('code_pendaftaran').innerText;
+
+        // Membuat elemen textarea secara dinamis
+        const textarea = document.createElement('textarea');
+        textarea.value = codeText;
+
+        // Menambahkan textarea ke body (tidak terlihat)
+        document.body.appendChild(textarea);
+
+        // Memilih dan menyalin teks
+        textarea.select();
+        document.execCommand('copy');
+
+        // Menghapus elemen textarea
+        document.body.removeChild(textarea);
+
+        alert('Code Registrasi berhasil disalin ke clipboard!');
+    }
+</script>
+</body>
+</html>

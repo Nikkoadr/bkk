@@ -49,6 +49,7 @@
                         <select id="filter_bayar" class="form-control">
                             <option value="">-- Semua Status --</option>
                             <option value="sudah">Sudah Bayar</option>
+                            <option value="mengunggu">Menunggu</option>
                             <option value="belum">Belum Bayar</option>
                         </select>
                     </div>

@@ -10,6 +10,7 @@ use App\Exports\PendaftaranExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -30,18 +31,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $lokerData = Loker::select('loker.nama_loker',
-        DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "belum" THEN 1 ELSE 0 END) as belum_bayar'),
-        DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "menunggu" THEN 1 ELSE 0 END) as menunggu'),
-        DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "sudah" THEN 1 ELSE 0 END) as sudah_bayar'))
-        ->leftJoin('pendaftaran', 'loker.id_loker', '=', 'pendaftaran.id_loker')
-        ->where('loker.status_loker', 'aktif')
-        ->groupBy('loker.nama_loker')
-        ->get();
-        return view('admin.home',compact('lokerData'));
+        $lokerData = Loker::select(
+            'loker.nama_loker',
+            DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "belum" THEN 1 ELSE 0 END) as belum_bayar'),
+            DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "menunggu" THEN 1 ELSE 0 END) as menunggu'),
+            DB::raw('SUM(CASE WHEN pendaftaran.status_bayar = "sudah" THEN 1 ELSE 0 END) as sudah_bayar')
+        )
+            ->leftJoin('pendaftaran', 'loker.id_loker', '=', 'pendaftaran.id_loker')
+            ->where('loker.status_loker', 'aktif')
+            ->groupBy('loker.nama_loker')
+            ->get();
+        return view('admin.home', compact('lokerData'));
     }
 
-    public function data_loker() {
+    public function data_loker()
+    {
         $data_loker = Loker::all();
         return view('admin.data_loker', compact('data_loker'));
     }
@@ -62,7 +66,8 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Loker has been added successfully');
     }
 
-    public function edit_loker($id){
+    public function edit_loker($id)
+    {
         $data = Loker::find($id);
         return view('admin.edit_loker', compact('data'));
     }
@@ -88,11 +93,11 @@ class HomeController extends Controller
 
         $loker = Loker::findOrFail($id);
         $loker->update($request->only([
-            'nama_loker', 
-            'posisi', 
-            'deskripsi', 
-            'administrasi', 
-            'status_loker', 
+            'nama_loker',
+            'posisi',
+            'deskripsi',
+            'administrasi',
+            'status_loker',
             'grup_wa',
             'form_npwp',
             'form_npsn',
@@ -118,7 +123,7 @@ class HomeController extends Controller
     public function download_pelamar($id)
     {
         $nama_loker = DB::table('loker')->where('id_loker', $id)->first()->nama_loker;
-        return Excel::download(new PendaftaranExport($id), date('Y-m-d_H-i-s').'_'.$nama_loker.'_'.$id.'.xlsx');
+        return Excel::download(new PendaftaranExport($id), date('Y-m-d_H-i-s') . '_' . $nama_loker . '_' . $id . '.xlsx');
     }
 
 
@@ -129,54 +134,69 @@ class HomeController extends Controller
     }
 
     public function get_data_pelamar(Request $request)
-{
-    $dataPelamar = Pendaftaran::query();
+    {
+        $dataPelamar = Pendaftaran::with('loker') // pastikan ada relasi 'loker' di model Pendaftaran
+            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+            ->select('pendaftaran.*', 'loker.nama_loker');
 
-    // Handle search functionality
-    if ($request->has('search') && !empty($request->search['value'])) {
-        $keyword = $request->search['value'];
-        $dataPelamar->where(function ($query) use ($keyword) {
-            $query->where('nama', 'like', "%{$keyword}%")
-                ->orWhere('code_pendaftaran', 'like', "%{$keyword}%")
-                ->orWhere('nomor_wa', 'like', "%{$keyword}%")
-                ->orWhere('status_bayar', 'like', "%{$keyword}%")
-                ->orWhere('bukti_transfer', 'like', "%{$keyword}%");
-        });
-    }
-
-    // Handle ordering functionality
-    if ($request->has('order')) {
-        foreach ($request->order as $order) {
-            $orderColumn = $order['column'];
-            $orderDir = $order['dir'];
-            $columns = $request->columns;
-
-            $orderColumnName = $columns[$orderColumn]['name'];
-            $dataPelamar->orderBy($orderColumnName, $orderDir);
+        // Filter berdasarkan dropdown
+        if ($request->filled('filter_loker')) {
+            $dataPelamar->where('loker.nama_loker', $request->filter_loker);
         }
-    } else {
-        $dataPelamar->orderBy('nama', 'asc')->orderBy('status_bayar', 'asc');
-    }
 
-return DataTables::of($dataPelamar)
-    ->editColumn('bukti_transfer', function ($data) {
-        return $data->bukti_transfer
-            ? '<a href="' . asset('/storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">
+        if ($request->filled('filter_bayar')) {
+            $dataPelamar->where('pendaftaran.status_bayar', $request->filter_bayar);
+        }
+
+        // Handle search global dari kolom pencarian
+        if ($request->has('search') && !empty($request->search['value'])) {
+            $keyword = $request->search['value'];
+            $dataPelamar->where(function ($query) use ($keyword) {
+                $query->where('pendaftaran.nama', 'like', "%{$keyword}%")
+                    ->orWhere('pendaftaran.code_pendaftaran', 'like', "%{$keyword}%")
+                    ->orWhere('pendaftaran.nomor_wa', 'like', "%{$keyword}%")
+                    ->orWhere('pendaftaran.status_bayar', 'like', "%{$keyword}%")
+                    ->orWhere('pendaftaran.bukti_transfer', 'like', "%{$keyword}%")
+                    ->orWhere('loker.nama_loker', 'like', "%{$keyword}%");
+            });
+        }
+
+        // Order handling
+        if ($request->has('order')) {
+            foreach ($request->order as $order) {
+                $orderColumn = $order['column'];
+                $orderDir = $order['dir'];
+                $columns = $request->columns;
+                $orderColumnName = $columns[$orderColumn]['name'];
+                if (!empty($orderColumnName)) {
+                    $dataPelamar->orderBy($orderColumnName, $orderDir);
+                }
+            }
+        } else {
+            $dataPelamar->orderBy('pendaftaran.nama', 'asc')->orderBy('pendaftaran.status_bayar', 'asc');
+        }
+
+        return DataTables::of($dataPelamar)
+            ->editColumn('bukti_transfer', function ($data) {
+                return $data->bukti_transfer
+                    ? '<a href="' . asset('/storage/bukti_transfer/' . $data->bukti_transfer) . '" target="_blank">
                     <img width="50" height="50" src="' . asset('/storage/bukti_transfer/' . $data->bukti_transfer) . '" alt="Bukti Transfer">
             </a>'
-            : 'N/A';
-    })
-    ->rawColumns(['action', 'bukti_transfer'])
-    ->make(true);
+                    : 'N/A';
+            })
+            ->rawColumns(['action', 'bukti_transfer'])
+            ->make(true);
+    }
 
-}
 
-    public function edit_pelamar($id){
+    public function edit_pelamar($id)
+    {
         $data = Pendaftaran::find($id);
         return view('admin.edit_pelamar', compact('data'));
     }
 
-    public function update_pelamar(Request $request, $id) {
+    public function update_pelamar(Request $request, $id)
+    {
         $validatedData = $request->validate([
             'code_pendaftaran' => 'required|string|max:255',
             'status_bayar' => 'required|in:belum,menunggu,sudah',
@@ -231,25 +251,42 @@ return DataTables::of($dataPelamar)
         return redirect('status_pelamar')->with('success', 'Data pelamar berhasil diupdate');
     }
 
-    public function hapus_pelamar($id) {
+    public function hapus_pelamar($id)
+    {
         $pendaftaran = Pendaftaran::findOrFail($id);
+
+        // Gunakan disk 'local' (menunjuk ke storage/app/public/bukti_transfer)
+        $disk = env('STORAGE_DISK', 'local');
+
+        if ($pendaftaran->bukti_transfer) {
+            $filePath = $pendaftaran->bukti_transfer; // Tidak perlu folder 'bukti_transfer' lagi
+
+            if (Storage::disk($disk)->exists($filePath)) {
+                Storage::disk($disk)->delete($filePath);
+            }
+        }
+
         $pendaftaran->delete();
-        return redirect()->back()->with('success', 'data pelamar berhasil di hapus');
+
+        return redirect()->back()->with('success', 'Data pelamar berhasil dihapus');
     }
 
-    public function download_laporan(){
+
+
+    public function download_laporan()
+    {
         $nama_file = 'Seluruh Data Pelamar_' . date('Y-m-d') . '.xlsx';
         return Excel::download(new LaporanExport, $nama_file);
     }
 
     public function update_status_pembayaran($id)
-{
-    $pelamar = Pendaftaran::find($id);
-    if ($pelamar) {
-        $pelamar->status_bayar = 'sudah';
-        $pelamar->save();
-        return response()->json(['success' => true, 'message' => 'Status pembayaran berhasil diperbarui']);
+    {
+        $pelamar = Pendaftaran::find($id);
+        if ($pelamar) {
+            $pelamar->status_bayar = 'sudah';
+            $pelamar->save();
+            return response()->json(['success' => true, 'message' => 'Status pembayaran berhasil diperbarui']);
+        }
+        return response()->json(['success' => false, 'message' => 'Data tidak ditemukan']);
     }
-    return response()->json(['success' => false, 'message' => 'Data tidak ditemukan']);
-}
 }

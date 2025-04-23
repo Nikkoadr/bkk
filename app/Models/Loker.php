@@ -10,4 +10,9 @@ class Loker extends Model
     protected $table = 'loker';
     protected $primaryKey = 'id_loker';
     protected $guarded = [];
+
+    public function pendaftaran()
+    {
+        return $this->hasMany(Pendaftaran::class, 'id_loker', 'id_loker');
+    }
 }

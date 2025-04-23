@@ -17,22 +17,17 @@ class PendaftaranController extends Controller
 
 public function bayar(Request $request)
 {
-    // Check if id_loker and nik are already registered
     $cek_pendaftar = Pendaftaran::where('id_loker', $request->id_loker)
                                 ->where('nomor_nik', $request->nomor_nik)
                                 ->first();
     
     if ($cek_pendaftar) {
-        // Check the payment status
         if ($cek_pendaftar->status_bayar == 'belum') {
-            // Proceed with the existing pendaftaran if not paid yet
             $pendaftaran = $cek_pendaftar;
         } else {
-            // Redirect with an error if already registered and paid
             return redirect('/')->with('error', 'NIK Anda Sudah terdaftar Pada PT yang anda coba daftar');
         }
     } else {
-        // Create a new pendaftaran if not already registered
         $pendaftaran = Pendaftaran::where('code_pendaftaran', $request->code_pendaftaran)->first();
         if (!$pendaftaran) {
             $request->merge(['status_bayar' => 'belum']);
@@ -40,14 +35,12 @@ public function bayar(Request $request)
         }
     }
 
-    // Get registration details with join to loker table
     $pendaftaran = DB::table('pendaftaran')
         ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
         ->select('pendaftaran.*', 'loker.*', 'loker.nama_loker as nama_loker')
         ->where('pendaftaran.id', $pendaftaran->id)
         ->first();
 
-    // Get payment details
     $bayar = DB::table('loker')
         ->where('id_loker', $pendaftaran->id_loker)
         ->select('administrasi')
@@ -58,12 +51,10 @@ public function bayar(Request $request)
 
 public function bukti_pembayaran(Request $request)
 {
-    // Validasi input
     $request->validate([
         'bukti_transfer' => 'required|file|mimes:jpg,jpeg,png,pdf,heif|max:5000',
     ]);
 
-    // Ambil data pendaftaran beserta status_bayar dan loker dalam satu query
     $pendaftaran = DB::table('pendaftaran')
         ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
         ->select(

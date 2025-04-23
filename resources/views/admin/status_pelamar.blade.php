@@ -33,6 +33,26 @@
         <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="filter_loker">Filter Nama PT</label>
+                        <select id="filter_loker" class="form-control">
+                            <option value="">-- Semua PT --</option>
+                            @foreach(\App\Models\Loker::all() as $loker)
+                                <option value="{{ $loker->nama_loker }}">{{ $loker->nama_loker }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="filter_bayar">Filter Status Bayar</label>
+                        <select id="filter_bayar" class="form-control">
+                            <option value="">-- Semua Status --</option>
+                            <option value="sudah">Sudah Bayar</option>
+                            <option value="belum">Belum Bayar</option>
+                        </select>
+                    </div>
+                </div>
             <table id="tabel_pelamar" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -107,7 +127,7 @@ var Toast = Swal.mixin({
         return `<span class="${status.class}">${status.text}</span>`;
     }
 
-$('#tabel_pelamar').DataTable({
+let table = $('#tabel_pelamar').DataTable({
     responsive: true,
     lengthChange: true,
     autoWidth: true,
@@ -116,13 +136,17 @@ $('#tabel_pelamar').DataTable({
     searching: true,
     ajax: {
         url: '{{ route("get_data_pelamar") }}',
-        type: 'GET'
+        type: 'GET',
+        data: function (d) {
+            d.filter_loker = $('#filter_loker').val();
+            d.filter_bayar = $('#filter_bayar').val();
+        }
     },
     order: [
         [2, 'asc'],
         [4, 'asc']
     ],
-        lengthMenu: [
+    lengthMenu: [
         [10, 25, 50, -1],
         [10, 25, 50, "Semua"]
     ],
@@ -144,12 +168,11 @@ $('#tabel_pelamar').DataTable({
             render: function(data, type, row) {
                 var nomor = data;
                 var message = `Assalamu'alaikum Wr Wb ka.\n` +
-                                `kami dari BKK SMK Muhammadiyah kandanghaur ingin mengonfirmasi terakit status pendaftaran kaka yang becode *${row.code_pendaftaran}* ` +
-                                `yang masih berstatus belum sukses. mohon kesediaanya membalas chat kami terkait permasalahannya. terimakasih`;
+                    `kami dari BKK SMK Muhammadiyah kandanghaur ingin mengonfirmasi terakit status pendaftaran kaka yang becode *${row.code_pendaftaran}* ` +
+                    `yang masih berstatus belum sukses. mohon kesediaanya membalas chat kami terkait permasalahannya. terimakasih`;
 
                 var encodedMessage = encodeURIComponent(message);
                 var waLink = `https://wa.me/62${nomor}?text=${encodedMessage}`;
-
                 return `<a href="${waLink}" target="_blank">${data}</a>`;
             }
         },
@@ -193,6 +216,12 @@ $('#tabel_pelamar').DataTable({
         }
     ]
 });
+
+// Trigger reload saat filter berubah
+$('#filter_loker, #filter_bayar').on('change', function () {
+    table.ajax.reload();
+});
+
 
 
 function convertNumber(number) {

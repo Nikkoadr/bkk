@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'id_role' => '1',
             'name' => 'Administrator',
             'email' => 'bkk@smkmuhkandanghaur.sch.id',
-            'password' => Hash::make('P4ssw0rd'),
+            'password' => Hash::make('Secret123'),
         ]);
 
         Loker::create([

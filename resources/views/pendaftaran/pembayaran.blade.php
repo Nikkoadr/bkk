@@ -82,15 +82,13 @@
                                         </tr>
                                     </table>
                                     <hr>
-                                    <div class="col-12 m-3">
+                                    <div class="col-12 m-1">
                                         <p class="lead">Metode Pembayaran :</p>
                                         <table>
                                             <tr>
-                                                <td><img style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="Dana"> 
-                                                <img  style="width: 50px; height: 50px;" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo_purple.svg" alt="OVO"> <span>: 08112390028</span>
-                                                {{-- </td>
-                                                <td><img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span></td>
-                                            </tr> --}}
+                                                <td><img style="width: 90px; height: 90px;" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/SeaBank.svg" alt="seabank"> <span>: <b>901202801345</b></span></td>
+                                                {{-- <td><img style="width: 70px; height: 50px;" src="{{ asset('assets/dist/img/bri.png') }}" alt="Bank BRI"> <span>: 36472789462374274</span></td> --}}
+                                            </tr>
                                         </table>
                                     </div>
                                     @if($pendaftaran -> status_bayar  == 'sudah')

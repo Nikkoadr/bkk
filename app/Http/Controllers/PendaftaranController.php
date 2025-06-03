@@ -15,110 +15,110 @@ class PendaftaranController extends Controller
         return view('pendaftaran.form_pendaftaran', compact('data'));
     }
 
-public function bayar(Request $request)
-{
-    $cek_pendaftar = Pendaftaran::where('id_loker', $request->id_loker)
-                                ->where('nomor_nik', $request->nomor_nik)
-                                ->first();
-    
-    if ($cek_pendaftar) {
-        if ($cek_pendaftar->status_bayar == 'belum') {
-            $pendaftaran = $cek_pendaftar;
-        } else {
-            return redirect('/')->with('error', 'NIK Anda Sudah terdaftar Pada PT yang anda coba daftar');
+    public function bayar(Request $request)
+        {
+            $cek_pendaftar = Pendaftaran::where('id_loker', $request->id_loker)
+                                        ->where('nomor_nik', $request->nomor_nik)
+                                        ->first();
+            
+            if ($cek_pendaftar) {
+                if ($cek_pendaftar->status_bayar == 'belum') {
+                    $pendaftaran = $cek_pendaftar;
+                } else {
+                    return redirect('/')->with('error', 'NIK Anda Sudah terdaftar Pada PT yang anda coba daftar');
+                }
+            } else {
+                $pendaftaran = Pendaftaran::where('code_pendaftaran', $request->code_pendaftaran)->first();
+                if (!$pendaftaran) {
+                    $request->merge(['status_bayar' => 'belum']);
+                    $pendaftaran = Pendaftaran::create($request->all());
+                }
+            }
+
+            $pendaftaran = DB::table('pendaftaran')
+                ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+                ->select('pendaftaran.*', 'loker.*', 'loker.nama_loker as nama_loker')
+                ->where('pendaftaran.id', $pendaftaran->id)
+                ->first();
+
+            $bayar = DB::table('loker')
+                ->where('id_loker', $pendaftaran->id_loker)
+                ->select('administrasi')
+                ->first();
+
+            return view('pendaftaran.pembayaran', compact('pendaftaran', 'bayar'));
         }
-    } else {
-        $pendaftaran = Pendaftaran::where('code_pendaftaran', $request->code_pendaftaran)->first();
-        if (!$pendaftaran) {
-            $request->merge(['status_bayar' => 'belum']);
-            $pendaftaran = Pendaftaran::create($request->all());
-        }
-    }
 
-    $pendaftaran = DB::table('pendaftaran')
-        ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
-        ->select('pendaftaran.*', 'loker.*', 'loker.nama_loker as nama_loker')
-        ->where('pendaftaran.id', $pendaftaran->id)
-        ->first();
+    public function bukti_pembayaran(Request $request)
+    {
+        $request->validate([
+            'bukti_transfer' => 'required|file|mimes:jpg,jpeg,png,pdf,heif|max:5000',
+        ]);
 
-    $bayar = DB::table('loker')
-        ->where('id_loker', $pendaftaran->id_loker)
-        ->select('administrasi')
-        ->first();
-
-    return view('pendaftaran.pembayaran', compact('pendaftaran', 'bayar'));
-}
-
-public function bukti_pembayaran(Request $request)
-{
-    $request->validate([
-        'bukti_transfer' => 'required|file|mimes:jpg,jpeg,png,pdf,heif|max:5000',
-    ]);
-
-    $pendaftaran = DB::table('pendaftaran')
-        ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
-        ->select(
-            'pendaftaran.*', 
-            'pendaftaran.created_at as pendaftaran_created_at',
-            'loker.*', 
-            'loker.created_at as loker_created_at'
-        )
-        ->where('pendaftaran.id', $request->id)
-        ->first();
-
-    // Jika data pendaftaran tidak ditemukan
-    if (!$pendaftaran) {
-        return redirect()->back()->with('error', 'maaf file harus gambar  dan tidak lebih dari 5Mb');
-    }
-
-    // Simpan file bukti transfer
-    $nama_file = 'bukti_transfer_'.$request->id.'.'.$request->bukti_transfer->getClientOriginalExtension();
-    Storage::disk(env('STORAGE_DISK'))->put($nama_file, file_get_contents($request->bukti_transfer));
-
-    // Siapkan data untuk diupdate
-    $updateData = ['bukti_transfer' => $nama_file];
-    if ($pendaftaran->status_bayar === 'belum') {
-        $updateData['status_bayar'] = 'menunggu';
-    }
-
-    // Update data pendaftaran
-    DB::table('pendaftaran')
-        ->where('id', $request->id)
-        ->update($updateData);
-
-    // Kembalikan view dengan data pendaftaran
-    return view('pendaftaran.bukti_pembayaran', compact('pendaftaran'));
-}
-    
-public function cari(Request $request) {
-    $pendaftaran = DB::table('pendaftaran')
-        ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
-        ->select(
-            'pendaftaran.*', 
-            'pendaftaran.created_at as pendaftaran_created_at',
-            'loker.*', 
-            'loker.created_at as loker_created_at'
-        )
-        ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
-        ->first();
-        
-    if (!$pendaftaran) {
-        return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
-    }
-
-    // Check if the status is 'belum'
-    if ($pendaftaran->status_bayar == 'belum') {
-        // Get payment details
-        $bayar = DB::table('loker')
-            ->where('id_loker', $pendaftaran->id_loker)
-            ->select('administrasi')
+        $pendaftaran = DB::table('pendaftaran')
+            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+            ->select(
+                'pendaftaran.*', 
+                'pendaftaran.created_at as pendaftaran_created_at',
+                'loker.*', 
+                'loker.created_at as loker_created_at'
+            )
+            ->where('pendaftaran.id', $request->id)
             ->first();
-        
-        return view('pendaftaran.pembayaran', compact('pendaftaran', 'bayar'));
-    }
 
-    return view('pendaftaran.cari_pendaftaran', compact('pendaftaran'));
-}
+        // Jika data pendaftaran tidak ditemukan
+        if (!$pendaftaran) {
+            return redirect()->back()->with('error', 'maaf file harus gambar  dan tidak lebih dari 5Mb');
+        }
+
+        // Simpan file bukti transfer
+        $nama_file = 'bukti_transfer_'.$request->id.'.'.$request->bukti_transfer->getClientOriginalExtension();
+        Storage::disk(env('STORAGE_DISK'))->put($nama_file, file_get_contents($request->bukti_transfer));
+
+        // Siapkan data untuk diupdate
+        $updateData = ['bukti_transfer' => $nama_file];
+        if ($pendaftaran->status_bayar === 'belum') {
+            $updateData['status_bayar'] = 'menunggu';
+        }
+
+        // Update data pendaftaran
+        DB::table('pendaftaran')
+            ->where('id', $request->id)
+            ->update($updateData);
+
+        // Kembalikan view dengan data pendaftaran
+        return view('pendaftaran.bukti_pembayaran', compact('pendaftaran'));
+    }
+    
+    public function cari(Request $request) {
+        $pendaftaran = DB::table('pendaftaran')
+            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+            ->select(
+                'pendaftaran.*', 
+                'pendaftaran.created_at as pendaftaran_created_at',
+                'loker.*', 
+                'loker.created_at as loker_created_at'
+            )
+            ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
+            ->first();
+            
+        if (!$pendaftaran) {
+            return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
+        }
+
+        // Check if the status is 'belum'
+        if ($pendaftaran->status_bayar == 'belum') {
+            // Get payment details
+            $bayar = DB::table('loker')
+                ->where('id_loker', $pendaftaran->id_loker)
+                ->select('administrasi')
+                ->first();
+            
+            return view('pendaftaran.pembayaran', compact('pendaftaran', 'bayar'));
+        }
+
+        return view('pendaftaran.cari_pendaftaran', compact('pendaftaran'));
+    }
 
     public function scan($code_pendaftaran) {
     $pendaftaran = DB::table('pendaftaran')

@@ -56,7 +56,7 @@
                                         <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
                                         <div class="card-body pt-0">
                                             <div class="form-group">
-                                                <label for="code_pendaftaran">Code Pendaftaran</label>
+                                                <label for="code_pendaftaran">Code Pendaftaran </label>
                                                 <input type="text" class="form-control @error('code_pendaftaran') is-invalid @enderror" id="code_pendaftaran" name="code_pendaftaran" value="" readonly required oninput="this.value = this.value.toUpperCase()">
                                                 @error('code_pendaftaran')
                                                     <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">Email</label>
+                                                <label for="email">Email<span style="color: red">*</span></label>
                                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="example@gmail.com" required>
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="nomor_wa">Nomor Whatsapp</label>
+                                                <label for="nomor_wa">Nomor Whatsapp<span style="color: red">*</span></label>
                                                 <input type="number" class="form-control @error('nomor_wa') is-invalid @enderror" id="nomor_wa" name="nomor_wa" placeholder="081222222222" required>
                                                 @error('nomor_wa')
                                                     <span class="invalid-feedback" role="alert">
@@ -83,7 +83,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="nama">Nama Lengkap</label>
+                                                <label for="nama">Nama Lengkap<span style="color: red">*</span></label>
                                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Nama" required oninput="this.value = this.value.toUpperCase()">
                                                 @error('nama')
                                                     <span class="invalid-feedback" role="alert">
@@ -92,7 +92,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="nomor_nik">Nomor NIK</label>
+                                                <label for="nomor_nik">Nomor NIK<span style="color: red">*</span></label>
                                                 <input type="number" class="form-control @error('nomor_nik') is-invalid @enderror" id="nomor_nik" name="nomor_nik" placeholder="Nomor NIK" oninput="this.value = this.value.toUpperCase()">
                                                 @error('nomor_nik')
                                                     <span class="invalid-feedback" role="alert">
@@ -142,8 +142,8 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="tanggal_lahir">Tanggal Lahir</label>
-                                                <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir">
+                                                <label for="tanggal_lahir">Tanggal Lahir<span style="color: red">*</span></label>
+                                                <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir" required>
                                                 @error('tanggal_lahir')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="jenis_kelamin">Jenis Kelamin</label>
+                                                <label for="jenis_kelamin">Jenis Kelamin<span style="color: red">*</span></label>
                                                 <select class="form-control @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin" name="jenis_kelamin" required>
                                                     <option value="L">Laki-Laki</option>
                                                     <option value="P">Perempuan</option>
@@ -163,7 +163,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="status_perkawinan">Status Perkawinan</label>
+                                                <label for="status_perkawinan">Status Perkawinan<span style="color: red">*</span></label>
                                                 <select class="form-control @error('status_perkawinan') is-invalid @enderror" id="status_perkawinan" name="status_perkawinan" required>
                                                     <option value="BELUM MENIKAH">BELUM MENIKAH</option>
                                                     <option value="MENIKAH">MENIKAH</option>
@@ -175,7 +175,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="jenis_pendidikan_terakhir">Jenis Pendidikan Terakhir</label>
+                                                <label for="jenis_pendidikan_terakhir">Jenis Pendidikan Terakhir<span style="color: red">*</span></label>
                                                 <select class="form-control @error('jenis_pendidikan_terakhir') is-invalid @enderror" id="jenis_pendidikan_terakhir" name="jenis_pendidikan_terakhir" required>
                                                     <option value="MA">MA</option>
                                                     <option value="MAK">MAK</option>

@@ -133,8 +133,8 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="tempat_lahir">Tempat Lahir</label>
-                                                <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" oninput="this.value = this.value.toUpperCase()">
+                                                <label for="tempat_lahir">Tempat Lahir<span style="color: red">*</span></label>
+                                                <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" oninput="this.value = this.value.toUpperCase()" required>
                                                 @error('tempat_lahir')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

@@ -84,7 +84,7 @@
                                                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/600px-Instagram_logo_2022.svg.png" width="20" height="20" alt="Instagram">
                                                                 <a target="_blank" href="https://www.instagram.com/bkk.smkmuhkandanghaur/">Instagram BKK</a><br>
                                                                 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg" width="20" height="20" alt="Facebook">
-                                                                <a target="_blank" href="https://www.facebook.com/profile.php?id=61552243586350&locale=id_ID">Fanspage BKK</a><br>
+                                                                <a target="_blank" href="https://whatsapp.com/channel/0029VaxngoMA89MrPXjbFq1n">Saluran WhatsApp BKK</a><br>
                                                             </div>
                                                             <div class="col-6">
                                                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1024px-Telegram_2019_Logo.svg.png" width="20" height="20" alt="Telegram">

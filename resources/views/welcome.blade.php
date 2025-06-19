@@ -83,7 +83,7 @@
                                                             <div class="col-6">
                                                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/600px-Instagram_logo_2022.svg.png" width="20" height="20" alt="Instagram">
                                                                 <a target="_blank" href="https://www.instagram.com/bkk.smkmuhkandanghaur/">Instagram BKK</a><br>
-                                                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg" width="20" height="20" alt="Facebook">
+                                                                <img src="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN" width="20" height="20" alt="Facebook">
                                                                 <a target="_blank" href="https://whatsapp.com/channel/0029VaxngoMA89MrPXjbFq1n">Saluran WhatsApp BKK</a><br>
                                                             </div>
                                                             <div class="col-6">

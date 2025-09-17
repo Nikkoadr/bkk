@@ -48,6 +48,7 @@
                         <th>Status Loker</th>
                         <th>grup WA</th>
                         <th data-orderable="false">Menu</th>
+                        <th data-orderable="false">Hapus pelamar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,8 +75,10 @@
                                 </form>
                                 <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a class="btn btn-danger konfirmasi" href="/hapus_loker/{{ $data->id_loker }}"><i class="fa-solid fa-trash-can"></i></a>
-                                
                             </div>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger konfirmasi_hapus_pelamar" href="/hapus_seluruh_pelamar/{{ $data->id_loker }}"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -159,6 +162,26 @@ document.querySelectorAll('.konfirmasi').forEach(function(element) {
         const url = this.getAttribute('href');
         Swal.fire({
             text: "Anda yakin ingin menghapus data ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    });
+});
+</script>
+<script>
+document.querySelectorAll('.konfirmasi_hapus_pelamar').forEach(function(element) {
+    element.addEventListener('click', function (event) {
+        event.preventDefault();
+        const url = this.getAttribute('href');
+        Swal.fire({
+            text: "Anda yakin ingin menghapus seluruh data pelamar ini?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

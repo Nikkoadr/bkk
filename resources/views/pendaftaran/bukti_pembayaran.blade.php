@@ -35,31 +35,29 @@
                                     </h3>
                                     <h5 class="text-center">BKK SMK Muhammadiyah Kandanghaur</h5>
                                     <hr>
-                                        <p class="text-center">
-                                            <b>Code Registrasi: 
-                                                <span id="code_pendaftaran">{{ $pendaftaran->code_pendaftaran }}</span>
-                                            </b>
-                                            <button onclick="copyToClipboard()" class="btn btn-sm btn-secondary ml-2" title="Copy to Clipboard">
-                                                <i class="fas fa-copy"></i>
-                                            </button>
-                                        </p>
-
                                     <p class="mt-3 mb-5 text-center">dokument ini menyatakan bahwa :</p>
                                     <table class="table">
                                         <tr>
+                                            <td><b>Code Registrasi</b></td>
+                                            <td><b>:</b></td>
+                                            <td><b>{{ $pendaftaran->code_pendaftaran }}</b><button onclick="copyToClipboard()" class="btn btn-sm btn-secondary ml-2" title="Copy to Clipboard">
+                                                <i class="fas fa-copy"></i>
+                                            </button></td>
+                                        </tr>
+                                        <tr>
                                             <td><b>Nama</b></td>
                                             <td><b>:</b></td>
-                                            <td><b>{{ $pendaftaran -> nama }}</b></td>
+                                            <td><b>{{ $pendaftaran->nama }}</b></td>
                                         </tr>
                                         <tr>
                                             <td><b>No Whatsapp</b></td>
                                             <td><b>:</b></td>
-                                            <td><b>{{ $pendaftaran -> nomor_wa }}</b></td>
+                                            <td><b>{{ $pendaftaran->nomor_wa }}</b></td>
                                         </tr>
                                         <tr>
                                             <td><b>Nama Sekolah</b></td>
                                             <td><b>:</b></td>
-                                            <td><b>{{ $pendaftaran -> nama_sekolah }}</b></td>
+                                            <td><b>{{ $pendaftaran->nama_sekolah }}</b></td>
                                         </tr>
                                         <tr>
                                             <td><b>Status Pembayaran</b></td>
@@ -73,27 +71,31 @@
                                         </tr>
                                     </table>
                                     <p class="mt-4 mb-3 text-center">Telah mendaftar sebagai calon pelamar pada :</p>
-                                    <p class="text-center"><b>Perusahaan: {{ $pendaftaran-> nama_loker }}</b></p>
-                                    <p class="text-center"><b>Pada tanggal : {{ Carbon\Carbon::parse($pendaftaran->pendaftaran_created_at)->setTimezone('Asia/Jakarta')->translatedFormat('d F Y, H:i') }}</b></p>
-                                    <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
-                                    @php
-                                    $grupWaLink = $pendaftaran->grup_wa;
-                                    if (!preg_match("~^(?:f|ht)tps?://~i", $grupWaLink)) {
-                                        $grupWaLink = $grupWaLink;
-                                    }
-                                    @endphp
-                                    <p class="text-center"><a class="btn btn-success" href="{{ $grupWaLink }}" target="_blank">Gabung Grup Whatsapp</a></p>
-                                    <form action="print_bukti_transfer" method="post">
-                                        @csrf
-                                        <input type="hidden" name="code_pendaftaran" value="{{ $pendaftaran -> code_pendaftaran }}">
-                                        <div class="text-center m-2">
-                                            <button class="btn btn-primary" formtarget="_blank" type="submit">Cetak</button>
-                                        </div>
-                                    </form>
-                                    <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/scan/'.$pendaftaran->code_pendaftaran) !!}</p>
-                                    
+                                    <p class="text-center"><b>{{ $pendaftaran-> nama_loker }}</b></p>
+                                    <p class="text-center"><b>Tanggal : {{ Carbon\Carbon::parse($pendaftaran->pendaftaran_created_at)->setTimezone('Asia/Jakarta')->translatedFormat('d F Y H:i') }}</b></p>
+                                    <p class="text-center"><b><input type="checkbox" id="agreeTerms" onchange="toggleActionDiv()"> Syarat dan Ketentuan berlaku (centang untuk menyetujuinya)</b></p>
+                                    <p class="text-center">Kesiapan dan kesungguhan mengikuti seleksi, Jika mengundurkan diri pada tahapan seleksi dinyatakan gugur.</p>
+
+
+                                    <!-- Bagian Aksi (disembunyikan dulu) -->
+                                    <div id="actionDiv" style="display: none;">
+                                        @php
+                                        $grupWaLink = $pendaftaran->grup_wa;
+                                        if (!preg_match("~^(?:f|ht)tps?://~i", $grupWaLink)) {
+                                            $grupWaLink = $grupWaLink;
+                                        }
+                                        @endphp
+                                        <p class="text-center"><a class="btn btn-success" href="{{ $grupWaLink }}" target="_blank">Gabung Grup Whatsapp</a></p>
+                                        <form action="print_bukti_transfer" method="post">
+                                            @csrf
+                                            <input type="hidden" name="code_pendaftaran" value="{{ $pendaftaran -> code_pendaftaran }}">
+                                            <div class="text-center m-2">
+                                                <button class="btn btn-primary" formtarget="_blank" type="submit">Cetak</button>
+                                            </div>
+                                        </form>
+                                        <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/scan/'.$pendaftaran->code_pendaftaran) !!}</p>
+                                    </div>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
                         </div>
                     </div>
@@ -131,6 +133,17 @@
         document.body.removeChild(textarea);
 
         alert('Code Registrasi berhasil disalin ke clipboard!');
+    }
+</script>
+<script>
+    function toggleActionDiv() {
+        const checkbox = document.getElementById("agreeTerms");
+        const actionDiv = document.getElementById("actionDiv");
+        if (checkbox.checked) {
+            actionDiv.style.display = "block";
+        } else {
+            actionDiv.style.display = "none";
+        }
     }
 </script>
 </body>

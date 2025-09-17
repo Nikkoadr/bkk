@@ -119,6 +119,11 @@ class HomeController extends Controller
         $loker->delete();
         return redirect()->back()->with('success', 'Loker has been deleted successfully');
     }
+    public function hapus_seluruh_pelamar($id)
+    {
+        Pendaftaran::where('id_loker', $id)->delete();
+        return redirect()->back()->with('success', 'Seluruh pelamar telah dihapus dari loker ini');
+    }
 
     public function download_pelamar($id)
     {

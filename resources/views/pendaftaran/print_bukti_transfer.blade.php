@@ -77,6 +77,7 @@
         <p class="text-center"><b>Perusahaan: {{ $pendaftaran->nama_loker }}</b></p>
         <p class="text-center"><b>Pada tanggal : {{ Carbon\Carbon::parse($pendaftaran->pendaftaran_created_at)->setTimezone('Asia/Jakarta')->translatedFormat('d F Y, H:i') }}</b></p>
         <p class="text-center">Simpan bukti pendaftaran ini. Sebagai syarat mengikuti proses recruitment perusahaan.</p>
+        <p class="text-center"><b>Catatan: </b>Jika mengundurkan diri pada tahapan seleksi dinyatakan gugur.</p>
         <p class="text-center m-3">{!! QrCode::size(100)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/scan/'.$pendaftaran->code_pendaftaran) !!}</p>
         <p class="text-center"><b>Bergerak Maju Menjadi Yang Terdepan</b></p>
     </div>

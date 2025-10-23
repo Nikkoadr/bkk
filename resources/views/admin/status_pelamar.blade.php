@@ -127,7 +127,7 @@ $(document).ready(function() {
         serverSide: true,
         searching: true,
         ajax: {
-            url: '{{ route("get_data_pelamar") }}',
+            url: '/get_data_pelamar',
             type: 'GET',
             data: function (d) {
                 d.filter_loker = $('#filter_loker').val();

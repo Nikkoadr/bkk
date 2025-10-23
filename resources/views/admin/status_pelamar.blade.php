@@ -136,7 +136,7 @@ let table = $('#tabel_pelamar').DataTable({
     serverSide: true,
     searching: true,
     ajax: {
-        url: '{{ route("get_data_pelamar") }}',
+        url: 'https://bkk.smkmuhkandanghaur.sch.id/get_status_pelamar',
         type: 'GET',
         data: function (d) {
             d.filter_loker = $('#filter_loker').val();

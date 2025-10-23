@@ -221,7 +221,7 @@ $(document).ready(function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: '{{ url("update_status_pembayaran") }}/' + id,
+                    url: '/update_status_pembayaran/' + id,
                     type: 'POST',
                     data: { _token: '{{ csrf_token() }}' },
                     success: function(response) {

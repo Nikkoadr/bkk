@@ -52,7 +52,7 @@ class PendaftaranController extends Controller
     public function bukti_pembayaran(Request $request)
     {
         $request->validate([
-            'bukti_transfer' => 'required|file|mimes:jpg,jpeg,png,pdf,heif|max:5000',
+            'bukti_transfer' => 'required|file|mimes:jpg,jpeg,png,pdf,heif|max:10000',
         ]);
 
         $pendaftaran = DB::table('pendaftaran')

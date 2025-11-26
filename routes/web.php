@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobfairController;
 use App\Models\Loker;
 
 Route::get('/', function () {
@@ -46,3 +47,5 @@ Route::put('/update_pelamar/{id}', [HomeController::class, 'update_pelamar']);
 Route::get('/laporan/download', [HomeController::class, 'download_laporan']);
 
 Route::post('/update_status_pembayaran/{id}', [HomeController::class, 'update_status_pembayaran']);
+    
+Route::post('disnaker/jobfair/pendaftaran', [JobfairController::class, 'external_pendaftaran'])->name('external_pendaftaran');

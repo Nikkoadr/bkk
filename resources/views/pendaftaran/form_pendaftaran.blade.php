@@ -51,7 +51,7 @@
                                     <h5 class="card-title m-0 text-bold">Form Pendaftaran</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="/bayar" method="post">
+                                    <form action="{{ route('external_pendaftaran') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
                                         <div class="card-body pt-0">

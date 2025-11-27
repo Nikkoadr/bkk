@@ -413,7 +413,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nama_kordinator">Nama Kordinator</label>
-                                                <input readonly type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" value="ADI SAFRUDIN" name="nama_kordinator" placeholder="Nama Kordinator" oninput="this.value = this.value.toUpperCase()">
+                                                <input readonly type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" value="Job Fair 2025" name="nama_kordinator" oninput="this.value = this.value.toUpperCase()">
                                                 @error('nama_kordinator')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

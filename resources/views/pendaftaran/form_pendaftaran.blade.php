@@ -51,7 +51,7 @@
                                     <h5 class="card-title m-0 text-bold">Form Pendaftaran</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ route('external_pendaftaran') }}" method="post">
+                                    <form action="{{ route('bayar') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
                                         <div class="card-body pt-0">
@@ -413,7 +413,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nama_kordinator">Nama Kordinator</label>
-                                                <input readonly type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" value="Job Fair 2025" name="nama_kordinator" oninput="this.value = this.value.toUpperCase()">
+                                                <input readonly type="text" class="form-control @error('nama_kordinator') is-invalid @enderror" id="nama_kordinator" value="Adi Safrudin" name="nama_kordinator" oninput="this.value = this.value.toUpperCase()">
                                                 @error('nama_kordinator')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

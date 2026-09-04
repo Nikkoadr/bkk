@@ -218,9 +218,9 @@
                                     <i class="fas fa-qrcode text-[#2b8cdf] text-lg"></i> QR Code Tiket
                                 </p>
                                 <div class="qr-wrapper mt-2">
-                                    {!! QrCode::size(120)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/scan/'.$pendaftaran->code_pendaftaran) !!}
+                                    {!! QrCode::size(120)->backgroundColor(255,255,255)->generate($grupWaLink) !!}
                                 </div>
-                                <p class="text-[#4a7fa8] text-xs mt-2">Scan untuk verifikasi kehadiran</p>
+                                <p class="text-[#4a7fa8] text-xs mt-2">Scan untuk bergabung dengan grup WhatsApp</p>
                             </div>
 
                             <!-- Tombol Aksi -->

@@ -137,23 +137,34 @@ class PendaftaranController extends Controller
     return view('pendaftaran.cari_pendaftaran', compact('pendaftaran'));
     }
 
-    public function print_bukti_transfer(Request $request) {
-        
-    $pendaftaran = DB::table('pendaftaran')
-        ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
-        ->select(
-            'pendaftaran.code_pendaftaran', 
-            'pendaftaran.nama', 
-            'pendaftaran.nomor_wa', 
-            'pendaftaran.nama_sekolah',
-            'pendaftaran.status_bayar',
-            'loker.nama_loker', 
-            'pendaftaran.created_at as pendaftaran_created_at'
-        )
-        ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
-        ->first();
-        
-    return view('pendaftaran.print_bukti_transfer', compact('pendaftaran'));
+    public function print_bukti_transfer(Request $request)
+    {
+        // Ambil data pendaftaran beserta data loker
+        $pendaftaran = DB::table('pendaftaran')
+            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
+            ->select(
+                'pendaftaran.code_pendaftaran',
+                'pendaftaran.nama',
+                'pendaftaran.nomor_wa',
+                'pendaftaran.nama_sekolah',
+                'pendaftaran.status_bayar',
+                'pendaftaran.created_at as pendaftaran_created_at',
+                'loker.nama_loker',
+                'loker.grup_wa'  // Ambil link grup WA dari tabel loker
+            )
+            ->where('pendaftaran.code_pendaftaran', $request->code_pendaftaran)
+            ->first();
+
+        // Jika data tidak ditemukan
+        if (!$pendaftaran) {
+            return redirect()->back()->with('error', 'Data pendaftaran tidak ditemukan');
+        }
+
+        // Ambil link grup WhatsApp (dengan fallback jika kosong)
+        $grupWaLink = $pendaftaran->grup_wa ?? 'https://chat.whatsapp.com/';
+
+        // Kirim data ke view
+        return view('pendaftaran.print_bukti_transfer', compact('pendaftaran', 'grupWaLink'));
     }
 
 }

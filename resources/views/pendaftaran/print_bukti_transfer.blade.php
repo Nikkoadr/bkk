@@ -26,8 +26,8 @@
 
         /* ===== UKURAN SETENGAH A4 (A5 Landscape) ===== */
         .print-container {
-            width: 210mm;  /* A4 width */
-            height: 148mm; /* A5 height (setengah A4) */
+            width: 210mm;
+            height: 148mm;
             background: white;
             padding: 10mm 12mm;
             margin: 0 auto;
@@ -168,12 +168,12 @@
             margin-top: 2px;
         }
 
-        /* ===== QR CODE ===== */
+        /* ===== QR CODE SECTION ===== */
         .qr-section {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin: 6px 0;
             padding: 6px 0;
             border-top: 1px solid #e9f0f8;
@@ -192,15 +192,26 @@
             font-size: 8px;
             color: #4a7fa8;
             margin-top: 2px;
+            text-align: center;
+        }
+        .qr-section .qr-label i {
+            font-size: 8px;
         }
         .qr-section .info-text {
             font-size: 9px;
             color: #1a3f6a;
             line-height: 1.4;
-            max-width: 60%;
+            max-width: 45%;
         }
         .qr-section .info-text strong {
             color: #0a4b8a;
+        }
+
+        /* ===== DIVIDER ===== */
+        .qr-divider {
+            width: 1px;
+            height: 70px;
+            background: #e9f0f8;
         }
 
         /* ===== FOOTER ===== */
@@ -272,12 +283,16 @@
                 max-width: 100%;
                 text-align: center;
             }
+            .qr-divider {
+                width: 80%;
+                height: 1px;
+            }
             .company-box .name {
                 font-size: 12px;
             }
         }
 
-        /* Tombol print (hanya tampil di layar) */
+        /* Tombol print */
         .print-btn {
             position: fixed;
             bottom: 30px;
@@ -313,7 +328,7 @@
 </head>
 <body>
 
-    <!-- ===== TOMBOL PRINT (hanya di layar) ===== -->
+    <!-- ===== TOMBOL PRINT ===== -->
     <button class="print-btn no-print" onclick="window.print()">
         <i class="fas fa-print"></i> Cetak / Print
     </button>
@@ -375,12 +390,30 @@
             </div>
         </div>
 
-        <!-- ===== QR CODE ===== -->
+        <!-- ===== QR CODE SECTION (2 QR CODE) ===== -->
         <div class="qr-section">
+            <!-- QR Code 1: Pendaftaran -->
             <div class="qr-wrapper">
+                <p class="qr-label" style="font-weight:700; color:#0a4b8a; font-size:9px;">
+                    <i class="fas fa-qrcode"></i> Tiket
+                </p>
                 {!! QrCode::size(80)->backgroundColor(255,255,255)->generate('https://bkk.smkmuhkandanghaur.sch.id/scan/'.$pendaftaran->code_pendaftaran) !!}
                 <span class="qr-label">Scan untuk verifikasi</span>
             </div>
+
+            <!-- Divider -->
+            <div class="qr-divider"></div>
+
+            <!-- QR Code 2: Grup WhatsApp -->
+            <div class="qr-wrapper">
+                <p class="qr-label" style="font-weight:700; color:#25D366; font-size:9px;">
+                    <i class="fab fa-whatsapp" style="color:#25D366;"></i> Grup WA
+                </p>
+                {!! QrCode::size(80)->backgroundColor(255,255,255)->generate($grupWaLink) !!}
+                <span class="qr-label">Scan untuk bergabung</span>
+            </div>
+
+            <!-- Info Text -->
             <div class="info-text">
                 <strong>Catatan:</strong> Simpan bukti pendaftaran ini sebagai syarat mengikuti proses recruitment perusahaan. 
                 Jika mengundurkan diri pada tahapan seleksi, dinyatakan <strong>GUGUR</strong>.
@@ -395,12 +428,12 @@
 
     </div>
 
-    <!-- Font Awesome untuk icon (hanya di layar) -->
+    <!-- Font Awesome untuk icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <script>
-        // Auto print jika diperlukan (opsional)
-        // window.print();
+        // Opsional: auto print jika diperlukan
+        // window.onload = function() { window.print(); }
     </script>
 
 </body>

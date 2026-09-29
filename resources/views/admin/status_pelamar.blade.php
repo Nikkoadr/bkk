@@ -33,8 +33,8 @@
                                     <label for="filter_loker">Filter Nama PT</label>
                                     <select id="filter_loker" class="form-control">
                                         <option value="">-- Semua PT --</option>
-                                        @foreach(\App\Models\Loker::all() as $loker)
-                                            <option value="{{ $loker->nama_loker }}">{{ $loker->nama_loker }}</option>
+                                        @foreach(\App\Models\Loker::orderBy('nama_loker')->get() as $loker)
+                                            <option value="{{ $loker->id_loker }}" {{ request('loker_id') == $loker->id_loker ? 'selected' : '' }}>{{ $loker->nama_loker }} — {{ $loker->posisi }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -130,7 +130,7 @@ $(document).ready(function() {
             url: '/get_data_pelamar',
             type: 'GET',
             data: function (d) {
-                d.filter_loker = $('#filter_loker').val();
+                d.filter_loker_id = $('#filter_loker').val();
                 d.filter_bayar = $('#filter_bayar').val();
             }
         },
@@ -254,7 +254,18 @@ function deleteConfirmation(id) {
         cancelButtonText: 'Batal'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '{{ url("hapus_pelamar") }}/' + id;
+            $.ajax({
+                url: '{{ url("hapus_pelamar") }}/' + id,
+                type: 'POST',
+                data: { _token: '{{ csrf_token() }}', _method: 'DELETE' },
+                success: function() {
+                    Swal.fire('Berhasil!', 'Data pelamar berhasil dihapus.', 'success');
+                    $('#tabel_pelamar').DataTable().ajax.reload(null, false);
+                },
+                error: function() {
+                    Swal.fire('Gagal!', 'Terjadi kesalahan saat menghapus data.', 'error');
+                }
+            });
         }
     });
 }

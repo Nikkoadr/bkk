@@ -156,12 +156,6 @@
                                             {!! $data->deskripsi !!}
                                         </div>
                                     </div>
-                                    <div class="form-group pt-2 border-top">
-                                        <label class="text-muted text-uppercase small font-weight-bold">Kode Pendaftaran</label>
-                                        <div style="background: #e6f3ff; border-radius: 8px; padding: 10px 15px; border: 1px solid #b8d4f0;">
-                                            <code id="code_pendaftaran" style="font-size: 1rem; font-weight: 700; color: #0a4b8a; display: block; text-align: center; letter-spacing: 1px; font-family: 'Courier New', monospace;"></code>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +171,6 @@
                                     <form action="{{ route('bayar') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id_loker" value="{{ $data->id_loker }}">
-                                        <input type="hidden" id="code_pendaftaran_input" name="code_pendaftaran" value="">
 
                                         <div class="row">
                                             <!-- Email -->
@@ -194,7 +187,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="nomor_wa">Nomor WhatsApp <span style="color: red;">*</span></label>
-                                                    <input type="number" class="form-control @error('nomor_wa') is-invalid @enderror" id="nomor_wa" name="nomor_wa" placeholder="081222222222" required>
+                                                    <input type="text" inputmode="numeric" pattern="[0-9+]+" class="form-control @error('nomor_wa') is-invalid @enderror" id="nomor_wa" name="nomor_wa" placeholder="081222222222" required>
                                                     @error('nomor_wa')
                                                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                                     @enderror
@@ -214,7 +207,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="nomor_nik">Nomor NIK <span style="color: red;">*</span></label>
-                                                    <input type="number" class="form-control @error('nomor_nik') is-invalid @enderror" id="nomor_nik" name="nomor_nik" placeholder="Nomor NIK" required>
+                                                    <input type="text" inputmode="numeric" pattern="[0-9]+" class="form-control @error('nomor_nik') is-invalid @enderror" id="nomor_nik" name="nomor_nik" placeholder="Nomor NIK" required>
                                                     @error('nomor_nik')
                                                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                                     @enderror
@@ -239,7 +232,6 @@
                                                     <select class="form-control @error('sim') is-invalid @enderror" name="sim" id="sim">
                                                         <option value="">Tidak Ada</option>
                                                         <option value="D">D</option>
-                                                        <option value="C">C</option>
                                                         <option value="C1">C1</option>
                                                         <option value="C2">C2</option>
                                                         <option value="C3">C3</option>
@@ -462,7 +454,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="kode_pos">Kode Pos</label>
-                                                    <input type="text" class="form-control @error('kode_pos') is-invalid @enderror" id="kode_pos" name="kode_pos" placeholder="Kode Pos">
+                                                    <input type="text" maxlength="10" class="form-control @error('kode_pos') is-invalid @enderror" id="kode_pos" name="kode_pos" placeholder="Kode Pos">
                                                     @error('kode_pos')
                                                         <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                                     @enderror
@@ -667,25 +659,5 @@
         </footer>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function generateUniqueCode() {
-                let date = new Date();
-                let loker = {{ $data->id_loker }};
-                let year = date.getFullYear().toString().slice(-2);
-                let month = ('0' + (date.getMonth() + 1)).slice(-2);
-                let day = ('0' + date.getDate()).slice(-2);
-                let hours = ('0' + date.getHours()).slice(-2);
-                let minutes = ('0' + date.getMinutes()).slice(-2);
-                let seconds = ('0' + date.getSeconds()).slice(-2);
-                let randomNumber = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-                return loker + '-' + day + '-' + month + '-' + year + '-' + hours + minutes + seconds + '-' + randomNumber;
-            }
-
-            let code = generateUniqueCode();
-            document.getElementById('code_pendaftaran').textContent = code;
-            document.getElementById('code_pendaftaran_input').value = code;
-        });
-    </script>
 </body>
 </html>

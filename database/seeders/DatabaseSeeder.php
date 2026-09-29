@@ -28,10 +28,11 @@ class DatabaseSeeder extends Seeder
 
         Loker::create([
             'nama_loker' => 'PT.Astra Honda Motor Jakarta',
-            'posisi' => 'Oprator',
-            'deskripsi' => 'lorem ipsum',
-            'administrasi' => '37000',
-            'grup_wa' => 'lorem ipsum',
+            'posisi' => 'Operator',
+            'deskripsi' => 'Lowongan operator produksi.',
+            'administrasi' => 37000,
+            'status_loker' => 'aktif',
+            'grup_wa' => 'https://chat.whatsapp.com/ContohGrupBKK',
         ]);
 
     }

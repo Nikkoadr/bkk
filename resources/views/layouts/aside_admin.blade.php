@@ -22,7 +22,7 @@
                 />
                 </div>
                 <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="{{ route('profile.edit') }}" class="d-block" title="Lihat Profile">{{ Auth::user()->name }}</a>
                 </div>
             </div>
             <!-- Sidebar Menu -->
@@ -57,6 +57,7 @@
                     </p>
                     </a>
                 </li>
+
                 {{-- <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>

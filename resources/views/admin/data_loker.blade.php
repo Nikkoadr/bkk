@@ -59,7 +59,6 @@
                         <td>{{ $data->posisi }}</td>
                         <td>{{ $data->deskripsi }}</td>
                         <td>{{ $data->administrasi }}</td>
-                        
                         <td>@if($data -> status_loker == 'aktif')
                             <span class="badge bg-green">Aktif</span>
                         @else
@@ -68,17 +67,25 @@
                         <td>{{ $data->grup_wa }}</td>
                         <td width="10%" style="text-align: center">
                             <div style="display: inline;">
-                                <form action="/download_pelamar/{{ $data->id_loker }}" method="post">
+                                <form action="/download_pelamar/{{ $data->id_loker }}" method="post" style="display:inline;">
                                 @csrf
                                 @method('put')
                                 <button class="btn btn-primary" type="submit"><i class="fa-solid fa-file-arrow-down"></i></button>
                                 </form>
                                 <a class="btn btn-info" href="/edit_loker/{{ $data->id_loker }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a class="btn btn-danger konfirmasi" href="/hapus_loker/{{ $data->id_loker }}"><i class="fa-solid fa-trash-can"></i></a>
+                                <form action="{{ route('hapus_loker', $data->id_loker) }}" method="post" style="display:inline;" class="form-hapus-loker">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger konfirmasi" type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
                             </div>
                         </td>
                         <td>
-                            <a class="btn btn-danger konfirmasi_hapus_pelamar" href="/hapus_seluruh_pelamar/{{ $data->id_loker }}"><i class="fa-solid fa-trash-can"></i></a>
+                            <form action="{{ route('hapus_seluruh_pelamar', $data->id_loker) }}" method="post" style="display:inline;" class="form-hapus-pelamar">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger konfirmasi_hapus_pelamar" type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -156,10 +163,9 @@ var Toast = Swal.mixin({
 @endif
 </script>
 <script>
-document.querySelectorAll('.konfirmasi').forEach(function(element) {
-    element.addEventListener('click', function (event) {
+document.querySelectorAll('.form-hapus-loker').forEach(function(form) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault();
-        const url = this.getAttribute('href');
         Swal.fire({
             text: "Anda yakin ingin menghapus data ini?",
             icon: 'warning',
@@ -169,17 +175,16 @@ document.querySelectorAll('.konfirmasi').forEach(function(element) {
             confirmButtonText: 'Ya, Hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = url;
+                form.submit();
             }
         });
     });
 });
 </script>
 <script>
-document.querySelectorAll('.konfirmasi_hapus_pelamar').forEach(function(element) {
-    element.addEventListener('click', function (event) {
+document.querySelectorAll('.form-hapus-pelamar').forEach(function(form) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault();
-        const url = this.getAttribute('href');
         Swal.fire({
             text: "Anda yakin ingin menghapus seluruh data pelamar ini?",
             icon: 'warning',
@@ -189,7 +194,7 @@ document.querySelectorAll('.konfirmasi_hapus_pelamar').forEach(function(element)
             confirmButtonText: 'Ya, Hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = url;
+                form.submit();
             }
         });
     });

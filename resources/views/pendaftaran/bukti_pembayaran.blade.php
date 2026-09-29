@@ -206,10 +206,10 @@
                     <div id="actionDiv" class="mt-6 hidden fade-in-up">
                         <div class="bg-[#e6f3ff] rounded-2xl p-5 border border-[#b8d4f0]">
                             @php
-                                $grupWaLink = $pendaftaran->grup_wa;
-                                if (!preg_match("~^(?:f|ht)tps?://~i", $grupWaLink)) {
-                                    $grupWaLink = $grupWaLink;
-                                }
+                                $rawWa = $pendaftaran->grup_wa ?? '';
+                                $grupWaLink = preg_match('~^https://chat\.whatsapp\.com/[A-Za-z0-9/?.=_-]+$~', $rawWa)
+                                    ? $rawWa
+                                    : 'https://chat.whatsapp.com/';
                             @endphp
 
                             <!-- QR Code -->

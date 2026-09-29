@@ -197,14 +197,42 @@
                             <div class="bg-blue-50 border-l-4 border-[#0b6bcb] text-[#0a4b8a] p-4 rounded-2xl flex items-start gap-3">
                                 <i class="fas fa-info-circle text-[#0b6bcb] text-lg mt-0.5"></i>
                                 <div>
-                                    <strong>Lakukan pembayaran</strong> dan upload bukti transfer di bawah ini
+                                    <strong>Pilih metode pembayaran</strong>: otomatis (QRIS/VA/E-Wallet) atau manual transfer + upload bukti
                                 </div>
                             </div>
+
+                            @if(($midtransReady ?? false) && ($bayar->administrasi ?? 0) > 0)
+                                <div class="mt-4 bg-[#f5faff] rounded-2xl p-4 border border-[#dcebfa]">
+                                    <p class="font-bold text-[#0a4b8a] text-sm mb-2"><i class="fas fa-bolt mr-1"></i> Bayar Otomatis (Midtrans)</p>
+                                    @if(!empty($snapToken))
+                                        <button id="pay-midtrans" class="btn-primary-custom text-white px-6 py-3 rounded-2xl text-sm font-semibold">Bayar Rp {{ number_format($bayar->administrasi, 0, ',', '.') }} Sekarang</button>
+                                        <p class="text-xs text-[#4a7fa8] mt-2">Mendukung QRIS, Virtual Account, E-Wallet, dan gerai retail.</p>
+                                    @else
+                                        <form action="{{ route('bayar') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id_loker" value="{{ $pendaftaran->id_loker }}">
+                                            <input type="hidden" name="code_pendaftaran" value="{{ $pendaftaran->code_pendaftaran }}">
+                                            <input type="hidden" name="email" value="{{ $pendaftaran->email }}">
+                                            <input type="hidden" name="nomor_wa" value="{{ $pendaftaran->nomor_wa }}">
+                                            <input type="hidden" name="nama" value="{{ $pendaftaran->nama }}">
+                                            <input type="hidden" name="nomor_nik" value="{{ $pendaftaran->nomor_nik }}">
+                                            <input type="hidden" name="tempat_lahir" value="{{ $pendaftaran->tempat_lahir }}">
+                                            <input type="hidden" name="tanggal_lahir" value="{{ $pendaftaran->tanggal_lahir }}">
+                                            <input type="hidden" name="jenis_kelamin" value="{{ $pendaftaran->jenis_kelamin }}">
+                                            <input type="hidden" name="status_perkawinan" value="{{ $pendaftaran->status_perkawinan }}">
+                                            <input type="hidden" name="jenis_pendidikan_terakhir" value="{{ $pendaftaran->jenis_pendidikan_terakhir }}">
+                                            <input type="hidden" name="payment_method" value="midtrans">
+                                            <button class="btn-primary-custom text-white px-6 py-3 rounded-2xl text-sm font-semibold">Buat Pembayaran Otomatis</button>
+                                        </form>
+                                    @endif
+                                </div>
+                            @endif
 
                             <form action="/bukti_pembayaran" method="post" enctype="multipart/form-data" class="mt-4">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="id" value="{{ $pendaftaran->id }}">
+                                <input type="hidden" name="code_pendaftaran" value="{{ $pendaftaran->code_pendaftaran }}">
                                 
                                 <label for="bukti_transfer" class="font-semibold text-[#1a3f6a] text-sm flex items-center gap-2">
                                     <i class="fas fa-upload text-[#0b6bcb]"></i> Upload Bukti Pembayaran
@@ -265,6 +293,19 @@
         </footer>
 
     </div>
+
+    @if(!empty($snapToken))
+        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ $midtransClientKey ?? '' }}"></script>
+        <script>
+            document.getElementById('pay-midtrans')?.addEventListener('click', function () {
+                window.snap.pay('{{ $snapToken }}', {
+                    onSuccess: function () { location.reload(); },
+                    onPending: function () { location.reload(); },
+                    onError: function () { alert('Pembayaran gagal, coba lagi.'); }
+                });
+            });
+        </script>
+    @endif
 
     <!-- ====== SCRIPT ====== -->
     <script>

@@ -122,7 +122,7 @@ class HomeController extends Controller
 
     public function edit_loker($id)
     {
-        $data = Loker::find($id);
+        $data = Loker::findOrFail($id);
         return view('admin.edit_loker', compact('data'));
     }
 
@@ -212,13 +212,12 @@ class HomeController extends Controller
 
     public function status_pelamar()
     {
-        $pendaftaran = Pendaftaran::orderBy('created_at', 'desc')->get();
-        return view('admin.status_pelamar', compact('pendaftaran'));
+        return view('admin.status_pelamar');
     }
 
     public function get_data_pelamar(Request $request)
     {
-        $dataPelamar = Pendaftaran::with('loker') // pastikan ada relasi 'loker' di model Pendaftaran
+        $dataPelamar = Pendaftaran::query()
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select('pendaftaran.*', 'loker.nama_loker');
 
@@ -281,7 +280,7 @@ class HomeController extends Controller
 
     public function edit_pelamar($id)
     {
-        $data = Pendaftaran::find($id);
+        $data = Pendaftaran::findOrFail($id);
         return view('admin.edit_pelamar', compact('data'));
     }
 

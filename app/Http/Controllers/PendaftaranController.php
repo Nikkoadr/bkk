@@ -228,21 +228,26 @@ class PendaftaranController extends Controller
         return view('pendaftaran.bukti_pembayaran', ['pendaftaran' => $row]);
     }
 
-    public function cari(Request $request)
+    private function findByCode(string $code)
     {
-        $validated = $request->validate([
-            'code_pendaftaran' => 'required|string|max:64',
-        ]);
-
-        $pendaftaran = DB::table('pendaftaran')
+        return DB::table('pendaftaran')
             ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
             ->select(
                 'pendaftaran.*',
                 'pendaftaran.created_at as pendaftaran_created_at',
                 'loker.nama_loker'
             )
-            ->where('pendaftaran.code_pendaftaran', $validated['code_pendaftaran'])
+            ->where('pendaftaran.code_pendaftaran', substr($code, 0, 64))
             ->first();
+    }
+
+    public function cari(Request $request)
+    {
+        $validated = $request->validate([
+            'code_pendaftaran' => 'required|string|max:64',
+        ]);
+
+        $pendaftaran = $this->findByCode($validated['code_pendaftaran']);
 
         if (! $pendaftaran) {
             return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');
@@ -268,17 +273,7 @@ class PendaftaranController extends Controller
 
     public function scan($code_pendaftaran)
     {
-        $code = substr((string) $code_pendaftaran, 0, 64);
-
-        $pendaftaran = DB::table('pendaftaran')
-            ->join('loker', 'pendaftaran.id_loker', '=', 'loker.id_loker')
-            ->select(
-                'pendaftaran.*',
-                'pendaftaran.created_at as pendaftaran_created_at',
-                'loker.nama_loker'
-            )
-            ->where('pendaftaran.code_pendaftaran', $code)
-            ->first();
+        $pendaftaran = $this->findByCode((string) $code_pendaftaran);
 
         if (! $pendaftaran) {
             return redirect('/')->with('notif', 'Data yang Anda cari tidak ditemukan.');

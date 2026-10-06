@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'id_role' => '1',
             'name' => 'Administrator',
             'email' => 'bkk@smkmuhkandanghaur.sch.id',
-            'password' => Hash::make('Secret123'),
+            'password' => Hash::make('dadangGanteng123'),
         ]);
 
         Loker::create([
@@ -34,6 +34,5 @@ class DatabaseSeeder extends Seeder
             'status_loker' => 'aktif',
             'grup_wa' => 'https://chat.whatsapp.com/ContohGrupBKK',
         ]);
-
     }
 }

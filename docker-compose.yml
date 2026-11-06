@@ -1,0 +1,32 @@
+name: bkk
+
+services:
+  app:
+    image: nikkoadr/bkk:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bkk
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./bootstrap/cache:/app/bootstrap/cache
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    networks:
+      - bkk-net
+
+networks:
+  bkk-net:
+    driver: bridge

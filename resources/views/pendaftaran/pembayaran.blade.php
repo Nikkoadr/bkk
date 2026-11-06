@@ -1,4 +1,4 @@
-﻿
+
     <!DOCTYPE html>
     <html lang="en">
     <head><!DOCTYPE html>
@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak_kecil.png') }}">
     <style>
         * { font-family: 'Inter', sans-serif; }
         body { background: #f0f8ff; }
@@ -279,7 +279,7 @@
                 <div class="flex items-center gap-2 flex-wrap justify-center text-center sm:text-left">
                     <span><i class="far fa-copyright mr-1"></i> 2024-2025</span>
                     <a href="https://bkk.smkmuhkandanghaur.sch.id" class="font-semibold text-[#0b6bcb] hover:underline">Nikko Adrian</a>
-                    <span class="hidden xs:inline">Â·</span>
+                    <span class="hidden xs:inline">·</span>
                     <span class="text-xs">All rights reserved.</span>
                 </div>
                 <div class="flex items-center gap-3 text-[#0b6bcb]">

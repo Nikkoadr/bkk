@@ -1,5 +1,7 @@
 @extends('layouts.main_admin')
 
+@section('title', 'Status Pelamar')
+
 @section('link')
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
@@ -7,66 +9,70 @@
 @endsection
 
 @section('content')
-<div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6"><h1 class="m-0">Status Pelamar</h1></div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Admin</a></li>
-                        <li class="breadcrumb-item active">Data pelamar</li>
-                    </ol>
+<div class="page-head">
+    <div>
+        <nav class="crumbs">
+            <a href="/home">Admin</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Status Pelamar</span>
+        </nav>
+        <h1>Status Pelamar</h1>
+        <p>Pantau pembayaran, verifikasi bukti transfer, dan data pelamar setiap lowongan.</p>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-head">
+        <div>
+            <h2>Daftar Pelamar</h2>
+            <p>Gunakan filter untuk mempersempit data berdasarkan perusahaan atau status pembayaran.</p>
+        </div>
+        <span class="count-chip"><i class="fa-solid fa-users"></i> Data real-time</span>
+    </div>
+
+    <div class="panel-body" style="padding-bottom:.35rem;">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="filter_loker">Filter Nama PT</label>
+                    <select id="filter_loker" class="form-select">
+                        <option value="">Semua PT</option>
+                        @foreach (\App\Models\Loker::orderBy('nama_loker')->get() as $loker)
+                            <option value="{{ $loker->id_loker }}" {{ request('loker_id') == $loker->id_loker ? 'selected' : '' }}>
+                                {{ $loker->nama_loker }} — {{ $loker->posisi }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="filter_bayar">Filter Status Bayar</label>
+                    <select id="filter_bayar" class="form-select">
+                        <option value="">Semua Status</option>
+                        <option value="sudah">Sudah Bayar</option>
+                        <option value="menunggu">Menunggu</option>
+                        <option value="belum">Belum Bayar</option>
+                    </select>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="filter_loker">Filter Nama PT</label>
-                                    <select id="filter_loker" class="form-control">
-                                        <option value="">-- Semua PT --</option>
-                                        @foreach(\App\Models\Loker::orderBy('nama_loker')->get() as $loker)
-                                            <option value="{{ $loker->id_loker }}" {{ request('loker_id') == $loker->id_loker ? 'selected' : '' }}>{{ $loker->nama_loker }} — {{ $loker->posisi }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="filter_bayar">Filter Status Bayar</label>
-                                    <select id="filter_bayar" class="form-control">
-                                        <option value="">-- Semua Status --</option>
-                                        <option value="sudah">Sudah Bayar</option>
-                                        <option value="menunggu">Menunggu</option>
-                                        <option value="belum">Belum Bayar</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <table id="tabel_pelamar" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Code</th>
-                                        <th>Nama Pendaftar</th>
-                                        <th>Nomor Whatsapp</th>
-                                        <th>Status Bayar</th>
-                                        <th>Bukti Transfer</th>
-                                        <th data-orderable="false">Menu</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="panel-body panel-body--flush">
+        <table id="tabel_pelamar" class="table bkk-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Code</th>
+                    <th>Nama Pendaftar</th>
+                    <th>Nomor WhatsApp</th>
+                    <th>Status Bayar</th>
+                    <th>Bukti Transfer</th>
+                    <th data-orderable="false">Menu</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 @endsection
@@ -84,45 +90,63 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+
+<script>
+    // Notifikasi sukses saat halaman dimuat (jika ada session flash)
+    function showSuccessToast(message) {
+        if (typeof Swal === 'undefined') {
+            return;
+        }
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: message,
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        @if (session()->has('success'))
+            if (typeof Swal !== 'undefined') {
+                showSuccessToast(@json(session('success')));
+            } else {
+                document.addEventListener('swal:ready', function () {
+                    showSuccessToast(@json(session('success')));
+                });
+            }
+        @endif
+    });
+</script>
+
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 
 <script>
 $(function () {
-    bsCustomFileInput.init();
-});
-
-@if (session()->has('success'))
-    var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 5000
-    });
-    Toast.fire({
-        icon: 'success',
-        title: '{{ session('success') }}'
-    })
-@endif
-
-$(document).ready(function() {
+    if (typeof bsCustomFileInput !== 'undefined') {
+        bsCustomFileInput.init();
+    }
 
     function renderStatusBadge(status) {
-        switch(status) {
+        switch (status) {
             case 'sudah':
-                return '<span class="badge bg-success">Sudah</span>';
+                return '<span class="pill pill-success">Sudah</span>';
             case 'menunggu':
-                return '<span class="badge bg-warning text-dark">Menunggu</span>';
+                return '<span class="pill pill-warning">Menunggu</span>';
             case 'belum':
-                return '<span class="badge bg-danger">Belum</span>';
+                return '<span class="pill pill-danger">Belum</span>';
             default:
-                return '<span class="badge bg-secondary">Unknown</span>';
+                return '<span class="pill pill-muted">Unknown</span>';
         }
     }
 
     let table = $('#tabel_pelamar').DataTable({
         responsive: true,
         lengthChange: true,
-        autoWidth: true,
+        autoWidth: false,
         processing: true,
         serverSide: true,
         searching: true,
@@ -142,33 +166,50 @@ $(document).ready(function() {
             [10, 25, 50, -1],
             [10, 25, 50, "Semua"]
         ],
+        language: {
+            search: "Cari:",
+            lengthMenu: "Tampilkan _MENU_ data",
+            info: "Menampilkan _START_–_END_ dari _TOTAL_ data",
+            infoEmpty: "Tidak ada data",
+            infoFiltered: "(difilter dari _MAX_ total data)",
+            zeroRecords: "Data tidak ditemukan",
+            processing: "Memuat data...",
+            paginate: {
+                first: "Awal",
+                last: "Akhir",
+                next: "Berikutnya",
+                previous: "Sebelumnya"
+            }
+        },
+        buttons: ["copy", "csv", "excel", "print", "colvis"],
+        dom: '<"dt-top"lBf>rt<"dt-bottom"ip>',
         columns: [
-            { 
-                data: null, 
-                orderable: false, 
-                searchable: false, 
+            {
+                data: null,
+                orderable: false,
+                searchable: false,
                 render: function (data, type, row, meta) {
                     return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
             { data: 'code_pendaftaran', name: 'code_pendaftaran' },
             { data: 'nama', name: 'nama' },
-            { 
-                data: 'nomor_wa', 
+            {
+                data: 'nomor_wa',
                 name: 'nomor_wa',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                     var nomor = data.startsWith('0') ? '62' + data.substring(1) : data;
                     var message = `Assalamu'alaikum Wr Wb ka.\nKami dari BKK SMK Muhammadiyah ingin mengonfirmasi status pendaftaran kaka *${row.code_pendaftaran}*. Mohon balas chat kami. Terimakasih.`;
-                    return `<a href="https://wa.me/${nomor}?text=${encodeURIComponent(message)}" target="_blank">${data}</a>`;
+                    return `<a href="https://wa.me/${nomor}?text=${encodeURIComponent(message)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="color:#0f9d68;margin-right:.3rem;"></i>${data}</a>`;
                 }
             },
-            { 
-                data: 'status_bayar', 
+            {
+                data: 'status_bayar',
                 name: 'status_bayar',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                     let badge = renderStatusBadge(data);
                     if (data !== 'sudah') {
-                        badge += ` <button class="btn btn-sm btn-success update-status" data-id="${row.id}">
+                        badge += ` <button class="btn btn-success btn-icon update-status" data-id="${row.id}" title="Tandai sudah bayar">
                                     <i class="fa-solid fa-check"></i>
                                   </button>`;
                     }
@@ -176,20 +217,22 @@ $(document).ready(function() {
                 }
             },
             { data: 'bukti_transfer', name: 'bukti_transfer', orderable: false, searchable: false },
-            { 
-                data: 'id', 
-                name: 'action', 
-                orderable: false, 
+            {
+                data: 'id',
+                name: 'action',
+                orderable: false,
                 searchable: false,
-                render: function(data) {
+                render: function (data) {
                     var editUrl = '{{ route("edit_pelamar", ":id") }}'.replace(':id', data);
                     return `
-                        <a href="${editUrl}" class="btn btn-sm btn-primary">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <button class="btn btn-sm btn-danger delete-btn" data-id="${data}">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
+                        <div class="action-group">
+                            <a href="${editUrl}" class="btn btn-warning btn-icon" title="Edit pelamar">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <button class="btn btn-soft-danger btn-icon delete-btn" data-id="${data}" title="Hapus pelamar">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
                     `;
                 }
             }
@@ -200,22 +243,22 @@ $(document).ready(function() {
         table.ajax.reload();
     });
 
-    $('#tabel_pelamar').on('click', '.delete-btn', function(e) {
+    $('#tabel_pelamar').on('click', '.delete-btn', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         deleteConfirmation(id);
     });
 
-    $('#tabel_pelamar').on('click', '.update-status', function(e) {
+    $('#tabel_pelamar').on('click', '.update-status', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         Swal.fire({
-            title: 'Konfirmasi?',
-            text: "Anda yakin ingin mengubah status pembayaran menjadi sudah?",
+            title: 'Konfirmasi pembayaran?',
+            text: 'Status pembayaran akan diubah menjadi sudah bayar.',
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#0b6bcb',
+            cancelButtonColor: '#6b7c93',
             confirmButtonText: 'Ya, konfirmasi!',
             cancelButtonText: 'Batal'
         }).then((result) => {
@@ -224,7 +267,7 @@ $(document).ready(function() {
                     url: '/update_status_pembayaran/' + id,
                     type: 'POST',
                     data: { _token: '{{ csrf_token() }}' },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             Swal.fire('Berhasil!', response.message, 'success');
                             table.ajax.reload(null, false);
@@ -232,24 +275,23 @@ $(document).ready(function() {
                             Swal.fire('Gagal!', response.message, 'error');
                         }
                     },
-                    error: function() {
+                    error: function () {
                         Swal.fire('Gagal!', 'Terjadi kesalahan saat memproses permintaan.', 'error');
                     }
                 });
             }
         });
     });
-
 });
 
 function deleteConfirmation(id) {
     Swal.fire({
-        title: 'Anda yakin?',
-        text: "Data ini akan dihapus secara permanen!",
+        title: 'Hapus data pelamar?',
+        text: 'Data ini akan dihapus secara permanen.',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#d33d4d',
+        cancelButtonColor: '#6b7c93',
         confirmButtonText: 'Ya, hapus!',
         cancelButtonText: 'Batal'
     }).then((result) => {
@@ -258,11 +300,11 @@ function deleteConfirmation(id) {
                 url: '{{ url("hapus_pelamar") }}/' + id,
                 type: 'POST',
                 data: { _token: '{{ csrf_token() }}', _method: 'DELETE' },
-                success: function() {
+                success: function () {
                     Swal.fire('Berhasil!', 'Data pelamar berhasil dihapus.', 'success');
                     $('#tabel_pelamar').DataTable().ajax.reload(null, false);
                 },
-                error: function() {
+                error: function () {
                     Swal.fire('Gagal!', 'Terjadi kesalahan saat menghapus data.', 'error');
                 }
             });

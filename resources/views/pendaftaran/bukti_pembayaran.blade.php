@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak_kecil.png') }}">
     <style>
         * { font-family: 'Inter', sans-serif; }
         body { background: #f0f8ff; }

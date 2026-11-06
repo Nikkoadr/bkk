@@ -1,43 +1,47 @@
 @extends('layouts.main_admin')
-@section('link')
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-@endsection
-@section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-        <h1 class="m-0">Edit Pelamar</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="/home">Admin</a></li>
-            <li class="breadcrumb-item">Data Pelamar</li>
-            <li class="breadcrumb-item active">edit Pelamar</li>
-        </ol>
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
+@section('title', 'Edit Pelamar')
 
-<!-- Main content -->
-<div class="content">
-    <div class="container-fluid">
-            <div class="row">
-        <div class="col-12">
-        <div class="card">
-            <!-- /.card-header -->
-            <div class="card-body">
-                <form action="/update_pelamar/{{ $data->id }}" method="post">
-                    @csrf
-                    @method('put')
-                    <div class="card-body pt-0">
+@section('content')
+<div class="page-head">
+    <div>
+        <nav class="crumbs">
+            <a href="/home">Admin</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="{{ route('status_pelamar') }}">Status Pelamar</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Edit Pelamar</span>
+        </nav>
+        <h1>Edit Pelamar</h1>
+        <p>Perbarui data pendaftar {{ $data->nama }} ({{ $data->code_pendaftaran }}).</p>
+    </div>
+    <div class="page-actions">
+        <a href="{{ route('status_pelamar') }}" class="btn btn-light">
+            <i class="fa-solid fa-arrow-left"></i>
+            Kembali
+        </a>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-head">
+        <div>
+            <h2>Data Pendaftar</h2>
+            <p>Semua kolom dapat diperbarui, kecuali kode pendaftaran.</p>
+        </div>
+        @php
+            $statusPill = ['sudah' => 'pill-success', 'menunggu' => 'pill-warning', 'belum' => 'pill-danger'][$data->status_bayar] ?? 'pill-muted';
+        @endphp
+        <span class="pill {{ $statusPill }}">Status: {{ ucfirst($data->status_bayar ?? '-') }}</span>
+    </div>
+
+    <div class="panel-body">
+        <form action="/update_pelamar/{{ $data->id }}" method="post">
+            @csrf
+            @method('put')
+
+            <div class="form-section"><i class="fa-solid fa-user-pen"></i> Identitas &amp; Kontak</div>
+
+            <div class="form-grid">
                         <div class="form-group">
                             <label for="code_pendaftaran">Code Pendaftaran</label>
                             <input type="text" class="form-control @error('code_pendaftaran') is-invalid @enderror" id="code_pendaftaran" name="code_pendaftaran" value="{{ $data->code_pendaftaran }}" readonly required oninput="this.value = this.value.toUpperCase()">
@@ -532,56 +536,32 @@
                             </div>
                         @endif
                     </div>
-                        <a class="btn btn-secondary" href="/status_pelamar">Kembali</a>
-                        <button type="submit" class="btn btn-primary float-right">Edit</button>
+                    <div class="form-actions">
+                        <a class="btn btn-light" href="{{ route('status_pelamar') }}">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Kembali
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Simpan Perubahan
+                        </button>
+                    </div>
                 </form>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
 @endsection
 @section('script')
 <script>
 @if (session()->has('success'))
-var Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 5000
-});
-    Toast.fire({
-    icon: 'success',
-    title: '{{ session('success') }}'
-    })
-@endif
-</script>
-<script>
-document.querySelectorAll('.konfirmasi').forEach(function(element) {
-    element.addEventListener('click', function (event) {
-        event.preventDefault();
-        const url = this.getAttribute('href');
-        Swal.fire({
-            text: "Anda yakin ingin menghapus data ini?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Hapus!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = url;
-            }
-        });
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: @json(session('success')),
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true
     });
-});
+@endif
 </script>
 @endsection

@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>BKK SMK Muhammadiyah Kandanghaur</title>
+  <link rel="icon" type="image/png" href="{{ asset('assets/dist/img/logoKotak_kecil.png') }}" />
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome 6 (Free) -->

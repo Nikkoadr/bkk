@@ -1,89 +1,70 @@
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="#" class="brand-link">
-            <img
-                src="{{ asset('assets/dist/img/BKK.png') }}"
-                alt="BKK"
-                class="brand-image elevation-3"
-                style="opacity: 0.8"
-            />
-            <span class="brand-text font-weight-light">BKK SMK MUH KDH</span>
+@php
+    $navItems = [
+        ['route' => '/home', 'active' => request()->is('home'), 'icon' => 'fa-solid fa-gauge-high', 'label' => 'Dashboard'],
+        ['route' => '/data_loker', 'active' => request()->is('data_loker') || request()->is('edit_loker/*'), 'icon' => 'fa-solid fa-building', 'label' => 'Data Loker'],
+        ['route' => '/status_pelamar', 'active' => request()->is('status_pelamar') || request()->is('edit_pelamar/*'), 'icon' => 'fa-solid fa-address-card', 'label' => 'Status Pelamar'],
+    ];
+@endphp
+
+<aside class="app-sidebar" id="appSidebar">
+    <div class="sidebar-brand">
+        <a href="/home" class="brand-link">
+            <span class="brand-logo">
+                <img src="{{ asset('assets/dist/img/logoKotak_kecil.png') }}" alt="Logo BKK">
+            </span>
+            <span class="brand-text">
+                <strong>BKK Admin</strong>
+                <small>SMK Muhammadiyah</small>
+            </span>
+        </a>
+        <button type="button" class="sidebar-close" id="sidebarClose" aria-label="Tutup menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="sidebar-user">
+        <img src="{{ asset('assets/dist/img/avatar.png') }}" alt="Avatar {{ Auth::user()->name }}">
+        <div class="sidebar-user-info">
+            <span>Masuk sebagai</span>
+            <strong title="{{ Auth::user()->name }}">{{ Auth::user()->name }}</strong>
+        </div>
+        <a href="{{ route('profile.edit') }}" title="Pengaturan profil">
+            <i class="fa-solid fa-gear"></i>
+        </a>
+    </div>
+
+    <div class="sidebar-scroll">
+        <p class="nav-label">Menu Utama</p>
+        <nav class="sidebar-nav">
+            @foreach ($navItems as $item)
+                <a href="{{ $item['route'] }}" class="nav-link {{ $item['active'] ? 'active' : '' }}" title="{{ $item['label'] }}">
+                    <span class="nav-icon"><i class="{{ $item['icon'] }}"></i></span>
+                    {{ $item['label'] }}
+                </a>
+            @endforeach
+        </nav>
+
+        <p class="nav-label">Lainnya</p>
+        <nav class="sidebar-nav">
+            <a href="{{ route('profile.edit') }}" class="nav-link {{ request()->is('profile') ? 'active' : '' }}" title="Profil Admin">
+                <span class="nav-icon"><i class="fa-regular fa-user"></i></span>
+                Profil Admin
             </a>
+            <a href="/" target="_blank" rel="noopener" class="nav-link" title="Lihat Website">
+                <span class="nav-icon"><i class="fa-solid fa-globe"></i></span>
+                Lihat Website
+            </a>
+        </nav>
+    </div>
 
-            <!-- Sidebar -->
-            <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                <img
-                    src="{{ asset('assets/dist/img/avatar.png') }}"
-                    class="img-circle elevation-2"
-                    alt="User Image"
-                />
-                </div>
-                <div class="info">
-                <a href="{{ route('profile.edit') }}" class="d-block" title="Lihat Profile">{{ Auth::user()->name }}</a>
-                </div>
-            </div>
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul
-                class="nav nav-pills nav-sidebar flex-column"
-                data-widget="treeview"
-                role="menu"
-                data-accordion="false"
-                >
-                <li class="nav-item">
-                    <a href="/home" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Dashboard
-                    </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/data_loker" class="nav-link {{ request()->is('data_loker') ? 'active' : '' }}">
-                    <i class="nav-icon fa-solid fa-building"></i>
-                    <p>
-                        Data Loker
-                    </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/status_pelamar" class="nav-link {{ request()->is('status_pelamar') ? 'active' : '' }}">
-                    <i class="nav-icon fa-solid fa-address-card"></i>
-                    <p>
-                        Status pelamar
-                    </p>
-                    </a>
-                </li>
-
-                {{-- <li class="nav-item menu-open">
-                    <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Loker
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Active Page</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Inactive Page</p>
-                        </a>
-                    </li>
-                    </ul>
-                </li> --}}
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-            </div>
-            <!-- /.sidebar -->
-        </aside>
+    <div class="sidebar-foot">
+        <a href="{{ route('logout') }}" class="sidebar-logout"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Keluar dari akun
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+</aside>

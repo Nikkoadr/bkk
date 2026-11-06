@@ -4,10 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BKK SMK Muhammadiyah Kandanghaur</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}" />
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak.png') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free-6.5.2-web/css/all.min.css') }}" />
+    @vite('resources/sass/app.scss')
+    <link rel="stylesheet" href="{{ asset('assets/css/bkk-theme.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/logoKotak_kecil.png') }}" />
     <style>
         /* ===== CSS UNTUK NUMBERING DI DESKRIPSI ===== */
         .desc-wrapper ul {
@@ -108,33 +111,23 @@
         }
     </style>
 </head>
-<body class="hold-transition layout-top-nav layout-navbar-fixed">
-    <div class="wrapper">
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-bottom border-light">
-            <div class="container">
-                <a href="/" class="navbar-brand">
-                    <img src="{{ asset('assets/dist/img/logobkk.png') }}" alt="BKK Logo" class="brand-image">
-                </a>
-            </div>
-        </nav>
+<body class="bkk-public">
+    <header class="public-topbar">
+        <a href="/" class="public-brand">
+            <img src="{{ asset('assets/dist/img/logoKotak_kecil.png') }}" alt="BKK Logo">
+            <span>BKK SMK Muhammadiyah</span>
+        </a>
+        <a href="/" class="topbar-link"><i class="fa-solid fa-house"></i> Beranda</a>
+    </header>
 
-        <!-- Content Wrapper -->
-        <div class="content-wrapper" style="background: #f0f8ff;">
-            <div class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-                        <div class="col-12 text-center">
-                            <h1 class="m-0 text-2xl font-bold" style="color: #0a4b8a;">Formulir Pendaftaran</h1>
-                            <p style="color: #4a7fa8;">Lengkapi data diri Anda dengan benar</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <main class="public-main">
+        <div class="public-head">
+            <h1>Formulir Pendaftaran</h1>
+            <p>Lengkapi data diri Anda dengan benar sebelum mengirim pendaftaran.</p>
+        </div>
 
-            <div class="content">
-                <div class="container">
-                    <div class="row">
+        <div class="container">
+            <div class="row">
                         <!-- ====== INFO LOKER ====== -->
                         <div class="col-lg-5">
                             <div class="card card-info-loker shadow-sm">
@@ -646,18 +639,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+    </main>
 
-        <!-- Footer -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 2.1.0
-            </div>
-            <strong>Copyright &copy; 2024-2025 <a href="https://bkk.smkmuhkandanghaur.sch.id">Nikko Adrian</a>.</strong>
-            All rights reserved.
-        </footer>
-    </div>
-
+    <footer class="public-footer">
+        &copy; {{ date('Y') }} <a href="https://bkk.smkmuhkandanghaur.sch.id" target="_blank" rel="noopener">BKK SMK Muhammadiyah Kandanghaur</a>. Seluruh hak cipta dilindungi.
+    </footer>
 </body>
 </html>

@@ -1,72 +1,54 @@
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"
-                ><i class="fas fa-bars"></i
-                ></a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/" class="nav-link">Website</a>
-            </li>
-            </ul>
+<header class="app-topbar">
+    <div class="topbar-left">
+        <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Buka menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            <li class="nav-item">
-                <a
-                class="nav-link"
-                data-widget="navbar-search"
-                href="#"
-                role="button"
-                >
-                <i class="fas fa-search"></i>
-                </a>
-                <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                    <input
-                        class="form-control form-control-navbar"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                    />
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                        <i class="fas fa-search"></i>
-                        </button>
-                        <button
-                        class="btn btn-navbar"
-                        type="button"
-                        data-widget="navbar-search"
-                        >
-                        <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    </div>
-                </form>
-                </div>
-            </li>
-            <!-- Messages Dropdown Menu -->
-            @include('layouts.partials.message_admin')
-            <!-- Notifications Dropdown Menu -->
-            @include('layouts.partials.notifikasi_admin')
-            <li class="nav-item">
-                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-            </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                    </a>
+        <div class="topbar-title">
+            <span>Panel Admin</span>
+            <strong>{{ now()->locale('id')->translatedFormat('l, d F Y') }}</strong>
+        </div>
+    </div>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
-        </nav>
+    <div class="topbar-right">
+        <a href="/" target="_blank" rel="noopener" class="topbar-link d-none d-md-inline-flex">
+            <i class="fa-solid fa-globe"></i>
+            <span>Website</span>
+        </a>
+
+        @include('layouts.partials.notifikasi_admin')
+
+        <button type="button" class="icon-btn d-none d-sm-inline-flex" id="fullscreenBtn" aria-label="Layar penuh">
+            <i class="fa-solid fa-expand"></i>
+        </button>
+
+        <div class="dropdown">
+            <button type="button" class="user-chip" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ asset('assets/dist/img/avatar.png') }}" alt="Avatar {{ Auth::user()->name }}">
+                <span class="user-meta">
+                    <strong>{{ Auth::user()->name }}</strong>
+                    <small>Administrator</small>
+                </span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-end user-menu">
+                <div class="menu-head">Akun Saya</div>
+                <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                    <i class="fa-regular fa-user"></i>
+                    Profil &amp; Keamanan
+                </a>
+                <a href="/" target="_blank" rel="noopener" class="dropdown-item">
+                    <i class="fa-solid fa-globe"></i>
+                    Buka Website
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ route('logout') }}" class="dropdown-item text-danger"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Keluar
+                </a>
+            </div>
+        </div>
+    </div>
+</header>

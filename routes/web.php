@@ -65,6 +65,7 @@ Route::prefix('tes/admin')->name('tes.')->middleware(['auth', 'throttle:120,1'])
     Route::get('/', [TesController::class, 'adminIndex'])->name('admin');
     Route::post('/', [TesController::class, 'store'])->name('store');
     Route::post('/import', [TesController::class, 'import'])->name('import');
+    Route::delete('/bulk-delete', [TesController::class, 'bulkDestroy'])->name('bulk-destroy');
     Route::put('/{id}', [TesController::class, 'update'])->whereNumber('id')->name('update');
     Route::delete('/{id}', [TesController::class, 'destroy'])->whereNumber('id')->name('destroy');
 });

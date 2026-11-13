@@ -147,10 +147,25 @@
     @endphp
 
     <div class="panel-body panel-body--flush">
+        <form id="form_bulk_hapus_tes" action="{{ route('tes.bulk-destroy') }}" method="POST" class="d-none">
+            @csrf
+            @method('DELETE')
+        </form>
+
+        <div class="d-flex align-items-center gap-2 px-3 pt-3">
+            <button type="submit" form="form_bulk_hapus_tes" id="btn_bulk_hapus_tes" class="btn btn-soft-danger btn-sm" disabled>
+                <i class="fa-solid fa-trash-can"></i> Hapus Terpilih (<span id="jumlah_terpilih_tes">0</span>)
+            </button>
+            <span class="text-muted small">Centang data yang ingin dihapus sekaligus.</span>
+        </div>
+
         <div class="table-responsive">
             <table class="table bkk-table align-middle" id="table_tes">
                 <thead>
                     <tr>
+                        <th style="width: 36px;">
+                            <input type="checkbox" id="cek_semua_tes" class="form-check-input" title="Pilih semua peserta">
+                        </th>
                         <th>No</th>
                         <th>
                             <a href="{{ $sortLink('no_tes') }}" class="text-reset text-decoration-none">
@@ -194,6 +209,11 @@
                 <tbody>
                     @forelse ($peserta as $item)
                         <tr>
+                            <td>
+                                <input type="checkbox" class="form-check-input cek_peserta_tes" name="ids[]"
+                                       value="{{ $item->id }}" form="form_bulk_hapus_tes"
+                                       aria-label="Pilih {{ $item->nama_lengkap }}">
+                            </td>
                             <td>{{ $peserta->firstItem() + $loop->index }}</td>
                             <td class="fw-semibold">{{ $item->no_tes }}</td>
                             <td>{{ $item->nama_lengkap }}</td>
@@ -241,7 +261,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="10" class="text-center py-4 text-muted">
+                            <td colspan="11" class="text-center py-4 text-muted">
                                 Belum ada data peserta tes. Tambahkan manual atau import file Excel/CSV.
                             </td>
                         </tr>
@@ -471,6 +491,67 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    var cekSemua = document.getElementById('cek_semua_tes');
+    var cekPeserta = Array.prototype.slice.call(document.querySelectorAll('.cek_peserta_tes'));
+    var btnBulkHapus = document.getElementById('btn_bulk_hapus_tes');
+    var jumlahTerpilih = document.getElementById('jumlah_terpilih_tes');
+    var formBulkHapus = document.getElementById('form_bulk_hapus_tes');
+
+    function jumlahPesertaTerpilih() {
+        return cekPeserta.filter(function (checkbox) {
+            return checkbox.checked;
+        }).length;
+    }
+
+    function perbaruiPilihanTes() {
+        var terpilih = jumlahPesertaTerpilih();
+
+        if (jumlahTerpilih) jumlahTerpilih.textContent = terpilih;
+        if (btnBulkHapus) btnBulkHapus.disabled = terpilih === 0;
+
+        if (cekSemua) {
+            cekSemua.checked = terpilih > 0 && terpilih === cekPeserta.length;
+            cekSemua.indeterminate = terpilih > 0 && terpilih < cekPeserta.length;
+        }
+    }
+
+    if (cekSemua) {
+        cekSemua.addEventListener('change', function () {
+            cekPeserta.forEach(function (checkbox) {
+                checkbox.checked = cekSemua.checked;
+            });
+            perbaruiPilihanTes();
+        });
+    }
+
+    cekPeserta.forEach(function (checkbox) {
+        checkbox.addEventListener('change', perbaruiPilihanTes);
+    });
+
+    if (btnBulkHapus && formBulkHapus) {
+        btnBulkHapus.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            var terpilih = jumlahPesertaTerpilih();
+            if (terpilih === 0) return;
+
+            Swal.fire({
+                title: 'Hapus ' + terpilih + ' peserta tes?',
+                text: 'Semua data yang dipilih akan dihapus permanen.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33d4d',
+                cancelButtonColor: '#6b7c93',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    formBulkHapus.submit();
+                }
+            });
+        });
+    }
 });
 </script>
 

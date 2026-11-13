@@ -124,6 +124,21 @@ class TesController extends Controller
     }
 
     /**
+     * Hapus beberapa peserta tes sekaligus dari checkbox tabel.
+     */
+    public function bulkDestroy(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'ids' => ['required', 'array', 'min:1'],
+            'ids.*' => ['integer', 'distinct', 'exists:peserta_tes,id'],
+        ]);
+
+        $deleted = PesertaTes::whereIn('id', $validated['ids'])->delete();
+
+        return redirect()->route('tes.admin')->with('success', $deleted.' peserta tes berhasil dihapus.');
+    }
+
+    /**
      * Import peserta tes dari file Excel/CSV dengan urutan kolom seperti tabel:
      * no_tes, nama_lengkap, asal_sekolah, email, hari, waktu, perangkat, link.
      */

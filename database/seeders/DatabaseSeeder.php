@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'id_role' => $operatorRole->id,
             'name' => 'Operator BKK',
             'email' => 'operator_bkk@smkmuhkandanghaur.sch.id',
-            'password' => Hash::make('Secret123'),
+            'password' => Hash::make('konci123'),
         ]);
 
         Loker::create([

@@ -35,9 +35,12 @@
             <i class="fas fa-home mr-1"></i> Beranda
           </a>
           @auth
-            <a href="{{ route('tes.admin') }}" class="bg-[#0b6bcb] text-white hover:bg-[#1a7fdf] px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition">
-              <i class="fas fa-sliders mr-1"></i> Kelola
-            </a>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+              @csrf
+              <button type="submit" class="bg-[#0b6bcb] text-white hover:bg-[#1a7fdf] px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition">
+                <i class="fas fa-sign-out-alt mr-1"></i> Logout
+              </button>
+            </form>
           @else
             <a href="{{ route('login') }}" class="bg-[#0b6bcb] text-white hover:bg-[#1a7fdf] px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition">
               <i class="fas fa-sign-in-alt mr-1"></i> Login

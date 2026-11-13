@@ -3,6 +3,7 @@
         ['route' => '/home', 'active' => request()->is('home'), 'icon' => 'fa-solid fa-gauge-high', 'label' => 'Dashboard'],
         ['route' => '/data_loker', 'active' => request()->is('data_loker') || request()->is('edit_loker/*'), 'icon' => 'fa-solid fa-building', 'label' => 'Data Loker'],
         ['route' => '/status_pelamar', 'active' => request()->is('status_pelamar') || request()->is('edit_pelamar/*'), 'icon' => 'fa-solid fa-address-card', 'label' => 'Status Pelamar'],
+        ['route' => '/tes/admin', 'active' => request()->is('tes/admin'), 'icon' => 'fa-solid fa-clipboard-list', 'label' => 'Daftar Tes'],
     ];
 @endphp
 

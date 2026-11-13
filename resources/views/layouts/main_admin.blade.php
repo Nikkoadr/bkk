@@ -41,6 +41,8 @@
 
     {{-- jQuery dibutuhkan oleh DataTables & plugin lama --}}
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    {{-- Bootstrap bundle lokal: dibutuhkan modal, dropdown, dan toast admin --}}
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     @vite('resources/js/app.js')
     {{-- SweetAlert2 --}}
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>

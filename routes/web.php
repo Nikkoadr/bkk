@@ -6,6 +6,7 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobfairController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TesController;
 use App\Models\Loker;
 
 Route::get('/', function () {
@@ -52,3 +53,16 @@ Route::get('/laporan/download', [HomeController::class, 'download_laporan']);
 Route::post('/update_status_pembayaran/{id}', [HomeController::class, 'update_status_pembayaran'])->whereNumber('id');
 
 Route::post('disnaker/jobfair/pendaftaran', [JobfairController::class, 'external_pendaftaran'])->middleware('throttle:20,1')->name('external_pendaftaran');
+
+// Halaman publik peserta tes interview (tanpa login, bisa dibuka operator).
+Route::get('/tes', [TesController::class, 'index'])->middleware('throttle:120,1')->name('tes.index');
+Route::get('/cari-tes', [TesController::class, 'index'])->middleware('throttle:120,1')->name('tes.cari');
+
+// Panel admin peserta tes interview.
+Route::prefix('tes/admin')->name('tes.')->middleware(['auth', 'throttle:120,1'])->group(function () {
+    Route::get('/', [TesController::class, 'adminIndex'])->name('admin');
+    Route::post('/', [TesController::class, 'store'])->name('store');
+    Route::post('/import', [TesController::class, 'import'])->name('import');
+    Route::put('/{id}', [TesController::class, 'update'])->whereNumber('id')->name('update');
+    Route::delete('/{id}', [TesController::class, 'destroy'])->whereNumber('id')->name('destroy');
+});

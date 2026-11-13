@@ -19,11 +19,22 @@ class DatabaseSeeder extends Seeder
             'nama_role' => 'admin',
         ]);
 
+        $operatorRole = Role::create([
+            'nama_role' => 'operator',
+        ]);
+
         User::create([
             'id_role' => '1',
             'name' => 'Administrator',
             'email' => 'bkk@smkmuhkandanghaur.sch.id',
             'password' => Hash::make('dadangGanteng123'),
+        ]);
+
+        User::create([
+            'id_role' => $operatorRole->id,
+            'name' => 'Operator BKK',
+            'email' => 'operator_bkk@smkmuhkandanghaur.sch.id',
+            'password' => Hash::make('Secret123'),
         ]);
 
         Loker::create([

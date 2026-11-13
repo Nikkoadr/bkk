@@ -28,6 +28,14 @@ class LoginController extends Controller
     protected $redirectTo = '/home';
 
     /**
+     * Operator diarahkan ke halaman tes, admin tetap ke dashboard.
+     */
+    protected function redirectTo()
+    {
+        return (int) (auth()->user()->id_role ?? 0) === 1 ? '/home' : '/tes';
+    }
+
+    /**
      * Create a new controller instance.
      *
      * @return void

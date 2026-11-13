@@ -54,9 +54,11 @@ Route::post('/update_status_pembayaran/{id}', [HomeController::class, 'update_st
 
 Route::post('disnaker/jobfair/pendaftaran', [JobfairController::class, 'external_pendaftaran'])->middleware('throttle:20,1')->name('external_pendaftaran');
 
-// Halaman publik peserta tes interview (tanpa login, bisa dibuka operator).
-Route::get('/tes', [TesController::class, 'index'])->middleware('throttle:120,1')->name('tes.index');
-Route::get('/cari-tes', [TesController::class, 'index'])->middleware('throttle:120,1')->name('tes.cari');
+// Halaman peserta tes interview: wajib login dan hanya untuk admin/operator BKK.
+Route::middleware(['auth', 'can:akses-tes', 'throttle:120,1'])->group(function () {
+    Route::get('/tes', [TesController::class, 'index'])->name('tes.index');
+    Route::get('/cari-tes', [TesController::class, 'index'])->name('tes.cari');
+});
 
 // Panel admin peserta tes interview.
 Route::prefix('tes/admin')->name('tes.')->middleware(['auth', 'throttle:120,1'])->group(function () {
